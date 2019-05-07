@@ -75,11 +75,11 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
 |:-|:-|:---|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
 |collectionName|MonogoDB的集合名。|是|无|
-|column|MongoDB的文档列名，配置为数组形式表示MongoDB的多个列。-   name：Column的名字。
+|column|MongoDB的文档列名，配置为数组形式表示MongoDB的多个列。 -   name：Column的名字。
 -   type：Column的类型。
 -   splitter：因为MongoDB支持数组类型，但CDP框架本身不支持数组类型，所以MongoDB读出来的数组类型要通过这个分隔符合并成字符串。
 
-|是|无|
+ |是|无|
 |query|您可以通过该配置型来限制返回MongoDB数据范围，例如您可以配置`"query":"{'operationTime':{'$gte':ISODate('${last_day}T00:00:00.424+0800')}}"`，限制返回operationTime大于等于$\{last\_day\}零点的数据，这里$\{last\_day\}为 DataWorks调度参数，格式为$\[yyyy-mm-dd\]。您可以根据需要具体使用其他MongoDB支持的条件操作符号（$gt、$lt、$gte和$lte等），逻辑操作符（and和or等），函数（max、min、sum、avg和ISODate等），详情请参见MongoDB查询语法。|否|无|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
@@ -128,13 +128,13 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
                           },
                           {
                               "name": "frontcat_id",
-                              "type": "Array",
-                              "spliter": ""
+                              "type": "array",
+                              "splitter": ""
                           },
                           {
                               "name": "categoryid",
-                              "type": "Array",
-                              "spliter": ""
+                              "type": "array",
+                              "splitter": ""
                           },
                           {
                               "name": "gmt_create",
@@ -142,8 +142,8 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
                           },
                           {
                               "name": "taglist",
-                              "type": "Array",
-                              "spliter": " "
+                              "type": "array",
+                              "splitter": " "
                           },
                           {
                               "name": "property",
@@ -161,7 +161,7 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
                               "name": "scorec",
                               "type": "int"
                           },
-			 {
+             {
                             "name": "a.b",
                             "type": "document.int"
                           },
