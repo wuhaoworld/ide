@@ -15,26 +15,26 @@ MongoDB Reader supports most data types in MongoDB. Check whether your data type
 
 MongoDB Writer converts the MongoDB data types as follows:
 
-|Type classification|MongoDB data type |
-|:------------------|:-----------------|
-|Integer|int and long|
-|Floating point|double|
-|String|string|
-|Date and time|date|
-|Boolean|bool|
-|Binary|bytes|
+|Type classification|MongoDB data type|
+|:------------------|:----------------|
+|Long|int，long，document.int and document.long|
+|Double|double and document.double|
+|String|string，array，document.string，document.array and combine|
+|Date|date and document.date|
+|Boolean|bool and document.bool|
+|Bytes|bytes and document.bytes|
 
 ## Parameter description​ {#section_jn2_gqh_p2b .section}
 
-|Attribute|Description| Required|Default value|
-|:--------|:----------|:--------|:------------|
+|Attribute|Description|Required|Default value|
+|:--------|:----------|:-------|:------------|
 |datasource|The data source name. It must be identical to the data source name added. Adding data source is supported in script mode.|Yes|N/A-|
 |collectionName|The collection name of MongoDB.|Yes|N/A|
-|column|An array of multiple column names of a document in MongoDB.-   name: Column name.
+|column|An array of multiple column names of a document in MongoDB. -   name: Column name.
 -   type: Column type.
 -   splitter: MongoDB supports array, but the CDP framework does not. Therefore, the data items read from MongoDB in an array format are joined into a string using this delimiter.
 
-|Yes|N/A|
+ |Yes|N/A|
 |query|Used to define the range of returned MongoDB data. For example, if you set it to`"query":"{'operationTime':{'$gte':ISODate('${last_day}T00:00:00.424+0800')}}"`, only the data with an operationTime later than or equal to 00:00 of $\{last\_day\} is returned. $\{last\_day\} is DataWorks scheduling parameter of in the format of $\[yyyy-mm-dd\]. You can use conditional operators \($gt, $lt, $gte, $lte\), logical operators \(and, or\), and functions \(max, min, sum, avg, ISODat\) supported by MongoDB as needed. For details, see the query syntax of MongoDB.|No|N/A|
 
 ## Development in wizard mode {#section_bp2_wsh_p2b .section}
@@ -54,12 +54,12 @@ To configure a job to extract data locally from MongoDB, please refer to the abo
             "plugin": "mongodb", 
             "parameter": {
                 "datasource": "datasourceName", 
-                "collectionName": "tag_data",
+                "collectionName": "tag_data", 
                 "query":"",
                 "column": [
                          {
                               "name": "unique_id", 
-                              "type": "string" 
+                              "type": "string"  
                           },
                           {
                               "name": "sid",
@@ -83,13 +83,13 @@ To configure a job to extract data locally from MongoDB, please refer to the abo
                           },
                           {
                               "name": "frontcat_id",
-                              "type": "Array",
-                              "spliter": ""
+                              "type": "array",
+                              "splitter": ""
                           },
                           {
                               "name": "categoryid",
-                              "type": "Array",
-                              "spliter": ""
+                              "type": "array",
+                              "splitter": ""
                           },
                           {
                               "name": "gmt_create",
@@ -97,8 +97,8 @@ To configure a job to extract data locally from MongoDB, please refer to the abo
                           },
                           {
                               "name": "taglist",
-                              "type": "Array",
-                              "spliter": " "
+                              "type": "array",
+                              "splitter": " "
                           },
                           {
                               "name": "property",
@@ -116,7 +116,7 @@ To configure a job to extract data locally from MongoDB, please refer to the abo
                               "name": "scorec",
                               "type": "int"
                           },
-			 {
+             {
                             "name": "a.b",
                             "type": "document.int"
                           },
