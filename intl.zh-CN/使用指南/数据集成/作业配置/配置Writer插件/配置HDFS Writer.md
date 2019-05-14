@@ -2,11 +2,11 @@
 
 本文为您介绍HDFS Writer支持的数据类型、写入方式、字段映射和数据源等参数及配置举例。
 
-HDFS Writer提供向HDFS文件系统指定路径中写入TextFile文件、 ORCFile文件以及ParquetFile格式文件，文件内容可与 Hive 中表关联。在开始配置 HDFS Writer 插件前，请首先配置好数据源，详情请参见 [配置FTP数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置FTP数据源.md#)。
+HDFS Writer提供向HDFS文件系统指定路径中写入TextFile文件、 ORCFile文件以及ParquetFile格式文件，文件内容可与 Hive 中表关联。在开始配置 HDFS Writer 插件前，请首先配置好数据源，详情请参见[配置HDFS数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置HDFS数据源.md#)。
 
 ## 实现过程 {#section_dvy_43m_q2b .section}
 
-HDFS Writer的实现过程，如下所示。
+HDFS Writer的实现过程如下所示：
 
 1.  根据您指定的path，创建一个HDFS文件系统上不存在的临时目录。
 
@@ -18,7 +18,7 @@ HDFS Writer的实现过程，如下所示。
 
 **说明：** 数据同步需要使用Admin账号，并且有访问相应文件的读写权限。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15519393277725_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15578314847725_zh-CN.png)
 
 命令说明如下：
 
@@ -70,7 +70,7 @@ HDFS Writer的实现过程，如下所示。
 
 -   目前HDFS Writer仅支持TextFile、ORCFile和ParquetFile三种格式的文件，且文件内容存放的必须是一张逻辑意义上的二维表。
 -   由于HDFS是文件系统，不存在schema的概念，因此不支持对部分列写入。
--   目前仅支持以下Hive数据类型。
+-   目前仅支持以下Hive数据类型:
     -   数值型：Tinyint、Smallint、Int、Bigint、Float和Double。
     -   字符串类型：String、Varchar和Char。
     -   布尔类型：Boolean。
@@ -99,20 +99,20 @@ HDFS Writer针对Hive数据类型的转换列表，如下所示。
 |参数|描述|必选|默认值|
 |:-|:-|:-|:--|
 |defaultFS|Hadoop HDFS文件系统namenode节点地址，例如`hdfs://127.0.0.1:9000`。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|是|无|
-|fileType|文件的类型，目前仅支持您配置为text，orc或parquet。-   text：表示TextFile文件格式。
+|fileType|文件的类型，目前仅支持您配置为text，orc或parquet。 -   text：表示TextFile文件格式。
 -   orc：表示ORCFile文件格式。
 -   parquet：表示普通parquet file文件格式。
 
-|是|无|
+ |是|无|
 |path| 存储到Hadoop HDFS文件系统的路径信息，HDFS Writer会根据并发配置在path目录下写入多个文件。
 
  为了与Hive表关联，请填写Hive表在HDFS上的存储路径。例如Hive上设置的数据仓库的存储路径为`/user/hive/warehouse/`，已建立数据库test表hello，则对应的存储路径为`/user/hive/warehouse/test.db/hello` 。
 
  |是|无|
 |fileName|HDFS Writer写入时的文件名，实际执行时会在该文件名后添加随机的后缀作为每个线程写入实际文件名。|是|无|
-|column|写入数据的字段，不支持对部分列写入。为了与Hive中的表关联，需要指定表中所有字段名和字段类型，其中name指定字段名，type指定字段类型。
+|column|写入数据的字段，不支持对部分列写入。 为了与Hive中的表关联，需要指定表中所有字段名和字段类型，其中name指定字段名，type指定字段类型。
 
-您可以指定column字段信息，配置如下：
+ 您可以指定column字段信息，配置如下：
 
 ```
 "column": 
@@ -128,26 +128,26 @@ HDFS Writer针对Hive数据类型的转换列表，如下所示。
 ]
 ```
 
-|是（如果filetype为parquet，此项无需填写）|无|
-|writeMode|HDFS Writer写入前数据清理处理模式。-   append：写入前不做任何处理，数据集成HDFS Writer直接使用filename写入，并保证文件名不冲突。
+ |是（如果filetype为parquet，此项无需填写）|无|
+|writeMode|HDFS Writer写入前数据清理处理模式。 -   append：写入前不做任何处理，数据集成HDFS Writer直接使用filename写入，并保证文件名不冲突。
 -   nonConflict：如果目录下有fileName前缀的文件，直接报错。
 
-**说明：** Parquet格式文件不支持Append，所以只能是noConflict。
+ **说明：** Parquet格式文件不支持Append，所以只能是noConflict。
 
-|是|无|
+ |是|无|
 |fieldDelimiter|HDFS Writer写入时的字段分隔符，需要您保证与创建的Hive表的字段分隔符一致，否则无法在Hive表中查到数据。|是（如果filetype为parquet，此项无需填写）|无|
-|compress|HDFS文件压缩类型，默认不填写，则表示没有压缩。其中text类型文件支持gzip和bzip2压缩类型，orc类型文件支持SNAPPY压缩类型（需要您安装SnappyCodec）。
+|compress|HDFS文件压缩类型，默认不填写，则表示没有压缩。 其中text类型文件支持gzip和bzip2压缩类型，orc类型文件支持SNAPPY压缩类型（需要您安装SnappyCodec）。
 
-|否|无|
+ |否|无|
 |encoding|写文件的编码配置。|否|无压缩|
-|parquetSchema|写Parquet格式文件时的必填项，用来描述目标文件的结构，所以此项当且仅当fileType为parquet时生效 。格式如下：```
+|parquetSchema|写Parquet格式文件时的必填项，用来描述目标文件的结构，所以此项当且仅当fileType为parquet时生效 。格式如下： ```
 message MessageType名 {
 是否必填, 数据类型, 列名;
 ......................;
 }
 ```
 
-配置项说明如下：
+ 配置项说明如下：
 
 -   MessageType名：填写名称。
 -   是否必填：required表示非空，optional表示可为空。推荐全填optional。
@@ -155,7 +155,7 @@ message MessageType名 {
 
 **说明：** 每行列设置必须以分号结尾，最后一行也要写上分号。
 
-示例如下：
+ 示例如下。
 
 ```
 message m {
@@ -171,8 +171,8 @@ optional int64 click_num;
 }
 ```
 
-|否|无|
-|hadoopConfig|hadoopConfig中可以配置与Hadoop相关的一些高级参数，例如HA的配置。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。```
+ |否|无|
+|hadoopConfig|hadoopConfig中可以配置与Hadoop相关的一些高级参数，例如HA的配置。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。 ```
 "hadoopConfig":{
 "dfs.nameservices": "testDfs",
 "dfs.ha.namenodes.testDfs": "namenode1,namenode2",
@@ -182,7 +182,7 @@ optional int64 click_num;
 }
 ```
 
-|否|无|
+ |否|无|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
@@ -197,7 +197,7 @@ optional int64 click_num;
     "type": "job",
     "version": "2.0",//版本号
     "steps": [
-        { //下面是关于Reader的模板，可以找相应的读插件文档
+        { //以下为Reader模板，可以根据相应的读插件文档配置。
             "stepType": "stream",
             "parameter": {},
             "name": "Reader",
@@ -206,7 +206,7 @@ optional int64 click_num;
         {
             "stepType": "hdfs",//插件名
             "parameter": {
-                "path": "",//存储到 Hadoop HDFS 文件系统的路径信息
+                "path": "",//存储到 Hadoop HDFS 文件系统的路径信息。
                 "fileName": "",//HDFS Writer 写入时的文件名
                 "compress": "",//HDFS 文件压缩类型
                 "datasource": "",//数据源
@@ -247,7 +247,7 @@ optional int64 click_num;
         },
         "speed": {
             "concurrent": 3,//作业并发数
-            "throttle": false,////false代表不限流，下面的限流的速度不生效，true代表限流
+            "throttle": false,////false代表不限流，下面的限流的速度不生效，true代表限流。
             "dmu": 1//DMU值
         }
     },
