@@ -18,7 +18,7 @@ HDFS Writer的实现过程如下所示：
 
 **说明：** 数据同步需要使用Admin账号，并且有访问相应文件的读写权限。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15578314847725_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15578317017725_zh-CN.png)
 
 命令说明如下：
 
