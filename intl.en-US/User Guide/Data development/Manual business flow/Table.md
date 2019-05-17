@@ -4,15 +4,15 @@
 
 1.  Click **Manual Business Flow**, and select **Create Business Flow**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15525334987961_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15580583247961_en-US.png)
 
 2.  Right-click **Table**, and select **Create Table**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15525334987962_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15580583247962_en-US.png)
 
 3.  Set basic attributes.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15525334987963_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15580583247963_en-US.png)
 
     -   Chinese Name: The Chinese name of the created table.
     -   Level-1 Topic: The name of the level-1 target folder of the created table.
@@ -20,13 +20,13 @@
     -   Description: The description of the created table.
     -   Click **Create Topic**. On the displayed Topic Management page, create level-1 and level-2 topics.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15525334987965_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15580583247965_en-US.png)
 
 4.  Create a table in DDL mode
 
     Click **DDL Mode**. In the displayed dialog box, enter the standard table creation statements.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15525334987966_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15580583247966_en-US.png)
 
     After editing the table creation SQL statements, click **Generate Table Structure** to automatically enter information in the Basic Attributes, Physical Model Design, and Table Structure Design areas.
 
@@ -63,7 +63,7 @@
             -   Security level: It can be set to Non-sensitive, Sensitive, or Confidential.
 
                 ```
-                C: Customer data, B: Company data, S: Business data。 
+                C: Customer data, B: Company data, S: Business data
                 C1—C2, B1, and S1 are non-sensitive data.
                 C3, B2–B4, S2, and S3 are sensitive data. 
                 C4, S4, and B4 are confidential data. 
