@@ -18,7 +18,7 @@ HDFS Writer的实现过程如下所示：
 
 **说明：** 数据同步需要使用Admin账号，并且有访问相应文件的读写权限。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15578317017725_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15580778967725_zh-CN.png)
 
 命令说明如下：
 
@@ -183,6 +183,39 @@ optional int64 click_num;
 ```
 
  |否|无|
+|dataxParquetMode|针对Parquet文件进行同步的模式。使用fields支持array、map和struct等复杂类型。可选值包括fields和columns。 配置dataxParquetMode为fields时，支持hdfs over oss，即HDFS的存储为OSS，OSS的数据存储格式为parquet。此时您可以在hadoopConfig中增加OSS相关的参数，详情如下：
+
+ -   fs.oss.accessKeyId：访问OSS的AccessKeyID。
+-   fs.oss.accessKeySecret：访问OSS的AccessKeySecret。
+-   fs.oss.endpoint：访问OSS的endpoint。
+
+ 访问OSS的示例如下所示：
+
+ ``` {#codeblock_8bu_jpz_0o6}
+```json
+	"writer": {
+	"name": "hdfswriter",
+	"parameter": {
+	    "defaultFS": "oss://test-bucket",
+	    "fileType": "parquet",
+	    "path": "/datasets/oss_demo/kpt",
+	    "fileName": "test",
+	    "writeMode": "truncate",
+	    "compress": "SNAPPY",
+	    "encoding": "UTF-8",
+	    "hadoopConfig": {
+	        "fs.oss.accessKeyId": "the-access-id",
+	        "fs.oss.accessKeySecret": "the-access-key",
+	        "fs.oss.endpoint": "oss-cn-hangzhou.aliyuncs.com"
+	        },
+	        "parquetSchema": "message test {\n    required int64 id;\n    optional binary name (UTF8);\n    optional int64 gmt_create;\n    required group map_col (MAP) {\n        repeated group key_value {\n            required binary key (UTF8);\n            required binary value (UTF8);\n        }\n    }\n    required group array_col (LIST) {\n        repeated group list {\n            required binary element (UTF8);\n        }\n    }\n    required group struct_col {\n        required int64 id;\n        required binary name (UTF8);\n    }    \n}",
+	        "dataxParquetMode": "fields"
+	        }
+	    }
+	```
+```
+
+ |否|columns|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
