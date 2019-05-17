@@ -2,12 +2,12 @@
 
 1.  右键单击**数据开发**下的**业务流程**，选择**新建业务流程**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16292/15513453607651_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16292/15580806477651_zh-CN.png)
 
 2.  右键单击**数据开发**，选择**新建数据开发节点** \> **ODPS SCRIPT**。
 3.  编辑ODPS SCRIPT节点。
 
-    您可在此节点中进行脚本模式的脚本编辑，详情请参见[编写SQL脚本](../../../../../cn.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/编写SQL脚本.md#)。
+    您可在此节点中进行脚本模式的脚本编辑，详情请参见[编写SQL脚本](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/编写SQL脚本.md#)。
 
 4.  节点调度配置。
 
