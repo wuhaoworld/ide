@@ -13,16 +13,16 @@ MaxCompute data sources you added manually can use the RAM user AccessKey.
 
 ## Procedure {#section_jy4_q4v_42b .section}
 
-1.  Log on to the [DataWorks console](https://partners-intl.aliyun.com) as an administrator and click **Enter Workspace** in the Actions column of the relevant project in the Project List.
+1.  Log on to the [DataWorks console](https://workbench.data.aliyun.com/console) as an administrator and click **Enter Workspace** in the Actions column of the relevant project in the Project List.
 2.  Click **Data Integration** in the top navigation bar to go to the **Data Source** page.
 3.  Click **New Source** in the supported data source pop-up window.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16204/15514309137542_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16204/15580593197542_en-US.png)
 
 4.  Select the data source type **MaxCompute \(ODPS\)** in the new window.
 5.  Complete the MaxCompute data source configurations.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16204/15514309147543_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16204/15580593207543_en-US.jpg)
 
     Configurations:
 
@@ -30,7 +30,7 @@ MaxCompute data sources you added manually can use the RAM user AccessKey.
     -   Data source description: A brief description of the data source that does not exceed 80 characters in length.
     -   MaxCompute endpoint: By default, the MaxCompute endpoint is read-only. The value is automatically read from the system configuration.
     -   MaxCompute project name: The corresponding MaxCompute project indicator.
-    -   AccessID/AccessKey: The [AccessKey](https://www.alibabacloud.com/help/zh/doc-detail/53045.htm)\(AccessKeyID and AccessKeySecret\) is equivalent to the logon password.
+    -   AccessID/AccessKey: The [AccessKey](https://www.alibabacloud.com/help/doc-detail/53045.htm)\(AccessKeyID and AccessKeySecret\) is equivalent to the logon password.
 6.  Click **Test Connectivity**.
 7.  When the connectivity has passed the test, click **Complete**.
 
@@ -39,5 +39,5 @@ MaxCompute data sources you added manually can use the RAM user AccessKey.
 
 ## Next step {#section_dqv_5d1_p2b .section}
 
-For more information on how to configure the MaxCompute Writer plug-in, see [Configure MaxCompute Writer](reseller.en-US/User Guide/Data integration/Task configuration/Configure writer plug-in/Configure MaxCompute Writer.md#).
+For more information on how to configure the MaxCompute Writer plug-in, see [Configure MaxCompute Writer](intl.en-US/User Guide/Data integration/Task configuration/Configure writer plug-in/Configure MaxCompute Writer.md#).
 
