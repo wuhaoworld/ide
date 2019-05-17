@@ -2,21 +2,23 @@
 
 HDFS Reader提供了读取分布式文件系统数据存储的能力。在底层实现上，HDFS Reader获取分布式文件系统上文件的数据，并转换为数据集成传输协议传递给Writer。
 
-HDFS Reader实现了从Hadoop分布式文件系统HDFS中读取文件数据并转为数据集成协议的功能 。
+HDFS Reader实现了从Hadoop分布式文件系统HDFS中，读取文件数据并转为数据集成协议的功能 。
 
 示例如下：
 
-TextFile是Hive建表时默认使用的存储格式，数据不做压缩，本质上TextFile是以文本的形式将数据存放在HDFS中，对于数据集成而言，HDFS Reader在实现与OSS Reader有很多相似之处。ORCFile的全名是Optimized Row Columnar file，是对RCFile做的优化，这种文件格式可以提供一种高效的方法来存储Hive数据。HDFS Reader利用Hive提供的OrcSerde类，读取解析ORCFile文件的数据。
+TextFile是Hive建表时默认使用的存储格式，数据不进行压缩。本质上TextFile是以文本的形式将数据存放在HDFS中，对于数据集成而言，HDFS Reader在实现上与OSS Reader有很多相似之处。
 
-**说明：** 数据同步需要使用Admin账号，并且有访问相应文件的读写权限。
+ORCFile的全名是Optimized Row Columnar file，是对RCFile的优化，这种文件格式可以提供一种高效的方法来存储Hive数据。HDFS Reader利用Hive提供的OrcSerde类，读取解析ORCFile文件的数据。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15542704497725_zh-CN.png)
+**说明：** 数据同步需要使用admin账号，并且有访问相应文件的读写权限。
+
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15580780477725_zh-CN.png)
 
 命令说明如下：
 
--   创建admin用户，并创建主目录，指定hadoop用户组，并指定supergroup附加组。
+-   创建admin用户，并创建主目录，指定Hadoop用户组和supergroup附加组。
 
-    ```
+    ``` {#codeblock_vix_c33_iyo}
     useradd -m -G supergroup -g hadoop -p admin admin 
     ```
 
@@ -25,33 +27,33 @@ TextFile是Hive建表时默认使用的存储格式，数据不做压缩，本�
     -   `-p admin admin`：给admin用户添加密码。
 -   查看该目录下的文件内容。
 
-    ```
+    ``` {#codeblock_w7j_ntk_eb1}
     hadoop fs -ls /user/hive/warehouse/hive_p_partner_native
     ```
 
-    使用hadoop命令时，格式为`hadoop fs -command`，其中command表示命令。
+    执行Hadoop命令时，格式为`hadoop fs -command`，其中command表示命令。
 
 -   将文件part-00000拷贝到本地文件系统上。
 
-    ```
+    ``` {#codeblock_w7t_2p6_5kx}
     hadoop fs -get /user/hive/warehouse/hive_p_partner_native/part-00000
     ```
 
 -   编辑刚刚拷贝的文件。
 
-    ```
+    ``` {#codeblock_2qd_4i8_9rv}
     vim part-00000
     ```
 
 -   退出当前用户。
 
-    ```
+    ``` {#codeblock_skq_i8a_fff}
     exit
     ```
 
--   通过清单连接主机并在每台连接的主机上创建admin账号。
+-   通过清单连接主机，并在每台连接的主机上创建admin账号。
 
-    ```
+    ``` {#codeblock_8mk_fyd_wyg}
     pssh -h /home/hadoop/slave4pssh useradd -m -G supergroup -g hadoop -p admin admin
     ```
 
@@ -65,7 +67,7 @@ TextFile是Hive建表时默认使用的存储格式，数据不做压缩，本�
 -   支持TextFile、ORCFile、rcfile、sequence file、csv和parquet格式的文件，且要求文件内容存放的是一张逻辑意义上的二维表。
 -   支持多种类型数据读取（使用String表示），支持列裁剪，支持列常量。
 -   支持递归读取、支持正则表达式\*和?。
--   支持ORCFile数据压缩，目前支持SNAPPY，ZLIB两种压缩方式。
+-   支持ORCFile数据压缩，目前支持SNAPPY和ZLIB两种压缩方式。
 -   支持sequence file数据压缩，目前支持lzo压缩方式。
 -   多个File可以支持并发读取。
 -   csv类型支持压缩格式有gzip、bz2、zip、lzo、lzo\_deflate和snappy。
@@ -77,9 +79,9 @@ TextFile是Hive建表时默认使用的存储格式，数据不做压缩，本�
 
 **RCFile**
 
-如果您同步的HDFS文件是RCFile，由于RCFile底层存储的时候不同的数据类型存储方式不一样，而HDFS Reader不支持对Hive元数据的数据库进行访问查询，因此需要您在column type中指定该column在Hive表中的数据类型，如果该column是Bigint/Double/Float类型，则填写Bigint/Double/Float，如果是Varchar或者Char类型，则填写String。
+如果您同步的HDFS文件是RCFile，由于RCFile底层存储的时候不同的数据类型存储方式不一样，而HDFS Reader不支持对Hive元数据的数据库进行访问查询，因此需要您在column type中指定该column在Hive表中的数据类型。如果该column是Bigint/Double/Float类型，则填写Bigint/Double/Float，如果是Varchar或者Char类型，则填写String。
 
-RCFile中的类型会默认转为数据集成支持的内部类型，对照表如下所示。
+RCFile中的类型会默认转为数据集成支持的内部类型，如下表所示。
 
 |类型分类|HDFS数据类型|
 |:---|:-------|
@@ -92,7 +94,7 @@ RCFile中的类型会默认转为数据集成支持的内部类型，对照表�
 
 **ParquetFile**
 
-ParquetFile中的类型默认会转成数据集成支持的内部类型，对照表如下所示。
+ParquetFile中的类型默认会转成数据集成支持的内部类型，如下表所示。
 
 |类型分类|HDFS数据类型|
 |:---|:-------|
@@ -105,9 +107,9 @@ ParquetFile中的类型默认会转成数据集成支持的内部类型，对照
 
 **TextFile、ORCFile和SequenceFile**
 
-由于TextFile和ORCFile文件表的元数据信息由Hive维护并存放在Hive自己维护的数据库（如MySQL）中，目前HDFS Reader不支持对Hive元数据的数据库进行访问查询，因此您在进行类型转换时，必须指定数据类型。
+由于TextFile和ORCFile文件表的元数据信息由Hive维护，并存放在Hive自己维护的数据库（如MySQL）中，目前HDFS Reader不支持对Hive元数据的数据库进行访问查询，因此您在进行类型转换时，必须指定数据类型。
 
-TextFile、ORCFile和SequenceFile中的类型会默认转为数据集成支持的内部类型，对照表如下所示。
+TextFile、ORCFile和SequenceFile中的类型会默认转为数据集成支持的内部类型，如下表所示。
 
 |类型分类|HDFS数据类型|
 |:---|:-------|
@@ -130,14 +132,14 @@ TextFile、ORCFile和SequenceFile中的类型会默认转为数据集成支持�
 
 |参数|描述|必选|默认值|
 |:-|:-|:-|:--|
-|path|要读取的文件路径，如果要读取多个文件，可以使用简单正则表达式匹配，例如/hadoop/data\_201704\*。-   当指定单个HDFS文件时，HDFS Reader暂时只能使用单线程进行数据抽取。
+|path|要读取的文件路径，如果要读取多个文件，可以使用简单正则表达式匹配，例如/hadoop/data\_201704\*。 -   当指定单个HDFS文件时，HDFS Reader暂时只能使用单线程进行数据抽取。
 -   当指定多个HDFS文件时，HDFS Reader支持使用多线程进行数据抽取，线程并发数通过作业速度mbps指定。
 
 **说明：** 实际启动的并发数是您的HDFS待读取文件数量和您配置作业速度两者中的小者。
 
 -   当指定通配符，HDFS Reader尝试遍历出多个文件信息。例如指定/代表读取/目录下所有的文件，指定/bazhen/代表读取bazhen目录下游所有的文件。HDFS Reader目前只支持\*和?作为文件通配符，语法类似于一般的Linux命令行文件通配符。
 
-**说明：** 
+ **说明：** 
 
 -   数据集成会将一个同步作业所有待读取文件视作同一张数据表。您必须自己保证所有的File能够适配同一套schema信息，并且提供给数据集成权限可读。
 -   **注意分区读取：** Hive在建表时，可以指定分区 （partition），例如创建分区partition\(day="20150820", hour="09"\)，对应的HDFS文件系统中，相应的表的目录下则会多出/20150820和/09两个目录且/20150820是/09的父目录。
@@ -149,9 +151,9 @@ TextFile、ORCFile和SequenceFile中的类型会默认转为数据集成支持�
     ```
 
 
-|是|无|
-|defaultFS|Hadoop HDFS文件系统namenode节点地址。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|是|无|
-|fileType|文件的类型，目前只支持您配置为text、orc、rc、seq、csv和parquet。HDFS Reader能够自动识别文件的类型，并使用对应文件类型的读取策略。HDFS Reader在做数据同步前，会检查您配置的路径下所有需要同步的文件格式是否和fileType一致，如果不一致任务会失败。fileType可以配置的参数值列表如下所示。
+ |是|无|
+|defaultFS|Hadoop HDFS文件系统namenode节点地址。默认资源组不支持Hadoop高级参数HA的配置，请新增自定义资源，详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|是|无|
+|fileType|文件的类型，目前只支持您配置为text、orc、rc、seq、csv和parquet。HDFS Reader能够自动识别文件的类型，并使用对应文件类型的读取策略。HDFS Reader在做数据同步前，会检查您配置的路径下所有需要同步的文件格式是否和fileType一致，如果不一致任务会失败。 fileType可以配置的参数值列表如下所示。
 
 -   text：表示TextFile文件格式。
 -   orc：表示ORCFile文件格式。
@@ -167,15 +169,15 @@ TextFile、ORCFile和SequenceFile中的类型会默认转为数据集成支持�
 
 从上面的转换结果可以看出，数据本身没有变化，但是表示的格式略有差异，所以如果您配置的文件路径中要同步的字段在Hive中是复合类型的话，建议配置统一的文件格式 。
 
-**最佳实践建议：**
+ **最佳实践建议：** 
 
 -   如果需要统一复合类型解析出来的格式，建议您在Hive客户端将TextFile格式的表导成ORCFile格式的表。
 -   如果是Parquet文件格式，后面的parquetSchema则必填，此属性用来说明要读取的Parquet格式文件的格式。
 
-对于您指定的column信息，type必须填写，index/value必须选择其一。
+ 对于您指定的column信息，type必须填写，index/value必须选择其一。
 
-|是|无|
-|column|读取字段列表，type指定源数据的类型，index指定当前列来自于文本第几列（以0开始），value指定当前类型为常量，不从源头文件读取数据，而是根据value值自动生成对应的列。默认情况下，您可以全部按照String类型读取数据，配置为`"column": ["*"]`。您也可以指定column 字段信息，配置如下：
+ |是|无|
+|column|读取字段列表，type指定源数据的类型，index指定当前列来自于文本第几列（以0开始），value指定当前类型为常量，不从源头文件读取数据，而是根据value值自动生成对应的列。默认情况下，您可以全部按照String类型读取数据，配置为`"column": ["*"]`。 您也可以指定column 字段信息，配置如下：
 
 ```
 {
@@ -188,31 +190,31 @@ TextFile、ORCFile和SequenceFile中的类型会默认转为数据集成支持�
 }
 ```
 
-|是|无|
-|fieldDelimiter|读取的字段分隔符，HDFS Reader在读取TextFile数据时，需要指定字段分割符，如果不指定默认为','，HDFS Reader在读取ORCFile时，您无需指定字段分割符，Hive本身的默认分隔符为\\u0001。-   如果您想将每一行作为目的端的一列，分隔符请使用行内容不存在的字符，例如不可见字符\\u0001。
+ |是|无|
+|fieldDelimiter|读取的字段分隔符，HDFS Reader在读取TextFile数据时，需要指定字段分割符，如果不指定默认为','，HDFS Reader在读取ORCFile时，您无需指定字段分割符，Hive本身的默认分隔符为\\u0001。 -   如果您想将每一行作为目的端的一列，分隔符请使用行内容不存在的字符，例如不可见字符\\u0001。
 -   分隔符不能使用\\n。
 
-|否|,|
+ |否|,|
 |encoding|读取文件的编码配置。|否|utf-8|
-|nullFormat|文本文件中无法使用标准字符串定义null（空指针），数据集成提供nullFormat定义哪些字符串可以表示为null。例如您配置nullFormat:"null"，那么如果源头数据是null，数据集成视作null字段。
+|nullFormat|文本文件中无法使用标准字符串定义null（空指针），数据集成提供nullFormat定义哪些字符串可以表示为null。 例如您配置nullFormat:"null"，那么如果源头数据是null，数据集成视作null字段。
 
-|否|无|
-|compress|当fileType（文件类型）为csv下的文件压缩方式，目前仅支持gzip、bz2、zip、lzo、lzo\_deflate、hadoop-snappy和framing-snappy压缩。**说明：** 
+ |否|无|
+|compress|当fileType（文件类型）为csv下的文件压缩方式，目前仅支持gzip、bz2、zip、lzo、lzo\_deflate、hadoop-snappy和framing-snappy压缩。 **说明：** 
 
 -   lzo存在lzo和lzo\_deflate两种压缩格式，您在配置时需要留心，不要配错。
 -   由于snappy目前没有统一的stream format，数据集成目前仅支持最主流的hadoop-snappy（hadoop上的snappy stream format）和framing-snappy（google建议的snappy stream format）。
 -   rc表示rcfile文件格式。
 -   orc文件类型下无需填写。
 
-|否|无|
-|parquetSchema|读取Parquet格式文件时的必填项，用来描述目标文件的结构，所以此项仅在fileType为parquet时生效。格式如下：```
+ |否|无|
+|parquetSchema|读取Parquet格式文件时的必填项，用来描述目标文件的结构，所以此项仅在fileType为parquet时生效。格式如下： ```
 message MessageType名 {
 是否必填, 数据类型, 列名;
 ......................;
 }
 ```
 
-说明如下：
+ 说明如下：
 
 -   MessageType名：填写名称。
 -   是否必填：required表示非空，optional表示可为空。推荐全填optional。
@@ -220,7 +222,7 @@ message MessageType名 {
 
 **说明：** 每行列设置必须以分号结尾，最后一行也要写上分号。
 
-配置示例如下所示。
+ 配置示例如下所示。
 
 ```
 message m {
@@ -236,8 +238,8 @@ optional int64 click_num;
 }
 ```
 
-|否|无|
-|csvReaderConfig|读取CSV类型文件参数配置，Map类型。读取CSV类型文件使用的CsvReader进行读取，会有很多配置，不配置则使用默认值。常见配置如下所示。
+ |否|无|
+|csvReaderConfig|读取CSV类型文件参数配置，Map类型。读取CSV类型文件使用的CsvReader进行读取，会有很多配置，不配置则使用默认值。 常见配置如下所示。
 
 ```
 "csvReaderConfig":{
@@ -247,7 +249,7 @@ optional int64 click_num;
 }
 ```
 
-所有配置项及默认值，配置时csvReaderConfig的map中请严格按照以下字段名字进行配置。
+ 所有配置项及默认值，配置时csvReaderConfig的map中请严格按照以下字段名字进行配置。
 
 ```
 boolean caseSensitive = true;
@@ -264,8 +266,8 @@ boolean skipEmptyRecords = true;//是否跳过空行
 boolean captureRawRecord = true;
 ```
 
-|否|无|
-|hadoopConfig|hadoopConfig中可以配置与Hadoop相关的一些高级参数，例如HA的配置。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。```
+ |否|无|
+|hadoopConfig|hadoopConfig中可以配置与Hadoop相关的一些高级参数，例如HA的配置。默认资源组不支持Hadoop高级参数HA的配置，请新增自定义资源，详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。 ```
 "hadoopConfig":{
 "dfs.nameservices": "testDfs",
 "dfs.ha.namenodes.testDfs": "namenode1,namenode2",
@@ -275,7 +277,7 @@ boolean captureRawRecord = true;
 }
 ```
 
-|否|无|
+ |否|无|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
@@ -355,31 +357,35 @@ boolean captureRawRecord = true;
 
 parquetSchema的HDFS Reader配置样例如下。
 
-**说明：** fileType配置项必须设置为parquet, 且column配置项不生效。
+**说明：** 
+
+-   fileType配置项必须设置为parquet。
+-   如果您要读取parquet文件中的部分列，需在parquetSchema配置项中，指定完整schema结构信息，并在column中根据下标筛选需要的同步列进行列映射。
 
 ```
-"reader": 
-    {
-        "name": "hdfsreader",
-        "parameter": 
-            {
-                "path": "/user/hive/warehouse/addata.db/dw_ads_rtb_monitor_minute/thedate=20170103/hour_id=22/*",
-                "defaultFS": "h10s010.07100.149:8020",
-                "column": [],
-                "fileType": "parquet",
-                "encoding": "UTF-8",
-                "parquetSchema": "message m {
-                                optional int32 minute_id;
-                                optional int32 dsp_id;
-                                optional int32 adx_pid;
-                                optional int64 req;
-                                optional int64 res;
-                                optional int64 suc;
-                                optional int64 imp;
-                                optional double revenue;
-                                }"
-            }
-
-    }
+"reader":  {
+    "name": "hdfsreader",
+    "parameter": {
+        "path": "/user/hive/warehouse/addata.db/dw_ads_rtb_monitor_minute/thedate=20170103/hour_id=22/*",
+        "defaultFS": "h10s010.07100.149:8020",
+        "column": [
+            {
+                "index": 0,
+                "type": "string"
+            },
+            {
+                "index": 1,
+                "type": "long"
+            },
+            {
+                "index": 2,
+                "type": "double"
+            }
+        ],
+        "fileType": "parquet",
+        "encoding": "UTF-8",
+        "parquetSchema": "message m { optional int32 minute_id; optional int32 dsp_id; optional int32 adx_pid; optional int64 req; optional int64 res; optional int64 suc; optional int64 imp; optional double revenue; }"
+    }
+}
 ```
 
