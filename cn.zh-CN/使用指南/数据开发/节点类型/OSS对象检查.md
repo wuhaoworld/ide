@@ -6,31 +6,31 @@
 
 1.  进入数据开发页面，选择**新建** \> **控制** \> **OSS对象检查**
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155627465345563_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155808054045563_zh-CN.png)
 
 2.  填写新建节点对话框中的配置，单击**提交**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155627465345564_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155808054045564_zh-CN.png)
 
 3.  新建成功后，对OSS对象检查节点进行配置。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155627465345565_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155808054045565_zh-CN.png)
 
     |序号|配置|说明|
     |--|--|--|
-    |1|**OSS对象**|此处可手动填写OSS对象的存储路径，路径支持使用调度参数，详情请参见[参数配置](cn.zh-CN/使用指南/数据开发/调度配置/参数配置.md#)。|
-    |2|**超时时间**|在超时时间内，每5秒检测该OSS对象是否存在OSS中，如果超出超时时间还未检测到OSS对象存在，则OSS对象检查任务会失败。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155627465345571_zh-CN.png)
+    |1|**OSS对象**|此处可手动填写OSS对象的存储路径，路径支持使用调度参数，详情请参见[参数配置](intl.zh-CN/使用指南/数据开发/调度配置/参数配置.md#)。|
+    |2|**超时时间**|在超时时间内，每5秒检测该OSS对象是否存在OSS中，如果超出超时时间还未检测到OSS对象存在，则OSS对象检查任务会失败。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155808054045571_zh-CN.png)
 
 |
     |3|**选择存储地址**|您可以选择以下两种存储地址：     -   **自己的存储**：检测该租户下的OSS对象。
     -   **别人的存储**：检测非当前租户下的OSS对象。
- ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155627465445573_zh-CN.png)
+ ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/155808054045573_zh-CN.png)
 
 |
 
     **说明：** 
 
-    -   任务运行时，将会通过MaxCompute访问身份检查OSS对象，请确认OSS Bucket的权限设置，详情请参见[OSS的STS模式授权](../../../../cn.zh-CN/用户指南/外部表/OSS的STS模式授权.md#)。
+    -   任务运行时，将会通过MaxCompute访问身份检查OSS对象，请确认OSS Bucket的权限设置，详情请参见[OSS的STS模式授权](../../../../intl.zh-CN/开发/外部表/OSS的STS模式授权.md#)。
     -   在开发/生产环境中，将会通过开发/生产环境访问身份访问身份检查OSS对象，请确认OSS Bucket的权限设置。
 4.  在RAM中授权MaxCompute访问OSS的权限。
 

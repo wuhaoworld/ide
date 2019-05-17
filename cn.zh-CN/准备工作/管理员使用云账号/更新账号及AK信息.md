@@ -21,12 +21,12 @@
 
 2.  进入个人信息页面后，即可对AccessKey等信息进行查看和修改。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16178/15554938028957_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16178/15554938048957_zh-CN.png)
 
 3.  定期确认上述AK是否显示**已启用**，如果AK被禁用或删除将直接影响您的DataWorks中各类任务正常运行。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16178/15554938028958_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16178/15554938048958_zh-CN.png)
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16178/15554938028959_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16178/15554938048959_zh-CN.png)
 
 
