@@ -36,37 +36,37 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
 
 ## Parameter description​ {#section_jn2_gqh_p2b .section}
 
-|Attribute|Description| Required|Default value|
-|:--------|:----------|:--------|:------------|
-|endpoint| The Log Service endpoint is a URL for accessing a project and its internal log data. It is associated with the Alibaba Cloud region and name of the project. Service entry for each region, see [service entry](https://www.alibabacloud.com/help/zh/doc-detail/29008.htm).
+|Attribute|Description|Required|Default value|
+|:--------|:----------|:-------|:------------|
+|endpoint| The Log Service endpoint is a URL for accessing a project and its internal log data. It is associated with the Alibaba Cloud region and name of the project. Service entry for each region, see [service entry](https://www.alibabacloud.com/help/doc-detail/29008.htm).
 
  |Yes|N/A|
 |accessId|It refers to an AccessKey for accessing the Log Service, which is used to identify the accessing user.|Yes|N/A|
 |accessKey|It refers to another AccessKey for accessing the Log Service, which is used to verify the user's key.|Yes|N/A|
 |project|It refers to the project name of the target Log Service, which is the resource management component in the Log Service for isolating and controlling resources.|Yes|N/A|
 |logstore|It refers to the name of the target Logstore. Logstore is a component of the Log Service for collecting, storing, and querying log data.|Yes|N/A|
-|batchSize|It refers to the number of data entries queried from the Log Service at a time.|No |128|
-|column|Column names in each data entry. Here, you can set a metadata item in the Log Service as the synchronization column. Supported metadata items include "C\_Topic", "C\_MachineUUID", "C\_HostName", "C\_Path", and "C\_LogTime", which represents the log topic, unique identifier of the collection machine, host name, path, and log time, respectively.The sub-table represents the log theme, the acquisition machine uniquely identified, the host name, path, log time, and so on.
+|batchSize|It refers to the number of data entries queried from the Log Service at a time.|No|128|
+|column|Column names in each data entry. Here, you can set a metadata item in the Log Service as the synchronization column. Supported metadata items include "C\_Topic", "C\_MachineUUID", "C\_HostName", "C\_Path", and "C\_LogTime", which represents the log topic, unique identifier of the collection machine, host name, path, and log time, respectively. The sub-table represents the log theme, the acquisition machine uniquely identified, the host name, path, log time, and so on.
 
-**Note:** The values of fields in the format are case insensitive.
+ **Note:** The values of fields in the format are case insensitive.
 
-|Yes|N/A|
-|Begindatetime|Start time of data consumption. The parameter defines the left border of a time range \(left closed and right open\) in the format of yyyyMMddHHmmss \(such as 20180111013000\), and can work with the scheduling time parameter in DataWorks.**Note:** The maid and enddatetime combinations are used together.
+ |Yes|N/A|
+|Begindatetime|Start time of data consumption. The parameter defines the left border of a time range \(left closed and right open\) in the format of yyyyMMddHHmmss \(such as 20180111013000\), and can work with the scheduling time parameter in DataWorks. **Note:** The maid and enddatetime combinations are used together.
 
-|Required: Select either this parameter or endTimestampMillis.|Blank|
-|Enddatetime|The end time of the data consumption. The parameter defines the right border of a time range \(left closed and right open\) in the format of yyyyMMddHHmmss \(such as 20180111013010\) and can work with the scheduling time parameter in DataWorks.**Note:** The combination of enddatetime and maid is used together.
+ |Required: Select either this parameter or endTimestampMillis.|Blank|
+|Enddatetime|The end time of the data consumption. The parameter defines the right border of a time range \(left closed and right open\) in the format of yyyyMMddHHmmss \(such as 20180111013010\) and can work with the scheduling time parameter in DataWorks. **Note:** The combination of enddatetime and maid is used together.
 
-|No |N/A|
-|Begintimestampmillis|It refers to the start time of data consumption in milliseconds and is the left boundary of the time range \(left-closed and right-open\).**Note:** Begintimestampmillis and endtimestampmillis combination for use.
+ |No|N/A|
+|Begintimestampmillis|It refers to the start time of data consumption in milliseconds and is the left boundary of the time range \(left-closed and right-open\). **Note:** Begintimestampmillis and endtimestampmillis combination for use.
 
 1 represents the beginning of the log service cursor cursormode. Begin. The beginDateTime mode is recommended.
 
-|Required: Select either this parameter or beginDateTime.|N/A|
-|Endtimestampmillis|It refers to the end time of data consumption in milliseconds and is the right boundary of the time range \(left-closed and right-open\).**Note:** Endtimestampmillis and begintimestampmillis combination for use.
+ |Required: Select either this parameter or beginDateTime.|N/A|
+|Endtimestampmillis|It refers to the end time of data consumption in milliseconds and is the right boundary of the time range \(left-closed and right-open\). **Note:** Endtimestampmillis and begintimestampmillis combination for use.
 
 -1 represents the last location of the log service cursor, cursormode.End. The endDateTime mode is recommended.
 
-|Required: Select either this parameter or endDateTime.|N/A|
+ |Required: Select either this parameter or endDateTime.|N/A|
 
 ## Development in wizard mode {#section_bp2_wsh_p2b .section}
 
@@ -74,7 +74,7 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
 
     Configure the source and destination of the data for the synchronization task.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15514297937878_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15580594977878_en-US.png)
 
     Configurations:
 
@@ -85,7 +85,7 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
 
     The source table field on the left and the target table field on the right are one-to-one relationships, click **Add row** to add a single field and click **Delete** to delete the current field.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15514297937879_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15580594977879_en-US.png)
 
     -   Peer mapping: Click **Enable Same-Line Mapping** to establish a corresponding mapping relationship in the peer, note that match the data type.
     -   Automatic formatting: The fields are automatically sorted based on corresponding rules.
@@ -98,14 +98,14 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
     -   If the value you entered cannot be parsed, the type is displayed as Not identified.
 3.  Control the tunnel
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15514297947675_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15580594977675_en-US.png)
 
     Configurations:
 
     -   DMU: A unit which measures the resources consumed during data integration, including CPU, memory, and network bandwidth. One DMU represents the minimum amount of resources used for a data synchronization task.
     -   Concurrent job count: The maximum number of threads used to concurrently read or write data into the data storage media in a data synchronization task. In wizard mode, configure a concurrency for the specified task on the wizard page.
     -   The maximum number of errors indicates the maximum number of dirty data records.
-    -   Task resource group: The machine on which the task runs. If the number of tasks is large, the default Resource Group is used to wait for a resource. We recommend you add a Custom Resource Group \(currently only East China 1, East China 2 supports adding custom resource groups\). For more information, see[Add task resources](reseller.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).
+    -   Task resource group: The machine on which the task runs. If the number of tasks is large, the default Resource Group is used to wait for a resource. We recommend you add a Custom Resource Group \(currently only East China 1, East China 2 supports adding custom resource groups\). For more information, see[Add task resources](intl.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).
 
 ## Development in script mode {#section_cp2_wsh_p2b .section}
 
