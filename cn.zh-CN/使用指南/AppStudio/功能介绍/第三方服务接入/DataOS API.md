@@ -2,16 +2,13 @@
 
 本文将为您介绍DataOS API的功能、输入、输出等详情，以及如何进行配置使用。
 
-## API详情 {#section_inf_zom_lgc .section}
+## CheckMetaTable {#section_inf_zom_lgc .section}
 
--   CheckMetaTable
-
-    -   功能：判断table是否存在。
-    -   输入：tableGuid（必选）。
-    -   格式：`odps.<project>.<table>`。
-    -   输出：true/false。
-    示例如下：
-
+-   功能：判断table是否存在。
+-   输入：tableGuid（必选）。
+-   格式：`odps.<project>.<table>`。
+-   输出：true/false。
+-   示例如下：
     -   输入：`request.setTableGuid("odps.autotest.daily_test");`
     -   输出：`{"requestId":"0b85c9d915548770462378104e","errMsg":"success","errCode":0,"data":true}`
 
@@ -420,6 +417,6 @@ public class Simple {
 
     单击页面右上角账号下的**accesskeys**，即可进行查询。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217865/155806126547429_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217865/155832319447429_zh-CN.png)
 
 
