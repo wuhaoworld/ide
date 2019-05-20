@@ -35,17 +35,17 @@
 
         ``` {#codeblock_u04_r1k_ual}
         {
-          "requestId": "0bfaefec****61500671805e",
-          "errMsg": "success",
-          "errCode": 0,
-          "data": {
-            "appGuid": "odps.meta",
-            "projectName": "meta",
-            "projectNameCn": "ODPS元仓",
-            "comment": "",
-            "ownerId": "13101879118",
-            "createTime": "2014-02-18",
-            "modifyTime": "2018-04-16"
+            "requestId": "0bfaefec****61500671805e",
+            "errMsg": "success",
+            "errCode": 0,
+            "data": {
+                "appGuid": "odps.meta",
+                "projectName": "meta",
+                "projectNameCn": "ODPS元仓",
+                "comment": "",
+                "ownerId": "13101879118",
+                "createTime": "2014-02-18",
+                "modifyTime": "2018-04-16"
           }
         }
         ```
@@ -77,20 +77,20 @@
 
         ``` {#codeblock_o7w_uto_r2w}
         {
-          "requestId": "0b8906da****8175861e",
-          "errMsg": "success",
-          "errCode": 0,
-          "data": {
-            "appGuid": "odps.meta",
-            "tableGuid": "odps.meta.m_table",
-            "tableName": "m_table",
-            "id": 64809,
-            "OwnerId": "dp-base-odps@aliyun-test.com",
-            "hasPart": 1,
-            "dataSize": 49397610904693,
-            "createTime": "2014-12-10 21:20:23",
-            "lastDdlTime": "2017-04-18 10:10:06",
-            "lastModifyTime": "2019-04-09 20:24:08"
+            "requestId": "0b8906da****8175861e",
+            "errMsg": "success",
+            "errCode": 0,
+            "data": {
+                "appGuid": "odps.meta",
+                "tableGuid": "odps.meta.m_table",
+                "tableName": "m_table",
+                "id": 64809,
+                "OwnerId": "dp-base-odps@aliyun-test.com",
+                "hasPart": 1,
+                "dataSize": 49397610904693,
+                "createTime": "2014-12-10 21:20:23",
+                "lastDdlTime": "2017-04-18 10:10:06",
+                "lastModifyTime": "2019-04-09 20:24:08"
           }
         }
         ```
@@ -122,21 +122,22 @@
 
         ``` {#codeblock_xmb_x6p_8kl}
         {
-          "requestId": "0b8906d*****9796824e",
-          "errCode": 0,
-          "errMsg": "success",
-          "columnList": [{
-            "appGuid": "odps.meta",
-            "tableGuid": "odps.meta.m_table",
-            "tableName": "m_table",
-            "columnGuid": "odps.meta.m_table.project_name",
-            "columnName": "project_name",
-            "columnType": "string",
-            "seqNumber": 1,
-            "isPartitionCol": 0,
-            "comment": "Project名称",
-            "safeLevel": "C2"
-          }, {
+            "requestId": "0b8906d*****9796824e",
+            "errCode": 0,
+            "errMsg": "success",
+            "columnList": [{
+                "appGuid": "odps.meta",
+                "tableGuid": "odps.meta.m_table",
+                "tableName": "m_table",
+                "columnGuid": "odps.meta.m_table.project_name",
+                "columnName": "project_name",
+                "columnType": "string",
+                "seqNumber": 1,
+                "isPartitionCol": 0,
+                "comment": "Project名称",
+                "safeLevel": "C2"
+          }, 
+        {
             "appGuid": "odps.meta",
             "tableGuid": "odps.meta.m_table",
             "tableName": "m_table",
@@ -186,23 +187,23 @@
 
     ``` {#codeblock_je3_rax_dxv}
     {
-      "requestId": "0baf3e0*****5025570e",
-      "errCode": 0,
-      "errMsg": "success",
-      "pageNum": 1,
-      "pageSize": 10,
-      "totalNum": 1101,
-      "partitionList": [{
-        "appGuid": "odps.meta",
-        "tableGuid": "odps.meta.m_table",
-        "tableName": "m_table",
-        "id": 168504514,
-        "partitionGuid": "odps.meta.m_table.ds\u003d20190408",
-        "partitionName": "ds\u003d20190408",
-        "createTime": "2019-04-08 13:59:52",
-        "modifyTime": "2019-04-08 19:54:51",
-        "dataSize": 273248012568,
-        "records": 720503170
+        "requestId": "0baf3e0*****5025570e",
+        "errCode": 0,
+        "errMsg": "success",
+        "pageNum": 1,
+        "pageSize": 10,
+        "totalNum": 1101,
+        "partitionList": [{
+            "appGuid": "odps.meta",
+            "tableGuid": "odps.meta.m_table",
+            "tableName": "m_table",
+            "id": 168504514,
+            "partitionGuid": "odps.meta.m_table.ds\u003d20190408",
+            "partitionName": "ds\u003d20190408",
+            "createTime": "2019-04-08 13:59:52",
+            "modifyTime": "2019-04-08 19:54:51",
+            "dataSize": 273248012568,
+            "records": 720503170
       } ... ]
     }
     ```
@@ -237,38 +238,39 @@
 
         ``` {#codeblock_udq_ia2_3k7}
         {
-          "message": null,
-          "code": 200,
-          "success": true,
-          "data": {
-            "requestId": "0be41b***22277597924e",
-            "errCode": 0,
-            "errMsg": "success",
-            "pageNum": 1,
-            "pageSize": 2,
-            "totalNum": 5000,
+            "message": null,
+            "code": 200,
+            "success": true,
+            "data": {
+                "requestId": "0be41b***22277597924e",
+                "errCode": 0,
+                "errMsg": "success",
+                "pageNum": 1,
+                "pageSize": 2,
+                "totalNum": 5000,
             "data": [{
-              "appGuid": null,
-              "tableGuid": "odps.ant_p13n.finance_newsrec_tab_dataset_ds",
-              "tableName": "finance_newsrec_tab_dataset_ds",
-              "createTime": "2018-07-06 16:24:41",
-              "lastModifyTime": "2019-04-26 10:49:23",
-              "lastDdlTime": null,
-              "lastAccessTime": null,
-              "ownerId": "163585"
-            }, {
-              "appGuid": null,
-              "tableGuid": "odps.tbcdm.dws_tm_itm_cate_food_ftr_test_cm",
-              "tableName": "dws_tm_itm_cate_food_ftr_test_cm",
-              "createTime": "2017-11-23 17:06:18",
-              "lastModifyTime": "2019-04-26 20:34:12",
-              "lastDdlTime": null,
-              "lastAccessTime": null,
-              "ownerId": "108292"
+                "appGuid": null,
+                "tableGuid": "odps.ant_p13n.finance_newsrec_tab_dataset_ds",
+                "tableName": "finance_newsrec_tab_dataset_ds",
+                "createTime": "2018-07-06 16:24:41",
+                "lastModifyTime": "2019-04-26 10:49:23",
+                "lastDdlTime": null,
+                "lastAccessTime": null,
+                "ownerId": "163585"
+            }, 
+            {
+                "appGuid": null,
+                "tableGuid": "odps.tbcdm.dws_tm_itm_cate_food_ftr_test_cm",
+                "tableName": "dws_tm_itm_cate_food_ftr_test_cm",
+                "createTime": "2017-11-23 17:06:18",
+                "lastModifyTime": "2019-04-26 20:34:12",
+                "lastDdlTime": null,
+                "lastAccessTime": null,
+                "ownerId": "108292"
             }]
           },
-          "timestamp": 1556452227875,
-          "sessionId": null
+            "timestamp": 1556452227875,
+            "sessionId": null
         }
         ```
 
@@ -278,30 +280,32 @@
 pom配置如下所示：
 
 ``` {#codeblock_aq5_ceb_36y}
+<!--DataOS Start-->
 <dependency>
-      <groupId>com.aliyun</groupId>
-      <artifactId>aliyun-java-sdk-dataworks</artifactId>
-      <version>0.11.10</version>
-    </dependency>
+    <groupId>com.aliyun</groupId>
+    <artifactId>aliyun-java-sdk-dataworks-enterprise-ultimate</artifactId>
+    <version>0.0.3</version>
+</dependency>
 
-    <dependency>
-      <groupId>com.aliyun</groupId>
-      <artifactId>aliyun-java-sdk-core</artifactId>
-      <version>4.4.0</version>
-    </dependency>
-
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.8.5</version>
-    </dependency>
+<!-- 要求JSON 2.8.5以上版本 -->
+<dependency>
+    <groupId>com.aliyun</groupId>
+    <artifactId>aliyun-java-sdk-core</artifactId>
+    <version>4.4.0</version>
+</dependency>
+<!--DataOS End-->
 ```
 
 host配置如下所示：
 
 ``` {#codeblock_646_ejd_3v7}
-#预发（办公网可以直接访问）
-100.67.30.222 dataworks-share.aliyuncs.com
+# from src/main/resources/application.properties
+# dataos api configuration
+dataworks.dataos.auth.accessId= <indicate user accessid, refer to aliyun>
+dataworks.dataos.auth.accessKey= <indicate user accessid, refer to aliyun>
+dataworks.dataos.region=cn-shanghai
+dataworks.dataos.endpoint=dataworks-ee-ue-share.cn-shanghai.aliyuncs.com
+dataworks.dataos.product=dataworks-enterprise-ultimate
 ```
 
 Java代码如下所示，其中创建IClientProfile时，需要指定云账号的AccessKeyID和AccessKeySecret，详情请参见下文的常见问题。
@@ -417,6 +421,6 @@ public class Simple {
 
     单击页面右上角账号下的**accesskeys**，即可进行查询。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217865/155832319447429_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/217865/155833345547429_zh-CN.png)
 
 
