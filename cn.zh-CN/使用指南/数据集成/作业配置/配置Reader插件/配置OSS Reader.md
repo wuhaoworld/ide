@@ -34,7 +34,7 @@ OSS Reader支持OSS中的BIGINT、DOUBLE、STRING、DATATIME和BOOLEAN数据类�
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
 |Object|OSS的Object信息，此处可以支持填写多个Object。例如xxx的bucket中有yunshi文件夹，文件夹中有ll.txt文件，则Object直接填yunshi/ll.txt。 -   当指定单个OSS Object时，OSS Reader暂时只能使用单线程进行数据抽取。后期将考虑在非压缩文件情况下针对单个Object可以进行多线程并发读取。
 -   当指定多个OSS Object时，OSS Reader支持使用多线程进行数据抽取。线程并发数通过通道数指定。
--   当指定通配符时，OSS Reader尝试遍历出多个Object信息，配置通配符会导致内存溢出，通常不建议您进行配置。详情请参见[OSS产品概述](../../../../intl.zh-CN/产品简介/什么是对象存储 OSS.md#)。
+-   当指定通配符时，OSS Reader尝试遍历出多个Object信息。例如配置 abc\[0-9\]表示abc0、abc1、abc2、abc3等。配置通配符会导致内存溢出，通常不建议您进行配置。详情请参见[OSS产品概述](../../../../intl.zh-CN/产品简介/什么是对象存储 OSS.md#)。
 
  **说明：** 
 
@@ -82,7 +82,7 @@ json
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15584934147815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15585128467815_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -100,7 +100,7 @@ json
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15584934147818_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15585128477818_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -109,7 +109,7 @@ json
 
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15584934217675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15585128477675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
