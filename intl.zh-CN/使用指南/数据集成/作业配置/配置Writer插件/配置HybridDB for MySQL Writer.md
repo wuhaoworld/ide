@@ -2,25 +2,25 @@
 
 本文将为您介绍HybridDB for MySQL Writer支持的数据类型、写入方式、字段映射和数据源等参数及配置举例。
 
-HybridDB for MySQL Writer插件实现了写入数据到MySQL数据库目标表的功能。在底层实现上，HybridDB for MySQL Writer通过JDBC连接远程HybridDB for MySQL数据库，并执行相应的`insert into…`或`replace into…`的SQL语句将数据写入HybridDB for MySQL，内部会分批次提交入库，需要数据库本身采用InnoDB引擎。
+HybridDB for MySQL Writer插件实现了写入数据到MySQL数据库目标表的功能。在底层实现上，HybridDB for MySQL Writer通过JDBC连接远程HybridDB for MySQL数据库，并执行相应的`insert into`或`replace into`的SQL语句将数据写入HybridDB for MySQL，分批次提交入库，需数据库本身采用InnoDB引擎。
 
 **说明：** 在开始配置HybridDB for MySQL Writer插件前，请首先配置好数据源，详情请参见[配置HybridDB for MySQL数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置HybridDB for MySQL数据源.md#)。
 
-HybridDB for MySQL Writer面向ETL开发工程师，他们使用HybridDB for MySQL Writer从数仓导入数据到HybridDB for MySQL。同时HybridDB for MySQL Writer也可以作为数据迁移工具为DBA等用户提供服务。HybridDB for MySQL Writer通过数据同步框架获取Reader生成的协议数据，根据您配置的writeMode生成。
+HybridDB for MySQL Writer面向数据开发工程师，使用HybridDB for MySQL Writer从数仓导入数据到HybridDB for MySQL。同时，HybridDB for MySQL Writer也可以作为数据迁移工具为DBA等用户提供服务。HybridDB for MySQL Writer通过数据同步框架根据您配置的writeMode获取Reader生成的协议数据。
 
-**说明：** 整个任务至少需要具备`insert/replace into…`的权限，是否需要其他权限，取决于您配置任务时在preSql和postSql中指定的语句。
+**说明：** 整个任务至少需要具备`insert/replace into`的权限。是否需要其他权限，取决于您配置任务时在preSql和postSql中指定的语句。
 
 ## 类型转换列表 {#section_qqr_b4r_5fb .section}
 
-目前HybridDB for MySQL Writer支持大部分HybridDB for MySQL类型，但也存在部分类型没有支持的情况，请注意检查您的类型。
+目前HybridDB for MySQL Writer存在小部分HybridDB for MySQL类型未支持的情况，请注意检查您的类型。
 
-HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表，如下所示。
+HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表如下所示。
 
 |类型分类|HybridDB for MySQL数据类型|
 |:---|:---------------------|
 |整数类|Int、Tinyint、Smallint、Mediumint、Bigint和Year|
 |浮点类|Float、Double和Decimal|
-|字符串类|Varchar、Char、Tinytext、T ext、Mediumtext和LongText|
+|字符串类|Varchar、Char、Tinytext、Text、Mediumtext和LongText|
 |日期时间类|Date、Datetime、Timestamp和Time|
 |布尔类|Bool|
 |二进制类|Tinyblob、Mediumblob、Blob、LongBlob和Varbinary|
@@ -31,11 +31,10 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表，如下�
 |:-|:-|:-|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
 |table|选取的需要同步的表名称。|是|无|
-|writeMode|选择导入模式，可以支持insert/replace方式。-   replace into…：没有遇到主键/唯一性索引冲突时，与insert into行为一致，冲突时会用新行替换原有行所有字段。
+|writeMode|选择导入模式，可以支持insert/replace方式。 -   replace into…：没有遇到主键/唯一性索引冲突时，与insert into行为一致，冲突时会用新行替换原有行所有字段。
 -   insert into…：当主键/唯一性索引冲突时会写不进去冲突的行，以脏数据的形式体现。
--   INSERT INTO table \(a,b,c\) VALUES \(1,2,3\) ON DUPLICATE KEY UPDATE…：没有遇到主键/唯一性索引冲突时，与insert into行为一致，冲突时会用新行替换已经指定的字段的语句写入数据到MySQL。
 
-|否|insert|
+ |否|insert|
 |column|目标表需要写入数据的字段，字段之间用英文所逗号分隔。例如`"column":["id","name","age"]`。如果要依次写入全部列，使用\*表示，例如`"column":["*"]`。|是|无|
 |preSql|执行数据同步任务之前率先执行的SQL语句。目前向导模式仅允许执行一条SQL语句，脚本模式可以支持多条SQL语句，例如清除旧数据。|否|无|
 |postSql|执行数据同步任务之后执行的SQL语句，目前向导模式仅允许执行一条SQL语句，脚本模式可以支持多条SQL语句，例如加上某一个时间戳。|否|无|
@@ -43,11 +42,11 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表，如下�
 
 ## 向导开发介绍 {#section_jvk_sgr_5fb .section}
 
-1.  **选择数据源**
+1.  **选择数据源** 
 
     配置同步任务的**数据来源**和**数据去向**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/155117396132039_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/155859634232039_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -61,7 +60,7 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表，如下�
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，单击**删除**即可删除当前字段 。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/155117396132041_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/155859634232041_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -72,7 +71,7 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表，如下�
 
 3.  **通道控制**
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/155117396132018_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/155859634232018_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
