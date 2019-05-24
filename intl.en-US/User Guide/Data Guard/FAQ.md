@@ -41,7 +41,3 @@ This topic describes the frequently asked questions \(FAQs\) about Data Guard of
     A: You can revoke permissions only on the fields whose security level is higher than the security level of your account.
 
 
-|Q|A|
-|--|--|
-|1|2|2|
-
