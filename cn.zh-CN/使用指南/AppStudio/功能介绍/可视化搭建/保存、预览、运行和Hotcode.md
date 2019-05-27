@@ -6,13 +6,13 @@
 
 可视化搭建系统将会定时的保存您的修改，您也可以自主单击操作面板中的保存按钮进行保存。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17766/155417581540962_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17766/155893328040962_zh-CN.png)
 
 ## 预览 {#section_cdg_3hd_dhb .section}
 
 在可视化搭建系统中，可视化操作区域是一种处于编辑的状态，而有一些组件针对编辑状态做了一些特殊的处理，只有在正式的运行状态下才能执行正常的渲染逻辑，如果您想查看正常的渲染结果，可以单击操作区域的预览按钮。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17766/155417581540963_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17766/155893328040963_zh-CN.png)
 
 ## 运行 {#section_k3t_phd_dhb .section}
 
@@ -20,7 +20,7 @@
 
 单击AppStudio Debug面板中的启动按钮来运行整个应用。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17766/155417581640964_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/17766/155893328040964_zh-CN.png)
 
 ## Hotcode {#section_enr_h3d_dhb .section}
 
