@@ -99,7 +99,7 @@ Kafka Reader通过Kafka Java SDK读取Kafka中的数据，使用的日志服务J
 |beginDateTime|数据消费的开始时间位点，为时间范围（左闭右开）的左边界。yyyymmddhhmmss格式的时间字符串，可以和[时间属性](cn.zh-CN/使用指南/数据开发/调度配置/时间属性.md#)配合使用。Kafka 0.10.2以上的版本支持此功能。|需要和beginOffset二选一。 **说明：** beginDateTime和endDateTime配合使用。
 
  |
-|endDateTime|数据消费的结束时间位点，为时间范围（左开右闭）的右边界。yyyymmddhhmmss格式的时间字符串，可以和[时间属性](cn.zh-CN/使用指南/数据开发/调度配置/时间属性.md#)配合使用。Kafka 0.10.2以上的版本支持此功能。|需要和endOffset二选一。 **说明：** endDateTime和beginDateTime配合使用。
+|endDateTime|数据消费的结束时间位点，为时间范围（左闭右开）的右边界。yyyymmddhhmmss格式的时间字符串，可以和[时间属性](cn.zh-CN/使用指南/数据开发/调度配置/时间属性.md#)配合使用。Kafka 0.10.2以上的版本支持此功能。|需要和endOffset二选一。 **说明：** endDateTime和beginDateTime配合使用。
 
  |
 |beginOffset|数据消费的开始时间位点，您可以配置以下形式。 -   例如15553274的数字形式，表示开始消费的点位。
