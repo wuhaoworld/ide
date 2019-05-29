@@ -1,10 +1,10 @@
 # 配置HybridDB for PostgreSQL Writer {#concept_vzd_n1c_5fb .concept}
 
-本文将为您介绍HybridDB for PostgreSQL Writer支持的数据类型、写入方式、字段映射和数据源等参数及配置举例。
+本文将为您介绍HybridDB for PostgreSQL Writer支持的数据类型、写入方式、字段映射和数据源等参数及配置示例。
 
-HybridDB for PostgreSQL Writer插件实现了向HybridDB for PostgreSQL写入数据。在底层实现上，HybridDB for PostgreSQL Writer通过JDBC连接远程HybridDB for PostgreSQL数据库，并执行相应的SQL语句将数据从PHybridDB for PostgreSQL库中SELECT出来，RDS在公共云提供HybridDB for PostgreSQL存储引擎。
+HybridDB for PostgreSQL Writer插件实现了向HybridDB for PostgreSQL写入数据。在底层实现上，HybridDB for PostgreSQL Writer通过JDBC连接远程HybridDB for PostgreSQL数据库，并执行相应的SQL语句，将数据从HybridDB for PostgreSQL库中Select出来，RDS在公共云提供HybridDB for PostgreSQL存储引擎。
 
-**说明：** 在开始配置HybridDB for PostgreSQL Writer插件前，请首先配置好数据源，详情请参见[配置HybridDB for PostgreSQL数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置HybridDB for PostgreSQL数据源.md#)。
+**说明：** 开始配置HybridDB for PostgreSQL Writer插件前，请首先配置好数据源，详情请参见[配置HybridDB for PostgreSQL数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置HybridDB for PostgreSQL数据源.md#)。
 
 简而言之，HybridDB for PostgreSQL Writer通过JDBC连接器连接到远程的HybridDB for PostgreSQL数据库，根据您配置的信息生成查询SELECT SQL语句并发送到远程HybridDB for PostgreSQL数据库，并将该SQL执行返回结果使用CDP自定义的数据类型拼装为抽象的数据集，并传递给下游Writer处理。
 
@@ -19,17 +19,17 @@ PHybridDB for PostgreSQL Writer针对HybridDB for PostgreSQL的类型转换列�
 
 |类型分类|HybridDB for PostgreSQL数据类型|
 |:---|:--------------------------|
-|Long|Bigint、Bigserial、Integer、Smallint和Serial|
-|Double|Double、Precision、Money、Numeric和Real|
-|String|Varchar、Char、Text、Bit和Inet|
-|Date|Date、Time和Timestamp|
-|Boolean|Bool|
-|Bytes|Bytea|
+|LONG|BIGINT、BIGSERIAL、INTEGER、SMALLINT和SERIAL|
+|DOUBLE|DOUBLE、PRECISION、MONEY、NUMERIC和REAL|
+|STRING|VARCHAR、CHAR、TEXT、BIT和INET|
+|DATE|DATE、TIME和TIMESTAMP|
+|BOOLEAN|BOOL|
+|BYTES|BYTEA|
 
 **说明：** 
 
 -   除上述罗列字段类型外，其他类型均不支持。
--   Money、Inet和Bit需要您使用a\_inet::varchar类似的语法进行转换。
+-   MONEY、INET和BIT需要您使用`a_inet::varchar`类似的语法进行转换。
 
 ## 参数说明 {#section_pld_gkr_5fb .section}
 
@@ -37,7 +37,10 @@ PHybridDB for PostgreSQL Writer针对HybridDB for PostgreSQL的类型转换列�
 |:-|:-|:---|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
 |table|选取的需要同步的表名称。|是|无|
-|writeMode|选择导入模式，可以支持insert方式。insert：当主键/唯一性索引冲突时，数据集成视为脏数据但保留原有的数据。|否|insert|
+|writeMode|选择导入模式，可以支持insert和copy方式。 -   insert：执行PostgreSQL的`insert into...values...`语句，将数据写出到PostgreSQL中。当数据出现主键/唯一性索引冲突时，待同步的数据行写入PostgreSQL失败，当前记录行成为脏数据。建议您优先选择insert模式。
+-   copy：PostgreSQL提供copy命令，用于表与文件（标准输出，标准输入）之间的相互复制。数据集成支持使用`copy from`，将数据加载到表中。建议您在遇到性能问题时再尝试使用该模式。
+
+ |否|insert|
 |column|目标表需要写入数据的字段，字段之间用英文逗号分隔。例如`"column":["id","name","age"]`。如果要依次写入全部列，使用\*表示，例如"column":\["\*"\]。|是|无|
 |preSql|执行数据同步任务之前率先执行的SQL语句。目前向导模式仅允许执行一条SQL语句，脚本模式可以支持多条SQL语句，例如清除旧数据。|否|无|
 |postSql|执行数据同步任务之后执行的SQL语句。目前向导模式仅允许执行一条SQL语句，脚本模式可以支持多条SQL语句，例如加上某一个时间戳。|否|无|
@@ -45,11 +48,11 @@ PHybridDB for PostgreSQL Writer针对HybridDB for PostgreSQL的类型转换列�
 
 ## 向导开发介绍 {#section_akn_qlr_5fb .section}
 
-1.  **选择数据源**
+1.  **选择数据源** 
 
     配置同步任务的**数据来源**和**数据去向**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62207/155117025532025_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62207/155909211732025_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -57,12 +60,13 @@ PHybridDB for PostgreSQL Writer针对HybridDB for PostgreSQL的类型转换列�
     |**表**|即上述参数说明中的table，选择需要同步的表。|
     |**导入前准备语句**|即上述参数说明中的preSql，输入执行数据同步任务之前率先执行的SQL语句。|
     |**导入后完成语句**|即上述参数说明中的postSql，输入执行数据同步任务之后执行的SQL语句。|
+    |**导入模式**|即上述参数说明中的writeMode，包括**insert**和**copy**两种模式。|
 
 2.  **字段映射**，即上述参数说明中的column。
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，将鼠标放到需要删除的字段，即可选择**删除**按钮。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62207/155117025532030_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62207/155909211732030_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -73,7 +77,7 @@ PHybridDB for PostgreSQL Writer针对HybridDB for PostgreSQL的类型转换列�
 
 3.  **通道控制**
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/155117025532018_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/155909211732018_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
