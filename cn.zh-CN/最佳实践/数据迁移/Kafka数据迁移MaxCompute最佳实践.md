@@ -13,13 +13,13 @@
     -   软件信息: Ganglia 3.7.2 ZooKeeper 3.4.12 Kafka 2.11-1.0.1 Kafka-Manager 1.3.3.16
     Kafka集群使用专有网络，区域为华东1（杭州），主实例组ECS计算资源配置公网及内网IP，具体配置如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045348036_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092248036_zh-CN.png)
 
 -   创建MaxCompute 项目
 
     开通MaxCompute服务并创建好项目，本文中在华东1（杭州）区域创建项目bigdata\_DOC，同时启动DataWorks相关服务，如下图所示。详情请参见[开通MaxCompute](../../../../cn.zh-CN/准备工作/开通MaxCompute.md#)。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/155911045311594_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/155911092211594_zh-CN.png)
 
 
 Kafka是一款分布式发布与订阅的消息中间件，具有高性能、高吞量的特点被广泛使用，每秒能处理上百万的消息。Kafka适用于流式数据处理，主要应用于用户行为跟踪、日志收集等场景。
@@ -36,7 +36,7 @@ Topic是Kafka集群上最常用的消息的集合，是一个消息存储逻辑�
 
             进入EMR Hadoop控制台**集群管理** \> **主机列表**页面，确认EMR集群Header主机地址，并通过SSH连接远程登录。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045348046_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348046_zh-CN.png)
 
         2.  创建测试Topic
 
@@ -77,7 +77,7 @@ Topic是Kafka集群上最常用的消息的集合，是一个消息存储逻辑�
     2.  创建MaxCompute表 为保证MaxCompute可以顺利接收Kafka数据，请您首先在MaxCompute上创建表。本例中为测试便利，使用非分区表。
         1.  登陆DataWorks创建表，详情请参见[表管理](../../../../cn.zh-CN/使用指南/数据开发/表管理.md#)。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045348051_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348051_zh-CN.png)
 
             您可以单击**DDL模式**进行建表，建表语句举例如下。
 
@@ -109,17 +109,17 @@ Topic是Kafka集群上最常用的消息的集合，是一个消息存储逻辑�
 
         在本文中，为节省资源，直接使用EMR集群Header主机作为自定义资源组。完成后，请等待服务器状态变为**可用**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045348054_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348054_zh-CN.png)
 
     2.  新建并运行同步任务 
 
         1.  在您的业务流程中右键单击**数据集成**，选择**新建数据集成节点** \> **数据同步**。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045448059_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348059_zh-CN.png)
 
         2.  新建数据同步节点后，您需要选择数据来源的数据源为**Kafka**，数据去向的数据源为**ODPS**，并且使用默认数据源**odps\_first**。选择数据去向表为您新建的**testkafka**。完成上述配置后，请点击下图框中的按钮，转换为**脚本模式**。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045448060_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348060_zh-CN.png)
 
         3.  脚本配置如下，代码释义请参见[配置Kafka Reader](../../../../cn.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置Kafka Reader.md#)。
 
@@ -130,7 +130,7 @@ Topic是Kafka集群上最常用的消息的集合，是一个消息存储逻辑�
                     {
                         "stepType": "kafka",
                         "parameter": {
-                            "server": "47.111.103.5:9092",
+                            "server": "47.xxx.xxx.xxx:9092",
                             "kafkaConfig": {
                                 "group.id": "console-consumer-83505"
                             },
@@ -230,18 +230,18 @@ Topic是Kafka集群上最常用的消息的集合，是一个消息存储逻辑�
 
             完成脚本配置后，请首先切换任务资源组为您刚创建的资源组，然后点击运行。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045448075_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348075_zh-CN.png)
 
         4.  完成运行后，您可以在**运行日志**中查看运行结果，如下为成功运行的日志。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045448076_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348076_zh-CN.png)
 
 3.  结果验证 您可以通过新建一个数据开发任务运行SQL语句，查看当前表中是否已存在从Kafka同步过来的数据。本例中使用select \* from testkafka；语句，完成后点击运行即可。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045448077_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348077_zh-CN.png)
 
     执行结果如下，本例中为保证结果，在testkafka Topic中输入了多条数据，您可以查验是否和您输入的数据一致。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911045448079_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/301870/155911092348079_zh-CN.png)
 
 
