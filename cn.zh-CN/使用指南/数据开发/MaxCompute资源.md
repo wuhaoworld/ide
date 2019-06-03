@@ -6,15 +6,15 @@
 
 1.  您可通过**MaxCompute资源**面板，查看在MaxCompute计算引擎对应项目中存在的资源。
 
-    ![MaxCompute资源面板](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434792_zh-CN.png)
+    ![MaxCompute资源面板](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912334792_zh-CN.png)
 
     |序号|图标|说明|
     |--|--|--|
-    |1|![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434797_zh-CN.png)|单击后，可在弹出的面板中切换工作空间下的项目。 **说明：** 简单模式的工作空间只有生产环境项目。
+    |1|![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434797_zh-CN.png)|单击后，可在弹出的面板中切换工作空间下的项目。 **说明：** 简单模式的工作空间只有生产环境项目。
 
  |
-    |2|![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434798_zh-CN.png)|单击后，可以筛选不同的资源类型。|
-    |3|![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434799_zh-CN.png)|单击后，可以切换条目排序，默认按更新时间倒序排列。|
+    |2|![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434798_zh-CN.png)|单击后，可以筛选不同的资源类型。|
+    |3|![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434799_zh-CN.png)|单击后，可以切换条目排序，默认按更新时间倒序排列。|
 
     **说明：** 目前支持FILE、JAR、PYTHON和ARCHIVE四种资源类型。
 
@@ -40,17 +40,17 @@
 
 添加资源到数据开发面板的流程，如下图所示。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434812_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434812_zh-CN.png)
 
 1.  找到需要的资源后，单击**添加到数据开发**。
 
     您可通过此操作，快速将**MaxCompute资源**面板中的的资源文件同步至**数据开发**的业务流程中。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434807_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434807_zh-CN.png)
 
 2.  填写新建资源对话框中的配置。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434811_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434811_zh-CN.png)
 
     上传过程中，您可以进行如下操作：
 
@@ -73,10 +73,10 @@
 
 1.  单击**查看变更历史**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434813_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434813_zh-CN.png)
 
 2.  查看资源文件的创建、修改记录。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952440434815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/81298/155952912434815_zh-CN.png)
 
 
