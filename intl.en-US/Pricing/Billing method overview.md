@@ -36,11 +36,11 @@ Based on the billing method used, you can purchase or activate the following fou
 
 The following figure shows the billing items and purchase plans for these products.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/218438/155971974047467_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/218438/155971975447467_en-US.png)
 
 The following table describes the relationships between the billing objects and billing items.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/218438/155971974047166_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/218438/155971975547166_en-US.png)
 
 ## Pay-As-You-Go \(post-payment\) {#section_rvc_rpd_xg8 .section}
 
