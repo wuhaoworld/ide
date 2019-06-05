@@ -1,6 +1,6 @@
 # 配置HDFS Writer {#concept_q3n_hdm_q2b .concept}
 
-本文为您介绍HDFS Writer支持的数据类型、写入方式、字段映射和数据源等参数及配置举例。
+本文为您介绍HDFS Writer支持的数据类型、写入方式、字段映射和数据源等参数及配置示例。
 
 HDFS Writer提供向HDFS文件系统指定路径中写入TextFile文件、 ORCFile文件以及ParquetFile格式文件，文件内容可与 Hive 中表关联。在开始配置 HDFS Writer 插件前，请首先配置好数据源，详情请参见[配置HDFS数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置HDFS数据源.md#)。
 
@@ -18,13 +18,13 @@ HDFS Writer的实现过程如下所示：
 
 **说明：** 数据同步需要使用Admin账号，并且有访问相应文件的读写权限。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15580778967725_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15597284457725_zh-CN.png)
 
 命令说明如下：
 
 -   创建admin用户，并创建主目录，指定hadoop用户组，并指定supergroup附加组。
 
-    ```
+    ``` {#codeblock_4ld_jrx_cta}
     useradd -m -G supergroup -g hadoop -p admin admin 
     ```
 
@@ -33,7 +33,7 @@ HDFS Writer的实现过程如下所示：
     -   `-p admin admin`：给admin用户添加密码。
 -   查看该目录下的文件内容。
 
-    ```
+    ``` {#codeblock_pci_j6s_gvi}
     hadoop fs -ls /user/hive/warehouse/hive_p_partner_native
     ```
 
@@ -41,25 +41,25 @@ HDFS Writer的实现过程如下所示：
 
 -   将文件part-00000拷贝到本地文件系统上。
 
-    ```
+    ``` {#codeblock_kmz_ncq_inv}
     hadoop fs -get /user/hive/warehouse/hive_p_partner_native/part-00000
     ```
 
 -   编辑刚刚拷贝的文件。
 
-    ```
+    ``` {#codeblock_fp9_6tf_ybd}
     vim part-00000
     ```
 
 -   退出当前用户。
 
-    ```
+    ``` {#codeblock_16s_gvf_fly}
     exit
     ```
 
 -   通过清单连接主机并在每台连接的主机上创建admin账号。
 
-    ```
+    ``` {#codeblock_83l_yh9_3yr}
     pssh -h /home/hadoop/slave4pssh useradd -m -G supergroup -g hadoop -p admin admin
     ```
 
@@ -86,13 +86,15 @@ HDFS Writer的实现过程如下所示：
 
 HDFS Writer针对Hive数据类型的转换列表，如下所示。
 
-|数据集成类型分类|HDFS/Hive数据类型|
-|:-------|:------------|
-|long|Tinyint、Smallint、Int和Bigint。|
-|double|Float和Double|
-|string|String、Varchar和Char|
-|boolean|Boolean|
-|date|Date和Timestamp|
+**说明：** column的配置需要和Hive表对应的列类型保持一致。
+
+|类型分类|数据库数据类型|
+|:---|:------|
+|整数类|TINYINT、SMALLINT、INT和BIGINT|
+|浮点类|FLOAT和DOUBLE|
+|字符串类|CHAR、VARCHAR和STRING|
+|布尔类|BOOLEAN|
+|日期时间类|DATE和TIMESTAMP|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
@@ -114,7 +116,7 @@ HDFS Writer针对Hive数据类型的转换列表，如下所示。
 
  您可以指定column字段信息，配置如下：
 
-```
+``` {#codeblock_l57_u6e_kpq}
 "column": 
 [
     {
@@ -140,7 +142,7 @@ HDFS Writer针对Hive数据类型的转换列表，如下所示。
 
  |否|无|
 |encoding|写文件的编码配置。|否|无压缩|
-|parquetSchema|写Parquet格式文件时的必填项，用来描述目标文件的结构，所以此项当且仅当fileType为parquet时生效 。格式如下： ```
+|parquetSchema|写Parquet格式文件时的必填项，用来描述目标文件的结构，所以此项当且仅当fileType为parquet时生效 。格式如下： ``` {#codeblock_jt7_94w_orm}
 message MessageType名 {
 是否必填, 数据类型, 列名;
 ......................;
@@ -157,7 +159,7 @@ message MessageType名 {
 
  示例如下。
 
-```
+``` {#codeblock_7s8_iat_xpl}
 message m {
 optional int64 id;
 optional int64 date_id;
@@ -172,7 +174,7 @@ optional int64 click_num;
 ```
 
  |否|无|
-|hadoopConfig|hadoopConfig中可以配置与Hadoop相关的一些高级参数，例如HA的配置。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。 ```
+|hadoopConfig|hadoopConfig中可以配置与Hadoop相关的一些高级参数，例如HA的配置。默认资源组不支持Hadoop高级参数HA的配置，请[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。 ``` {#codeblock_gcb_x6j_2zi}
 "hadoopConfig":{
 "dfs.nameservices": "testDfs",
 "dfs.ha.namenodes.testDfs": "namenode1,namenode2",
@@ -193,29 +195,40 @@ optional int64 click_num;
 
  ``` {#codeblock_8bu_jpz_0o6}
 ```json
-	"writer": {
-	"name": "hdfswriter",
-	"parameter": {
-	    "defaultFS": "oss://test-bucket",
-	    "fileType": "parquet",
-	    "path": "/datasets/oss_demo/kpt",
-	    "fileName": "test",
-	    "writeMode": "truncate",
-	    "compress": "SNAPPY",
-	    "encoding": "UTF-8",
-	    "hadoopConfig": {
-	        "fs.oss.accessKeyId": "the-access-id",
-	        "fs.oss.accessKeySecret": "the-access-key",
-	        "fs.oss.endpoint": "oss-cn-hangzhou.aliyuncs.com"
-	        },
-	        "parquetSchema": "message test {\n    required int64 id;\n    optional binary name (UTF8);\n    optional int64 gmt_create;\n    required group map_col (MAP) {\n        repeated group key_value {\n            required binary key (UTF8);\n            required binary value (UTF8);\n        }\n    }\n    required group array_col (LIST) {\n        repeated group list {\n            required binary element (UTF8);\n        }\n    }\n    required group struct_col {\n        required int64 id;\n        required binary name (UTF8);\n    }    \n}",
-	        "dataxParquetMode": "fields"
-	        }
-	    }
-	```
+    "writer": {
+    "name": "hdfswriter",
+    "parameter": {
+        "defaultFS": "oss://test-bucket",
+        "fileType": "parquet",
+        "path": "/datasets/oss_demo/kpt",
+        "fileName": "test",
+        "writeMode": "truncate",
+        "compress": "SNAPPY",
+        "encoding": "UTF-8",
+        "hadoopConfig": {
+            "fs.oss.accessKeyId": "the-access-id",
+            "fs.oss.accessKeySecret": "the-access-key",
+            "fs.oss.endpoint": "oss-cn-hangzhou.aliyuncs.com"
+            },
+            "parquetSchema": "message test {\n    required int64 id;\n    optional binary name (UTF8);\n    optional int64 gmt_create;\n    required group map_col (MAP) {\n        repeated group key_value {\n            required binary key (UTF8);\n            required binary value (UTF8);\n        }\n    }\n    required group array_col (LIST) {\n        repeated group list {\n            required binary element (UTF8);\n        }\n    }\n    required group struct_col {\n        required int64 id;\n        required binary name (UTF8);\n    }    \n}",
+            "dataxParquetMode": "fields"
+            }
+        }
+    ```
 ```
 
  |否|columns|
+|haveKerberos|是否有Kerberos认证，默认为false。例如用户配置为true，则配置项kerberosKeytabFilePath和kerberosPrincipal为必填。|否|false|
+|kerberosKeytabFilePath|Kerberos认证keytab文件的绝对路径。如果haveKerberos为true，则必选。| | |
+|kerberosPrincipal|Kerberos认证Principal名，如\*\*\*\*/hadoopclient@\*\*.\*\*\* 。如果haveKerberos为true，则必选。 **说明：** 由于Kerberos需要配置keytab认证文件的绝对路径，您需要在自定义资源组上使用此功能。配置示例如下：
+
+``` {#codeblock_wse_ub1_wsv}
+"haveKerberos":true,
+"kerberosKeytabFilePath":"/opt/datax/**.keytab",
+"kerberosPrincipal":"**/hadoopclient@**.**"
+```
+
+ |否|无|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
@@ -225,7 +238,7 @@ optional int64 click_num;
 
 脚本配置示例如下，详情请参见上述参数说明。
 
-```
+``` {#codeblock_ay9_239_8fx}
 {
     "type": "job",
     "version": "2.0",//版本号
@@ -240,7 +253,7 @@ optional int64 click_num;
             "stepType": "hdfs",//插件名
             "parameter": {
                 "path": "",//存储到 Hadoop HDFS 文件系统的路径信息。
-                "fileName": "",//HDFS Writer 写入时的文件名
+                "fileName": "",//HDFS Writer写入时的文件名
                 "compress": "",//HDFS 文件压缩类型
                 "datasource": "",//数据源
                 "column": [
@@ -280,7 +293,7 @@ optional int64 click_num;
         },
         "speed": {
             "concurrent": 3,//作业并发数
-            "throttle": false,////false代表不限流，下面的限流的速度不生效，true代表限流。
+            "throttle": false,//false代表不限流，下面的限流的速度不生效，true代表限流。
             "dmu": 1//DMU值
         }
     },
