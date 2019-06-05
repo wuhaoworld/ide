@@ -2,12 +2,12 @@
 
 HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase Reader通过HBase的Java客户端连接远程HBase服务，并通过Scan方式读取您指定的rowkey范围内的数据，将读取的数据使用数据集成自定义的数据类型拼装为抽象的数据集，并传递给下游Writer处理。
 
-## 支持的功能 { .section}
+## 支持的功能 {#section_sh9_13y_83s .section}
 
--   **支持HBase0.94.x和HBase1.1.x版本**
+-   **支持HBase0.94.x和HBase1.1.x版本** 
     -   如果您的HBase版本为HBase0.94.x，Reader端的插件请选择HBase094x。
 
-        ```
+        ``` {#codeblock_2qv_4n7_5rh}
         "reader": {
                 "plugin": "hbase094x"
             }
@@ -15,16 +15,16 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
 
     -   如果您的HBase版本为HBase1.1.x，Reader端的插件请选择HBase11x。
 
-        ```
+        ``` {#codeblock_uyh_swh_ftr}
         "reader": {
                 "plugin": "hbase11x"
             }
         ```
 
--   **支持normal和multiVersionFixedColumn模式**
+-   **支持normal和multiVersionFixedColumn模式** 
     -   normal模式：把HBase中的表，当成普通二维表（横表）进行读取，读取最新版本数据。
 
-        ```
+        ``` {#codeblock_9gu_9l2_e5t}
         hbase(main):017:0> scan 'users'
         ROW                                   COLUMN+CELL
         lisi                                 column=address:city, timestamp=1457101972764, value=beijing
@@ -51,7 +51,7 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
 
     -   multiVersionFixedColumn模式：把HBase中的表，当成竖表进行读取。读出的每条记录一定是四列形式，依次为rowKey、family:qualifier、timestamp和value。读取时需要明确指定要读取的列，把每一个cell中的值，作为一条记录（record），若有多个版本就有多条记录。
 
-        ```
+        ``` {#codeblock_09w_leo_6wy}
         hbase(main):018:0> scan 'users',{VERSIONS=>5}
         ROW                                   COLUMN+CELL
         lisi                                 column=address:city, timestamp=1457101972764, value=beijing
@@ -89,35 +89,36 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
         |xiaoming|info:company|1457082189826|alibaba|
 
 
-支持读取HBase数据类型，HBase Reader针对HBase类型的转换列表，如下所示。
+## 支持的数据类型 {#section_77j_hqk_smw .section}
 
-|数据集成内部类型|HBase数据类型|
-|:-------|:--------|
-|Long|Int、Short和Long|
-|Double|Float和Double|
-|String|String和Binarystring|
-|Date|Date|
-|Boolean|Boolean|
+支持读取HBase数据类型，HBase Reader针对HBase类型的转换列表，如下表所示。
+
+|类型分类|数据集成column配置类型|数据库数据类型|
+|:---|--------------|:------|
+|整数类|long|SHORT、INT和LONG|
+|浮点类|double|FLOAT和DOUBLE|
+|字符串类|string|BINARY\_STRING和STRING|
+|日期时间类|date|DATE|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
 |参数|描述|是否必选|默认值|
 |:-|:-|:---|:--|
-|haveKerberos|haveKerberos值为true时，表示HBase集群需要kerberos认证。**说明：** 
+|haveKerberos|haveKerberos值为true时，表示HBase集群需要kerberos认证。 **说明：** 
 
 -   如果该值配置为true，必须要配置下面五个kerberos认证相关参数。kerberosKeytabFilePath、kerberosPrincipal、hbaseMasterKerberosPrincipal、hbaseRegionserverKerberosPrincipal和hbaseRpcProtection。
 -   如果HBase集群没有kerberos认证，则不需要配置以上参数。
 
-|否|false|
+ |否|false|
 |hbaseConfig|连接HBase集群需要的配置信息，JSON格式。必填的配置为hbase.zookeeper.quorum，表示HBase的ZK链接地址。同时可以补充更多HBase client的配置，例如设置scan的cache、batch来优化与服务器的交互。|是|无|
 |mode|读取HBase的模式，支持normal模式、multiVersionFixedColumn模式，即normal/multiVersionFixedColumn。|是|无|
 |table|读取的HBase表名（大小写敏感） 。|是|无|
 |encoding|编码方式，UTF-8或是GBK，用于对二进制存储的HBase byte\[\]转为String时的编码。|否|utf-8|
-|column|要读取的HBase字段，normal模式与multiVersionFixedColumn模式下必填。-   **normal模式下**
+|column|要读取的HBase字段，normal模式与multiVersionFixedColumn模式下必填。 -   **normal模式下** 
 
 name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，type指定源数据的类型，format指定日期类型的格式，value指定当前类型为常量，不从HBase读取数据，而是根据value值自动生成对应的列。配置格式如下所示：
 
-    ```
+    ``` {#codeblock_znd_q9b_k3h}
 "column": 
 [
 {
@@ -133,11 +134,11 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
 
 normal模式下，对于您指定的Column信息，type必须填写，name/value必须选择其一。
 
--   **multiVersionFixedColumn 模式**
+-   **multiVersionFixedColumn 模式** 
 
 name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，type指定源数据的类型，format指定日期类型的格式。multiVersionFixedColumn模式下不支持常量列。配置格式如下：
 
-    ```
+    ``` {#codeblock_1m2_x45_pcx}
 "column": 
 [
 {
@@ -152,13 +153,13 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
     ```
 
 
-|是|无|
+ |是|无|
 |maxVersion|指定在多版本模式下的HBase Reader读取的版本数，取值只能为－1或大于1的数字，－1表示读取所有版本。|multiVersionFixedColumn模式下必填项|无|
-|range|指定HBase Reader读取的rowkey范围。-   startRowkey：指定开始rowkey。
+|range|指定HBase Reader读取的rowkey范围。 -   startRowkey：指定开始rowkey。
 -   endRowkey：指定结束rowkey。
 -   isBinaryRowkey：指定配置的startRowkey和endRowkey转换为 byte\[\]时的方式，默认值为false。如果为true，则调用Bytes.toBytesBinary\(rowkey\)方法进行转换。若为false，则调用 Bytes.toBytes\(rowkey\)。配置格式如下所示：
 
-    ```
+    ``` {#codeblock_drj_e65_e5y}
 "range": {
 "startRowkey": "aaa",
 "endRowkey": "ccc",
@@ -167,7 +168,7 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
     ```
 
 
-|否|无|
+ |否|无|
 |scanCacheSize|HBase client每次rpc从服务器端读取的行数。|否|256|
 |scanBatchSize|HBase client每次rpc从服务器端读取的列数。|否|100|
 
@@ -179,7 +180,7 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
 
 配置一个从HBase抽取数据到本地的作业（normal模式）。
 
-```
+``` {#codeblock_xts_7p4_cp3}
 {
     "type":"job",
     "version":"2.0",//版本号
@@ -187,9 +188,9 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
         {
             "stepType":"hbase",//插件名
             "parameter":{
-                "mode":"normal",//读取 HBase 的模式，支持 normal 模式、multiVersionFixedColumn 模式
-                "scanCacheSize":"256",//HBase client 每次 rpc 从服务器端读取的行数
-                "scanBatchSize":"100",//HBase client 每次 rpc 从服务器端读取的列数。 
+                "mode":"normal",//读取HBase的模式，支持normal模式、multiVersionFixedColumn模式。
+                "scanCacheSize":"256",//HBase client每次rpc从服务器端读取的行数。
+                "scanBatchSize":"100",//HBase client每次rpc从服务器端读取的列数。 
                 "hbaseVersion":"094x/11x",//hbase版本
                 "column":[//字段
                     {
@@ -210,12 +211,12 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
                         "type":"long"
                     }
                 ],
-                "range":{//指定 HBase Reader 读取的 rowkey 范围。
-                    "endRowkey":"",//指定结束 rowkey。
-                    "isBinaryRowkey":true,//指定配置的 startRowkey 和 endRowkey 转换为 byte[] 时的方式，默认值为 false
-                    "startRowkey":""//指定开始 rowkey。
+                "range":{//指定HBase Reader读取的rowkey范围。
+                    "endRowkey":"",//指定结束rowkey。
+                    "isBinaryRowkey":true,//指定配置的startRowkey和endRowkey转换为byte[]时的方式，默认值为false。
+                    "startRowkey":""//指定开始rowkey。
                 },
-                "maxVersion":"",//指定在多版本模式下的 HBase Reader 读取的版本数
+                "maxVersion":"",//指定在多版本模式下的HBase Reader读取的版本数。
                 "encoding":"UTF-8",//编码格式
                 "table":"",//表名
                 "hbaseConfig":{//连接HBase集群需要的配置信息，JSON格式。
@@ -227,7 +228,7 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
             "name":"Reader",
             "category":"reader"
         },
-        {//下面是关于Reader的模板，可以找相应的读插件文档
+        {//下面是关于Reader的模板，您可以查看相应的读插件文档。
             "stepType":"stream",
             "parameter":{},
             "name":"Writer",
@@ -239,7 +240,7 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
             "record":"0"//错误记录数
         },
         "speed":{
-            "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流
+            "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流。
             "concurrent":1,//作业并发数
             "dmu":1//DMU值
         }
