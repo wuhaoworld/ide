@@ -1,6 +1,6 @@
 # 配置OSS Reader {#concept_d33_12q_p2b .concept}
 
-本文为您介绍OSS Reader支持的数据类型、字段映射和数据源等参数及配置举例。
+本文为您介绍OSS Reader支持的数据类型、字段映射和数据源等参数及配置示例。
 
 OSS Reader插件提供了读取OSS数据存储的能力。在底层实现上，OSS Reader使用OSS官方Java SDK获取OSS数据，并转换为数据同步传输协议传递给Writer。
 
@@ -27,6 +27,16 @@ OSS Reader暂时不能实现以下功能。
 
 OSS Reader支持OSS中的BIGINT、DOUBLE、STRING、DATATIME和BOOLEAN数据类型。
 
+## 支持的数据类型 {#section_vjw_ldp_f6v .section}
+
+|类型分类|数据集成column配置类型|数据库数据类型|
+|:---|--------------|:------|
+|整数类|long|LONG|
+|字符串类|string|STRING|
+|浮点类|double|DOUBLE|
+|布尔类|boolean|BOOL|
+|日期时间类|date|DATE|
+
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
 |参数|描述|必选|默认值|
@@ -44,14 +54,14 @@ OSS Reader支持OSS中的BIGINT、DOUBLE、STRING、DATATIME和BOOLEAN数据类�
  |是|无|
 |column|读取字段列表，type指定源数据的类型，index指定当前列来自于文本第几列（以0开始），value指定当前类型为常量，不是从源头文件读取数据，而是根据value值自动生成对应的列。 默认情况下，您可以全部按照String类型读取数据，配置如下：
 
-```
+``` {#codeblock_409_48c_5qz}
 json
 "column": ["*"]
 ```
 
  您可以指定Column字段信息，配置如下：
 
-```
+``` {#codeblock_3sx_6x9_mkp}
 json
 "column":
     {
@@ -82,7 +92,7 @@ json
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15585128467815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15597286157815_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -100,7 +110,7 @@ json
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15585128477818_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15597286157818_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -109,21 +119,22 @@ json
 
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15585128477675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15597286157675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
     |**DMU**|数据集成消耗资源（包括CPU、内存、网络等资源分配）的度量单位。一个DMU描述了一个数据集成作业最小运行能力，即在限定的CPU、内存、网络等资源情况下对于数据同步的处理能力。|
     |**作业并发数**|可将此属性视为数据同步任务内，可从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
+    |**同步速率**|设置同步速率可保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
     |**错误记录数**|错误记录数，表示脏数据的最大容忍条数。|
-    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议添加自定义资源组（目前只有华东1，华东2支持添加自定义资源组），详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
+    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议添加任务资源（目前只有华东1，华东2支持添加任务资源），详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
 
 
 ## 脚本开发介绍 {#section_cp2_wsh_p2b .section}
 
 脚本配置样例如下所示，具体参数填写请参见参数说明。
 
-```
+``` {#codeblock_098_9rq_dqv}
 {
     "type":"job",
     "version":"2.0",//版本号
