@@ -18,6 +18,7 @@
 |Ad hoc workflows|Supported|Supported|Supported|Supported|Supported|
 |Deployment management|Supported|Supported|Supported|Supported|Supported|
 |SQL script templates|Not supported|supported|supported|Supported|Supported|
+|Functions|supported|supported|supported|supported|supported|
 |Custom nodes|Not supported|Not supported|Not supported|Supported|Supported| China \(Hangzhou\)
 
  China \(Shanghai\)
