@@ -46,10 +46,10 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 
 |类型分类|数据库数据类型|
 |:---|:------|
-|整数类|INT、LONG和SHORT|
-|浮点类|FLOAT和DOUBLE|
-|布尔类|BOOLEAN|
-|字符串类|STRING|
+|整数类|int、long和short|
+|浮点类|float和double|
+|布尔类|boolean|
+|字符串类|string|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
