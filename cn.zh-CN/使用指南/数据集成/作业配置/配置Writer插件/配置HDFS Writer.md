@@ -18,7 +18,7 @@ HDFS Writer的实现过程如下所示：
 
 **说明：** 数据同步需要使用Admin账号，并且有访问相应文件的读写权限。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15597284457725_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16224/15598111727725_zh-CN.png)
 
 命令说明如下：
 
@@ -90,11 +90,11 @@ HDFS Writer针对Hive数据类型的转换列表，如下所示。
 
 |类型分类|数据库数据类型|
 |:---|:------|
-|整数类|TINYINT、SMALLINT、INT和BIGINT|
-|浮点类|FLOAT和DOUBLE|
-|字符串类|CHAR、VARCHAR和STRING|
-|布尔类|BOOLEAN|
-|日期时间类|DATE和TIMESTAMP|
+|整数类|tinyint、smallint、int和bigint|
+|浮点类|float和double|
+|字符串类|char、varchar和string|
+|布尔类|boolean|
+|日期时间类|date和timestamp|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
