@@ -20,7 +20,7 @@ HybridDB for MySQL数据源为您提供读取和写入HybridDB for MySQL的双�
 
     ![](images/32067_zh-CN.jpeg)
 
-3.  在新建数据源弹出框中，选择数据源类型为**阿里云数据源（HybridDB）**。
+3.  在**新增数据源**弹出框中，选择数据源类型为**HybridDB for MySQL**。
 4.  填写HybridDB for MySQL数据源的各配置项。
 
     ![](images/32068_zh-CN.jpeg)
@@ -29,8 +29,10 @@ HybridDB for MySQL数据源为您提供读取和写入HybridDB for MySQL的双�
     |:-|:-|
     |**数据源类型**|当前选择的数据源类型为阿里云数据源（HybridDB）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
-    |**实例ID**|您可进入HybridDB for MySQL管控台查看相关的实例ID。|
-    |**主账号ID**|您可在HybridDB for MySQL管控台安全设置中查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62182/155323505132071_zh-CN.png)
+    |**数据源描述**|对新建的数据源进行简单描述。|
+    |**适用环境**|分为开发环境和生产环境。|
+    |**实例ID**|您可进入HybridDB for MySQL管控台，查看相关的实例ID。|
+    |**主账号ID**|您可在HybridDB for MySQL管控台安全设置中查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62182/155981158532071_zh-CN.png)
 
 |
     |**用户名/密码**|数据库对应的用户名和密码。|
@@ -42,8 +44,10 @@ HybridDB for MySQL数据源为您提供读取和写入HybridDB for MySQL的双�
 
 ## 测试连通性说明 {#section_l5s_ctr_5fb .section}
 
--   经典网络下，能够提供测试连通性能力。
--   专有网络以添加实例ID形式能够添加成功，提供相关反向代理功能。
+-   经典网络下，能够提供测试连通性能力，可以判断输入的用户名/密码、实例ID/JDBC URL是否正确。
+-   专有网络下，如果您使用实例模式配置数据源，可以判断输入的实例ID、主账号ID、用户名/密码是否正确。
+-   专有网络下，如果您将VPC内部地址作为JDBC URL添加数据源，测试连通性会报告失败。
+-   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的JDBC URL、用户名/密码是否正确。
 
 ## 后续步骤 {#section_utj_syr_5fb .section}
 
