@@ -40,11 +40,11 @@ RCFile、ParquetFile、ORCFile、TextFile和SequenceFile中的类型，会默认
 
 |类型分类|数据集成column配置类型|Hive数据类型|
 |----|--------------|--------|
-|整数类|long|TINYINT、SMALLINT、INT和BIGINT|
-|浮点类|double|FLOAT和DOUBLE|
-|字符串类|string|STRING、CHAR、VARCHAR、STRUCT、MAP、ARRAY、UNION和BINARY|
-|日期时间类|date|DATE和TIMESTAMP|
-|布尔类|bool|BOOLEAN|
+|整数类|long|tinyint、smallint、int和bigint|
+|浮点类|double|float和double|
+|字符串类|string|string、char、varchar、struct、map、array、union和binary|
+|日期时间类|date|date和timestamp|
+|布尔类|boolean|boolean|
 
 说明如下：
 
