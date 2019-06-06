@@ -14,12 +14,12 @@ MaxCompute Reader支持MaxCompute中以下数据类型。
 
 |类型分类|数据集成column配置类型|数据库数据类型|
 |:---|--------------|:------|
-|整数类|long|BIGINT、INT、TINYINT和SMALLINT|
-|布尔类|bool|BOOLEAN|
-|日期时间类|date|DATETIME和TIMESTAMP|
-|浮点类|double|FLOAT、DOUBLE和DECIMAL|
-|二进制类|bytes|BINARY|
-|复杂类|string|ARRAY、MAP和STRUCT|
+|整数类|long|biginy、int、tinyint和smallint|
+|布尔类|boolean|boolean|
+|日期时间类|date|datetime和timestamp|
+|浮点类|double|float、double和decimal|
+|二进制类|bytes|binary|
+|复杂类|string|array、map和struct|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
@@ -52,7 +52,7 @@ MaxCompute Reader支持MaxCompute中以下数据类型。
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16225/15597287217759_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16225/15598113807759_zh-CN.png)
 
     |配置|说明|
     |--|--|
@@ -72,7 +72,7 @@ MaxCompute Reader支持MaxCompute中以下数据类型。
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16225/15597287217760_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16225/15598113807760_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -87,7 +87,7 @@ MaxCompute Reader支持MaxCompute中以下数据类型。
 
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15597287217675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15598113807675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
