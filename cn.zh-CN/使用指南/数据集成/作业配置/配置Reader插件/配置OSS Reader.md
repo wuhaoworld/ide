@@ -31,11 +31,11 @@ OSS Reader支持OSS中的BIGINT、DOUBLE、STRING、DATATIME和BOOLEAN数据类�
 
 |类型分类|数据集成column配置类型|数据库数据类型|
 |:---|--------------|:------|
-|整数类|long|LONG|
-|字符串类|string|STRING|
-|浮点类|double|DOUBLE|
-|布尔类|boolean|BOOL|
-|日期时间类|date|DATE|
+|整数类|long|long|
+|字符串类|string|string|
+|浮点类|double|double|
+|布尔类|boolean|bool|
+|日期时间类|date|date|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
@@ -92,7 +92,7 @@ json
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15597286157815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15598112957815_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -110,7 +110,7 @@ json
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15597286157818_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15598112957818_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -119,7 +119,7 @@ json
 
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15597286157675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15598112957675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
