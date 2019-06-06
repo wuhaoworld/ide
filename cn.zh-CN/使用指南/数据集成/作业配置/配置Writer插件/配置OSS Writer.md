@@ -4,11 +4,9 @@
 
 OSS Writer插件提供了向OSS写入类CSV格式的一个或者多个表文件的功能，写入的文件个数和您的任务并发及同步的文件数有关。
 
-**说明：** 开始配置OSS Writer插件前，请首先配置好数据源，详情请参见[配置OSS数据源](cn.zh-CN/使用指南/数据集成/数据源配置/配置OSS数据源.md#)。
+**说明：** 开始配置OSS Writer插件前，请首先配置好数据源，详情请参见[配置OSS数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置OSS数据源.md#)。
 
-写入OSS内容存放的是一张逻辑意义上的二维表，例如CSV格式的文本信息。如果您想对OSS产品有更深入的了解，请参见[OSS产品概述](../../../../cn.zh-CN/产品简介/什么是对象存储 OSS.md#)。
-
-OSS Java SDK的详细介绍，请参见[阿里云OSS Java SDK](http://oss.aliyuncs.com/aliyun_portal_storage/help/oss/OSS_Java_SDK_Dev_Guide_20141113.pdf)。
+写入OSS内容存放的是一张逻辑意义上的二维表，例如CSV格式的文本信息。如果您想对OSS产品有更深入的了解，请参见[OSS产品概述](../../../../intl.zh-CN/产品简介/什么是对象存储 OSS.md#)。
 
 OSS Writer实现了从数据同步协议转为OSS中的文本文件功能，OSS本身是无结构化数据存储，目前OSS Writer支持的功能如下所示：
 
@@ -20,26 +18,14 @@ OSS Writer实现了从数据同步协议转为OSS中的文本文件功能，OSS�
 OSS Writer暂时不能实现以下功能：
 
 -   单个文件不能支持并发写入。
--   OSS本身不提供数据类型，OSS Writer均以String类型写入OSS。
-
-OSS本身不提供数据类型，下表中的类型是Data
-
-|类型分类|OSS数据类型|
-|:---|:------|
-|整数类|Long|
-|浮点类|Double|
-|字符串类|String|
-|布尔类|Bool|
-|日期时间类|Date|
+-   OSS本身不提供数据类型，OSS Writer均以STRING类型写入OSS对象。
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
 |参数|描述|是否必选|默认值|
 |:-|:-|:---|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
-|object|OSS Writer写入的文件名，OSS使用文件名模拟目录的实现。例如数据同步到OSS数据源中的bucket为test118的test文件夹。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16252/15572206098196_zh-CN.png)
-
- 则Object只需填写test，不要带上bucket名称，同步到OSS端的文件名与源端填写的文件名相同。
+|object|OSS Writer写入的文件名，OSS使用文件名模拟目录的实现。例如数据同步到OSS数据源中的bucket为test118的test文件夹。 则Object只需填写test，不要带上bucket名称，同步到OSS端的文件名与源端填写的文件名相同。
 
  使用"object": "test/DI"，写入的Object以test/DI开头。test为文件夹，DI为文件名称的开头，后缀随机添加字符串，/是OSS模拟目录的分隔符。
 
@@ -70,7 +56,7 @@ OSS本身不提供数据类型，下表中的类型是Data
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15572206097815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15598106917815_zh-CN.png)
 
     |配置|说明|
     |--|--|
@@ -87,13 +73,13 @@ OSS本身不提供数据类型，下表中的类型是Data
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除 。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15572206097818_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15598106917818_zh-CN.png)
 
     同行映射：单击**同行映射**可以在同行建立相应的映射关系，请注意匹配数据类型。
 
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15572206097675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15598106917675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -101,14 +87,14 @@ OSS本身不提供数据类型，下表中的类型是Data
     |**作业并发数**|可将此属性视为数据同步任务内，可从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
     |**同步速率**|设置同步速率可保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
     |**错误记录数**|表示脏数据的最大容忍条数。|
-    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议添加自定义资源组（目前只有华东1，华东2支持添加自定义资源组），详情请参见[新增任务资源](cn.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
+    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议添加自定义资源组（目前只有华东1，华东2支持添加自定义资源组），详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
 
 
 ## 脚本开发介绍 {#section_cp2_wsh_p2b .section}
 
 脚本配置样例如下所示，具体参数填写请参见参数说明。
 
-```
+``` {#codeblock_c3w_74x_hni}
 {
     "type":"job",
     "version":"2.0",
