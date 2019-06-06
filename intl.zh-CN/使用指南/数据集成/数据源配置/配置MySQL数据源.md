@@ -21,53 +21,57 @@ MySQL关系型数据库数据源提供了读取和写入MySQL双向通道的能�
 1.  以项目管理员身份进入[DataWorks管理控制台](https://workbench.data.aliyun.com/console)，单击对应项目操作栏中的**进入数据集成**。
 2.  单击**数据源** \> **新增数据源**，弹出支持的数据源。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15532348277549_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15598117307549_zh-CN.png)
 
-3.  在新建数据源弹出框中，选择数据源类型为**MySQL**。
+3.  在新增数据源弹出框中，选择数据源类型为**MySQL**。
 4.  填写MySQL数据源的各配置项。
 
-    MySQL数据源类型分为**阿里云数据库（RDS）**、**有公网IP**和**无公网IP**。
+    MySQL数据源类型分为**阿里云数据库（RDS）**、**连接串模式（数据集成网络可直接连通）**和**连接串模式（数据集成网络不可直接连通）**。
 
     以新增**MySQL** \> **阿里云数据库（RDS）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15532348277550_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15598117307550_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
     |**数据源类型**|当前选择的数据源类型MySQL\>阿里云数据库（RDS）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**RDS实例ID**|您可以进入RDS管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15532348277551_zh-CN.png)
+    |**适用环境**|分为开发环境和生产环境。|
+    |**地区**|选择相应Region。|
+    |**RDS实例ID**|您可以进入RDS管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15598117307551_zh-CN.png)
 
 |
-    |**RDS实例主账号ID**|您可在RDS管控台安全设置中查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15532348277553_zh-CN.png)
+    |**RDS实例主账号ID**|您可在RDS管控台安全设置中查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15598117307553_zh-CN.png)
 
 |
     |**用户名/密码**|数据库对应的用户名和密码。|
 
     **说明：** 您需要先添加RDS白名单才能连接成功，详情请参[添加白名单](intl.zh-CN/使用指南/数据集成/常见配置/添加白名单.md#)见。
 
-    以新增**MySQL** \> **有公网IP**类型的数据源为例。
+    以新增**MySQL** \> **连接串模式（数据集成网络可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15532348277554_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15598117307554_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|有公网IP。|
+    |**数据源类型**|连接串模式（数据集成网络可直接连通）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+    |**适用环境**|分为开发环境和生产环境。|
     |**JDBC URL**|JDBC连接信息，格式为jdbc:mysql://ServerIP:Port/Database。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
-    以新增**MySQL** \> **无公网IP**类型的数据源为例。
+    以新增**MySQL** \> **连接串模式（数据集成网络不可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15532348277555_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15598117307555_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|无公网IP。|
+    |**数据源类型**|连接串模式（数据集成网络可直接连通）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+    |**适用环境**|分为开发环境和生产环境。|
     |**资源组**|可以用于执行同步任务，一般添加资源组时可以绑定多台机器。详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
     |**JDBC URL**|JDBC连接信息，格式为jdbc:mysql://ServerIP:Port/Database。|
     |**用户名/密码**|数据库对应的用户名和密码。|
@@ -77,8 +81,10 @@ MySQL关系型数据库数据源提供了读取和写入MySQL双向通道的能�
 
 ## 测试连通性说明 {#section_eq3_lnb_p2b .section}
 
--   经典网络下，能够提供测试连通性能力，可以判断输入的JDBC URL，用户名/密码是否正确。
--   专有网络和无公网IP，目前不支持数据源连通性测试，直接单击**确认**。
+-   经典网络下，能够提供测试连通性能力，可以判断输入的用户名/密码、实例ID/JDBC URL是否正确。
+-   专有网络下，如果您使用实例模式配置数据源，可以判断输入的实例ID、主账号ID、用户名/密码是否正确。
+-   专有网络下，如果您将VPC内部地址作为JDBC URL添加数据源，测试连通性会报告失败。
+-   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的JDBC URL、用户名/密码是否正确。
 
 ## 后续步骤 {#section_bbg_jnb_p2b .section}
 
