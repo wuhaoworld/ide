@@ -95,10 +95,12 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
 
 |类型分类|数据集成column配置类型|数据库数据类型|
 |:---|--------------|:------|
-|整数类|long|SHORT、INT和LONG|
-|浮点类|double|FLOAT和DOUBLE|
-|字符串类|string|BINARY\_STRING和STRING|
-|日期时间类|date|DATE|
+|整数类|long|short、int和long|
+|浮点类|double|float和double|
+|字符串类|string|binary\_string和string|
+|日期时间类|date|date|
+|字节类|bytes|bytes|
+|布尔类|boolean|boolean|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
