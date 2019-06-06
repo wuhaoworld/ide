@@ -21,26 +21,28 @@ SQL Server关系型数据库数据源提供了读取和写入SQL Server双向通
 1.  以项目管理员身份进入[DataWorks管理控制台](https://workbench.data.aliyun.com/console)，单击对应项目操作栏中的**进入数据集成**。
 2.  单击**数据源** \> **新增数据源**，弹出支持的数据源。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15532345007595_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15598121967595_zh-CN.png)
 
-3.  在新建数据源弹出框中，选择数据源类型为**SQL Server**。
+3.  在新增数据源弹出框中，选择数据源类型为**SQL Server**。
 4.  填写SQL Server数据源的各配置项。
 
-    SQL Server数据源类型分为**阿里云数据库（RDS）**、**有公网IP**和**无公网IP**，您可根据自身情况进行选择。
+    SQL Server数据源类型分为**阿里云数据库（RDS）**、**连接串模式（数据集成网络可直接连通）**和**连接串模式（数据集成网络不可直接连通）**，您可根据自身情况进行选择。
 
     以新增**SQL Server** \> **阿里云数据库（RDS）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15532345007596_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15598121967596_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
     |**数据源类型**|阿里云数据库（RDS）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**RDS实例ID**|您可进入RDS的管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15532345007597_zh-CN.png)
+    |**适用环境**|分为开发环境和生产环境。|
+    |**地区**|选择相应的Region。|
+    |**RDS实例ID**|您可进入RDS的管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15598121967597_zh-CN.png)
 
 |
-    |**RDS实例主账号ID**|您可进入RDS管控台安全设置中查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15532345007598_zh-CN.png)
+    |**RDS实例主账号ID**|您可进入RDS管控台安全设置中查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15598121967598_zh-CN.png)
 
 |
     |**数据库名**|填写对应的数据库名称。|
@@ -48,29 +50,31 @@ SQL Server关系型数据库数据源提供了读取和写入SQL Server双向通
 
     **说明：** 您需要先添加RDS白名单才能连接成功。
 
-    以新增**SQL Server** \> **有公网IP**类型的数据源为例。
+    以新增**SQL Server** \> **连接串模式（数据集成网络可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15532345007599_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15598121967599_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|有公网IP。|
+    |**数据源类型**|连接串模式（数据集成网络可直接连通）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**JDBC URL**|JDBC连接信息，格式为jdbc:sqlserver://ServerIP:Port;DatabaseName=Database。|
+    |**适用环境**|分为开发环境和生产环境。|
+    |**JDBC URL**|JDBC连接信息，格式为`jdbc:sqlserver://ServerIP:Port;DatabaseName=Database`。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
-    以新增**SQL Server** \> **无公网IP**类型的数据源为例。
+    以新增**SQL Server** \> **连接串模式（数据集成网络不可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15532345007600_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15598121967600_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|无公网IP。|
+    |**数据源类型**|连接串模式（数据集成网络不可直接连通）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+    |**适用环境**|分为开发环境和生产环境。|
     |**资源组**|可以用于执行同步任务，一般添加资源组时可以绑定多台机器。详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
-    |**JDBC URL**|JDBC连接信息，格式为jdbc:sqlserver://ServerIP:Port;DatabaseName=Database。|
+    |**JDBC URL**|JDBC连接信息，格式为`jdbc:sqlserver://ServerIP:Port;DatabaseName=Database`。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
 5.  单击**测试连通性**。
@@ -78,8 +82,10 @@ SQL Server关系型数据库数据源提供了读取和写入SQL Server双向通
 
 ## 测试连通性说明 {#section_pnb_31c_p2b .section}
 
--   经典网络下，能够提供测试连通性能力，可以判断输入的JDBC URL、用户名/密码是否正确。
--   专有网络和无公网IP，目前不支持数据源连通性测试，直接单击**确定**。
+-   经典网络下，能够提供测试连通性能力，可以判断输入的用户名/密码、实例ID/JDBC URL是否正确。
+-   专有网络下，如果您使用实例模式配置数据源，可以判断输入的实例ID、主账号ID、用户名/密码是否正确。
+-   专有网络下，如果您将VPC内部地址作为JDBC URL添加数据源，测试连通性会报告失败。
+-   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的JDBC URL、用户名/密码是否正确。
 
 ## 后续步骤 {#section_jb1_tyb_p2b .section}
 
