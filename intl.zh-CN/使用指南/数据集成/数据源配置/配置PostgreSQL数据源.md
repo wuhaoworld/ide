@@ -19,50 +19,54 @@ PostgreSQL关系型数据库数据源提供了读取和写入PostgreSQL双向通
 1.  以项目管理员身份进入[DataWorks管理控制台](https://workbench.data.aliyun.com/console)，单击对应项目操作栏中的**进入数据集成**。
 2.  单击**数据源** \> **新增数据源**，弹出支持的数据源。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15532349677572_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667572_zh-CN.png)
 
-3.  在新建数据源弹出框中，选择数据源类型为**PostgreSQL**。
+3.  在新增数据源弹出框中，选择数据源类型为**PostgreSQL**。
 4.  填写PostgreSQL数据源的各配置项。
 
-    PostgreSQL数据源类型分为**阿里云数据库（RDS）**、**有公网IP**和**无公网IP**，您可根据自身情况进行选择。
+    PostgreSQL数据源类型分为**阿里云数据库（RDS）**、连接串模式（数据集成网络可直接连通）和**连接串模式（数据集成网络不可直接连通）**，您可根据自身情况进行选择。
 
     以新增**PostgreSQL** \> **阿里云数据库（RDS）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15532349677581_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667581_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
     |**数据源类型**|阿里云数据库（RDS）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**RDS实例ID**|您可进入RDS的管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15532349677582_zh-CN.png)
+    |**适用环境**|分为开发环境和生产环境。|
+    |**地区**|选择相应的Region。|
+    |**RDS实例ID**|您可进入RDS的管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667582_zh-CN.png)
 
 |
     |**RDS实例主账号ID**|购买RDS实例的主账号的ID。|
     |**数据库名**|填写对应的数据库名称。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
-    以新增**PostgreSQL** \> **有公网IP**类型的数据源为例。
+    以新增**PostgreSQL** \> **连接串模式（数据集成网络可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15532349677584_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667584_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|有公网IP。|
+    |**数据源类型**|连接串模式（数据集成网络可直接连通）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+    |**适用环境**|分为开发环境和生产环境。|
     |**JDBC URL**|JDBC连接信息，格式为jdbc:postgresql://ServerIP:Port/Database。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
-    以新增**PostgreSQL** \> **无公网IP**类型的数据源为例。
+    以新增**PostgreSQL** \> **连接串模式（数据集成网络不可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15532349677585_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667585_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|无公网IP。|
+    |**数据源类型**|连接串模式（数据集成网络不可直接连通）。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+    |**适用环境**|分为开发环境和生产环境。|
     |**资源组**|可以用于执行同步任务，一般添加资源组时可以绑定多台机器。详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
     |**JDBC URL**|JDBC连接信息，格式为jdbc:postgresql://ServerIP:Port/Database。|
     |**用户名/密码**|数据库对应的用户名和密码。|
@@ -70,10 +74,12 @@ PostgreSQL关系型数据库数据源提供了读取和写入PostgreSQL双向通
 5.  单击**测试连通性**。
 6.  测试连通性通过后，单击**确定**。
 
-## 测试连通性说明 { .section}
+## 测试连通性说明 {#section_8us_cpd_s7c .section}
 
--   经典网络下，能够提供测试连通性能力，可以判断输入的JDBC URL、用户名/密码是否正确。
--   专有网络和无公网IP，目前不支持数据源连通性测试，直接单击**确定**。
+-   经典网络下，能够提供测试连通性能力，可以判断输入的用户名/密码、实例ID/JDBC URL是否正确。
+-   专有网络下，如果您使用实例模式配置数据源，可以判断输入的实例ID、主账号ID、用户名/密码是否正确。
+-   专有网络下，如果您将VPC内部地址作为JDBC URL添加数据源，测试连通性会报告失败。
+-   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的JDBC URL、用户名/密码是否正确。
 
 ## 后续步骤 {#section_jb1_tyb_p2b .section}
 
