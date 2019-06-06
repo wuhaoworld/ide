@@ -38,7 +38,7 @@ MaxCompute Writer插件用于实现向MaxCompute中插入或者更新数据，�
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16247/15597283838125_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16247/15598111258125_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -63,7 +63,7 @@ MaxCompute Writer插件用于实现向MaxCompute中插入或者更新数据，�
     -   自动排版：可以根据相应的规律自动排版。
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15597283837675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15598111257675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
