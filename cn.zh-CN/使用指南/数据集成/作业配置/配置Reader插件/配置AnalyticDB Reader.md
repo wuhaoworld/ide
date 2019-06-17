@@ -6,16 +6,16 @@ AnalyticDB Reader插件实现了从AnalyticDB读取数据。在底层实现上�
 
 |AnalyticDB类型|DataX类型|MaxCompute类型|
 |------------|-------|------------|
-|BIGINT|LONG|BIGINT|
-|TINYINT|LONG|INT|
-|TIMESTAMP|DATE|DATETIME|
-|VARCHAR|STRING|STRING|
-|SMALLINT|LONG|INT|
-|INT|LONG|INT|
-|FLOAT|STRING|DOUBLE|
-|DOUBLE|STRING|DOUBLE|
-|DATE|DATE|DATETIME|
-|TIME|DATE|DATETIME|
+|bigint|long|bigint|
+|tinyint|long|int|
+|timestamp|date|datetime|
+|varchar|string|string|
+|smallint|long|int|
+|int|long|int|
+|float|string|double|
+|double|string|double|
+|date|date|datetime|
+|time|date|datetime|
 
 **说明：** 不支持multivalue，会直接异常退出。
 
@@ -26,20 +26,16 @@ AnalyticDB Reader插件实现了从AnalyticDB读取数据。在底层实现上�
 -   当前mode=Select时，上限为30万行。
 -   当前​mode=ODPS时，上限为1亿行。
 -   50列以上为AnalyticDB本身的限制，需要联系AnalyticDB的管理员进行手动调整。
--   Java版本需要1.8及以上，编译转码native2ascii LocalStrings.properties \> LocalStrings\_zh\_CN.properties。
+-   Java版本需要1.8及以上，编译转码`native2ascii LocalStrings.properties > LocalStrings_zh_CN.properties`。
 
 ## 参数说明 {#section_hmf_zcs_dm0 .section}
 
 |参数|描述|是否必选|默认值|
 |--|--|----|---|
-|address|AnalyticDB数据库地址及端口号，例如 127.0.0.1:9999。|是|无|
-|username|AnalyticDB数据库访问用户名，通常为对应云账号的AccessID。|是|无|
-|password|AnalyticDB数据库访问密码，通常为云账号的AccesssKey。|是|无|
-|schema|AnalyticDB数据库名称（即schema）。|是|无|
 |table|需要导出的表的名称。|是|无|
 |column|列名，如果没有，则为全部。|否|\*|
 |limit|限制导出的记录数。|否|无|
-|where|where条件，方便添加筛选条件，这里的String会被直接作为SQL条件添加到查询语句中，例如`where id < 100`。|否|无|
+|where|where条件，方便添加筛选条件，此处的String会被直接作为SQL条件添加到查询语句中，例如`where id < 100`。|否|无|
 |mode|导入类型，目前支持两种类型。 -   Select：使用limit分页。
 -   ODPS：使用ODPS DUMP来导出数据，需要有ODPS的访问权限。
 
@@ -60,12 +56,7 @@ AnalyticDB Reader插件实现了从AnalyticDB读取数据。在底层实现上�
         {
             "stepType": "ads",
             "parameter": {
-                "address": "100.81.***.*",
-                "port": "9999",
-                "username": "*********",
-                "password": "*********",
                 "datasource": "ads_demo",
-                "schema": "ads_test",
                 "table": "th_test",
                 "column": [
                     "id",
