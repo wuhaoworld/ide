@@ -4,15 +4,15 @@ ODPS Script节点是MaxCompute基于2.0的SQL引擎提供的脚本模式。编�
 
 1.  进入DataStudio（数据开发）页面，选择**新建** \> **数据开发** \> **ODPS Script**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/155929942548439_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156092963648439_zh-CN.png)
 
     **说明：** 您也可以找到相应的业务流程，右键单击**数据开发**，选择**新建数据开发节点** \> **ODPS Script**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/155929942548438_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156092963748438_zh-CN.png)
 
 2.  填写新建节点对话框中的配置，单击**提交**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/155929942548435_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156092963748435_zh-CN.png)
 
 3.  编辑ODPS SCRIPT节点。
 
