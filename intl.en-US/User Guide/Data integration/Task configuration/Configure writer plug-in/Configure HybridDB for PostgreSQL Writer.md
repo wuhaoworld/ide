@@ -8,7 +8,7 @@ HybridDB for PostgreSQL Writer writes data into a HybridDB for PostgreSQL databa
 
 In short, HybridDB for PostgreSQL Writer connects to a remote HybridDB for PostgreSQL database through a JDBC connector, generates SELECT statements based on the configuration, and sends the statements to the remote database. Then, HybridDB for PostgreSQL Writer assembles SQL execution results into abstract datasets in custom data types of Data Integration, and passes the datasets to the downstream writer.
 
--   HybridDB for PostgreSQL Writer concatenates the configured table, column, and WHERE information into SQL statements, and sends the statements to the HybridDB for PostgreSQL database.
+-   HybridDB for PostgreSQL Writer concatenates the configured table, column, and WHEREundefinedinformation into SQL statements, and sends the statements to the HybridDB for PostgreSQL database.
 -   HybridDB for PostgreSQL Writer sends the configured querySQL information to HybridDB for PostgreSQL database.
 
 **Note:** 
@@ -47,47 +47,44 @@ HybridDB for PostgreSQL Writer converts the data types in HybridDB for PostgreSQ
 
 ## Development in Wizard Mode {#section_akn_qlr_5fb .section}
 
-1.  **Specify data sources.**
+1.   **Specify data sources.** 
 
     Configure the data source and destination for a synchronization task.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/155175291932069_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/156151867932069_en-US.png)
 
     |Parameter|Description|
     |:--------|:----------|
-    |**Data Source**|The datasource parameter in the preceding parameter description. Select the configured data source.|
-    |**Table**|The table parameter in the preceding parameter description. Select the destination table.|
-    |**Before Import**|The preSQL parameter in the preceding parameter description. Enter the SQL statement that runs before running the data synchronization task.|
-    |**After Import**|The postSQL parameter in the preceding parameter description. Enter the SQL statement that runs after running the data synchronization task.|
+    | **Data Source** |The datasource parameter in the preceding parameter description. Select the configured data source.|
+    | **Table** |The table parameter in the preceding parameter description. Select the destination table.|
+    | **Before Import** |The preSQL parameter in the preceding parameter description. Enter the SQL statement that runs before running the data synchronization task.|
+    | **After Import** |The postSQL parameter in the preceding parameter description. Enter the SQL statement that runs after running the data synchronization task.|
 
 2.  Configure mappings of the fields \(the column parameters in the preceding parameter description\).
 
     Each source table field on the left maps a destination table field on the right. To add a mapping, click **Add**.To delete the current mapping, move the cursor over a line and click **Delete**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/155175291932070_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/156151867932070_en-US.png)
 
     |Configuration|Description|
     |:------------|:----------|
-    |**Map Fields with the Same Name**|Click **Map Fields with the Same Name** to map fields with the same name. Note that the data type must be consistent.|
-    |**Map Fields in the Same Row**|Click **Map Fields in the Same Row** to map the same row. Note that the data type must be consistent.|
-    |**Remove Mappings**|Click **Remove Mappings** to remove established mappings .|
-    |**Auto Layout**|The fields are automatically sorted based on specified rules.|
+    | **Map Fields with the Same Name** |Click **Map Fields with the Same Name** to map fields with the same name. Note that the data type must be consistent.|
+    | **Map Fields in the Same Row** |Click **Map Fields in the Same Row** to map the same row. Note that the data type must be consistent.|
+    | **Remove Mappings** |Click **Remove Mappings** to remove established mappings .|
+    | **Auto Layout** |The fields are automatically sorted based on specified rules.|
 
-3.  **Configure channel control**
-
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/155175291939902_en-US.png)
+3.   **Configure channel control** 
 
     |Configuration|Description|
     |:------------|:----------|
-    |**DMU**|The unit that measures resources, including CPU, memory, and network resources consumed by Data Integration. A DMU represents the minimum operating capability of a Data Integration task, that is, the data synchronization processing capability given limited CPU, memory, and network resources.|
-    |**Concurrent Jobs**|The maximum number of threads used to concurrently read data from the source or write data into the data storage media in a data synchronization task. In Wizard Mode, you can configure the concurrency for a task on the wizard page.|
-    |**Dirty Data Records Allowed**|The maximum number of errors or dirty data records allowed.|
-    |**Task Resource Group**|The machines on which tasks are run. If a large number of tasks are run on the default resource group, some tasks may be delayed due to insufficient resources. In this case, we recommend that you add a custom resource group. Currently, a custom resource group can be added only in the China \(Hangzhou\) and China \(Shanghai\) regions. For more information, see [Add task resources](intl.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).|
+    | **Concurrent Jobs** |The maximum number of threads used to concurrently read data from the source or write data into the data storage media in a data synchronization task. In Wizard Mode, you can configure the concurrency for a task on the wizard page.|
+    | **Dirty Data Records Allowed** |The maximum number of errors or dirty data records allowed.|
+    | **Task Resource Group** |The machines on which tasks are run. If a large number of tasks are run on the default resource group, some tasks may be delayed due to insufficient resources. In this case, we recommend that you add a custom resource group. For more information, see [Add task resources](intl.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).|
 
 
 ## Development in Script Mode {#section_ugh_hnr_5fb .section}
 
-```
+``` {#codeblock_eqj_i4e_xhl}
 {
     "type": "job",
     "steps": [
@@ -130,7 +127,6 @@ HybridDB for PostgreSQL Writer converts the data types in HybridDB for PostgreSQ
         "speed": {
             "concurrent": 6,// The number of concurrent threads.
             "throttle": false,// Indicates whether to throttle the transmission rate.
-            "dmu": 7// The DMU value.
         }
     }
 }
