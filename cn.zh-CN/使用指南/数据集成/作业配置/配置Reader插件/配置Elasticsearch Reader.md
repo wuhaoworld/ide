@@ -4,39 +4,61 @@
 
 ## 工作原理 {#section_sbw_pmp_hhb .section}
 
--   通过Elasticsearch的\_search + scroll + slice （即游标+分片）方式实现，slice结合DataX job的task多线程分片机制。
--   根据Elasticsearch中的mapping配置进行数据类型转换。
+-   通过Elasticsearch的\_search+scroll+slice（即游标+分片）方式实现，slice结合DataX job的task多线程分片机制使用。
+-   根据Elasticsearch中的mapping配置，进行数据类型转换。
 
 更多详情请参见[Elasticsearch官方文档](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html)。
 
 ## 基本配置 {#section_ysk_bnp_hhb .section}
 
 ``` {#codeblock_u4a_0fi_fxd}
-"reader": {
-    "name": "elasticsearchreader",
-    "parameter": {
-        "endpoint": "http://127.0.0.1:80",  // 服务地址
-        "username": "<yourUserName>", // 用户名
-        "password": "<yourPassWord>", // 密码
-        "index": "****", // 索引
-        "type": "default", // 索引类型
-        "column": [       // 读取列
-            "id",
-            "name"
-        ],
-        "pageSize": 1,  // 分页大小
-        "search": {       // 查询query参数，与Elasticsearch的query内容相同，使用_search api，故意重命名为search。
-            "match": {
-                "type": "<yourType>"
-            }
-        },
-        "scroll": "1m", // scroll标志
-        "sort": { "_id": "asc" }, // 排序k：属性名  v：排序值 asc desc
-        "retryCount": 3,
-        "retrySleepTime": 1000,
-        "connTimeOut": 1000,
-        "readTimeOut": 5000
-    }
+{
+    "order":{
+        "hops":[
+            {
+                "from":"Reader",
+                "to":"Writer"
+            }
+        ]
+    },
+    "setting":{
+        "errorLimit":{
+            "record":"0" //错误记录数。
+        },
+        "jvmOption":"",
+        "speed":{
+            "concurrent":3,
+            "throttle":false
+        }
+    },
+    "steps":[
+        {
+            "category":"reader",
+            "name":"Reader",
+            "parameter":{
+                "column":[ //读取列。
+                    "id",
+                    "name"
+                ],
+                "endpoint":"", //服务地址。
+                "index":"",  //索引。
+                "password":"",  //密码。
+                "scroll":"",  //scroll标志。
+                "search":"",  //查询query参数，与Elasticsearch的query内容相同，使用_search api，重命名为search。
+                "type":"default",
+                "username":""  //用户名。
+            },
+            "stepType":"elasticsearch"
+        },
+        {
+            "category":"writer",
+            "name":"Writer",
+            "parameter":{ },
+            "stepType":"stream"
+        }
+    ],
+    "type":"job",
+    "version":"2.0" //版本号。
 }
 ```
 
@@ -44,37 +66,35 @@
 
 -   支持全量拉取
 
-    支持将Elasticsearch一个文档的所有内容拉取为一个字段。
+    支持将Elasticsearch中一个文档的所有内容拉取为一个字段。
 
 -   支持半结构化到结构化数据的提取
-    -   产生背景
 
-        Elasticsearch中的数据特征为字段不固定，且有中文名、数据使用深层嵌套的形式，为更好地方便下游业务对数据的计算和存储需求，特推出从半结构化到结构化的转换解决方案。
+    |分类|说明|
+    |--|--|
+    |产生背景|Elasticsearch中的数据特征为字段不固定，且有中文名、数据使用深层嵌套的形式。为更好地方便下游业务对数据的计算和存储需求，特推出从半结构化到结构化的转换解决方案。|
+    |实现原理|将Elasticsearch获取到的JSON数据，利用JSON工具的路径获取特性，将嵌套数据扁平化为一维结构的数据。然后将数据映射至结构化数据表中，拆分Elasticsearch复合结构数据至多个结构化数据表。|
+    |解决方案|     -   JSON有嵌套的情况，通过path路径来解决。
+        -   属性
+        -   属性.子属性
+        -   属性\[0\].子属性
+    -   附属信息有一对多的情况，需要进行拆表拆行处理，进行遍历。
 
-    -   实现原理
+属性\[\*\].子属性
 
-        将Elasticsearch获取到的JSON数据，利用JSON工具的路径获取特性，将嵌套数据扁平化为一维结构的数据。然后将数据映射到结构化数据表中，将Elasticsearch复合结构数据拆分到多个结构化数据表。
+    -   数组归并，一个字符串数组内容，归并为一个属性，并进行去重。
 
-    -   解决方案
-        -   JSON有嵌套，通过path路径来解决。
-            -   属性
-            -   属性.子属性
-            -   属性\[0\].子属性
-        -   附属信息有一对多的情况，需要进行拆表拆行处理，进行遍历。
+属性\[\] 去重
 
-            属性\[\*\].子属性
+    -   多属性合一，将多个属性合并为一个属性。
 
-        -   数组归并，一个字符串数组内容，归并为一个属性，并进行去重。
+属性1,属性2
 
-            属性\[\] 去重
+    -   多属性选择处理
 
-        -   多属性合一，将多个属性合并为一个属性。
+属性1|属性2
 
-            属性1,属性2
-
-        -   多属性选择处理
-
-            属性1|属性2
+ |
 
 
 ## 参数说明 {#section_kx3_bf5_hhb .section}
