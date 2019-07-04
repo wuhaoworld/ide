@@ -12,11 +12,11 @@ PyODPS节点获取到本地处理的数据**不能超过50MB**，节点运行时
 
 1.  右键单击**数据开发**下的**业务流程**，选择**新建业务流程**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16292/15616274417651_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16292/15622135467651_zh-CN.png)
 
 2.  右键单击**数据开发**，选择**新建数据开发节点** \> **PyODPS**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/15616274417741_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/15622135467741_zh-CN.png)
 
 3.  编辑PyODPS节点。
     1.  ODPS入口
@@ -83,21 +83,21 @@ PYODPS节点使用调度参数需时，**系统定义的调度参数**，可以�
 
 **说明：** 由于默认资源组无法直接访问外网环境，建议当您有公网访问需求时使用自定义资源组。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156162744134264_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156221354634264_zh-CN.png)
 
 在赋值完成后，提交节点并在运维中心进行**测试运行**，可查看赋值结果。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156162744234265_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156221354634265_zh-CN.png)
 
 对于**自定义参数**，您可以在调度配置页面的**基础属性**一栏配置。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156162744234268_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156221354634268_zh-CN.png)
 
 **说明：** 自定义参数需要使用args\['参数名'\]形式调用，例如`print (args['ds'])`。
 
 完成配置后提交节点并在运维中心进行**测试运行**，可查看赋值结果。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156162744234289_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156221354634289_zh-CN.png)
 
 ## 后续操作 {#section_lkd_4mt_cgb .section}
 
