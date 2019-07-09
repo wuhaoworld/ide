@@ -9,15 +9,15 @@
 
     在指定MaxCompute工程空间（cdo\_datax）下创建项目（wordcountDemo），工程模板选择**UDFJava Project**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265733012_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763833012_zh-CN.png)
 
 3.  单击**确定**。
 
 ## 项目开发 {#section_tc2_2kk_5gb .section}
 
-在mapred包下，已存在WordCount的MapReduce示例代码。示例代码的功能是对输入表中的单词进行次数统计，将统计结果写入到输出表中，输入输出分别是两个表，详情请参见[MapReduce](../../../../cn.zh-CN/开发/MapReduce/概要/MapReduce概述.md#)。
+在mapred包下，已存在WordCount的MapReduce示例代码。示例代码的功能是对输入表中的单词进行次数统计，将统计结果写入到输出表中，输入输出分别是两个表，详情请参见[MapReduce](../../../../intl.zh-CN/开发/MapReduce/概要/MapReduce概述.md#)。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265733013_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763833013_zh-CN.png)
 
 ## 项目调试 {#section_asw_clk_5gb .section}
 
@@ -30,11 +30,11 @@ MapReduce项目目前不能在Function Studio中进行Debug，需要将代码发
 1.  Function Studio编译打包代码发布到DataWorks开发环境。
     1.  单击**发布**，选择**提交资源到DataWorks开发环境**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265733014_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763833014_zh-CN.png)
 
     2.  填写**提交函数至DataWorks开发环境**对话框中的配置信息。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265733015_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763833015_zh-CN.png)
 
         |配置|说明|
         |:-|:-|
@@ -47,18 +47,18 @@ MapReduce项目目前不能在Function Studio中进行Debug，需要将代码发
 
         信息提示窗口会输出本次编译发布成功还是失败。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265733016_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763833016_zh-CN.png)
 
 2.  在DataWorks中创建MapReduce节点进行测试。
     1.  打开DataWorks同名工作空间，创建ODPS MR类型节点。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265733017_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763833017_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833018_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933018_zh-CN.png)
 
     2.  计算节点需要写入以下固定脚本，目前脚本的一些变量还需被手工替换成相关Jar包的信息。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833019_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933019_zh-CN.png)
 
         **说明：** 请使用在Function Studio中发布的Jar包的信息来替换脚本中的信息，生成最后的代码。
 
@@ -67,14 +67,14 @@ MapReduce项目目前不能在Function Studio中进行Debug，需要将代码发
         -   包含main函数的入口类全类名main函数参数空格分隔。
     3.  选择相应业务流程下的**资源**，查看在Function Studio中发布的Jar包信息，来替换脚本中的相关信息。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833026_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933026_zh-CN.png)
 
         -   Jar包的名称为WordCountDemo\_1.0.0.jar，对应脚本中的-resource。
         -   右键单击Jar包，选择**查看历史版本**，即可查看路径的名称`http://schedule@{env}inside.cheetah.alibaba-inc.com/scheduler/res?id=106342493`，对应脚本中的-classpath。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833030_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933030_zh-CN.png)
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833040_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933040_zh-CN.png)
 
         最后的脚本：
 
@@ -87,50 +87,50 @@ MapReduce项目目前不能在Function Studio中进行Debug，需要将代码发
 
     4.  创建测试表和测试数据。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833042_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933042_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833043_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933043_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833044_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933044_zh-CN.png)
 
         准备好数据后，在开发环境运行脚本。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833045_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933045_zh-CN.png)
 
         至此，WordCount在开发环境的测试全部完成。由于WordCount的计算节点、Jar包、输入输出表都在开发环境，所以需要分别发布至正式环境。
 
 3.  将资源包，数据表，节点分别发布到DataWorks正式环境。
     1.  提交计算节点代码。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265833046_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933046_zh-CN.png)
 
     2.  进行发布配置。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933047_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933047_zh-CN.png)
 
     3.  进入发布页面，勾选提交的Jar包和节点进行发布。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933048_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264763933048_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933049_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033049_zh-CN.png)
 
     4.  发布数据表。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933050_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033050_zh-CN.png)
 
     5.  在运维中心对MapReduce任务进行线上测试。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933051_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033051_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933052_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033052_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933053_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033053_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933054_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033054_zh-CN.png)
 
         日志显示成功运行。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/155903265933055_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64980/156264764033055_zh-CN.png)
 
 
 由此可见，Function Studio可以编码和编译发布代码到DataWorks节点，DataWorks需要手工操作生成计算节点，在开发环境和生产环境分别运行。
