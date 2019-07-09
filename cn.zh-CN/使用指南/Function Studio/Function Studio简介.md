@@ -6,7 +6,7 @@ Function Studio是由阿里巴巴集团完全自主开发的、面向函数开�
 
 Function Studio提供语法高亮、代码自动补全、智能纠错和语法错误提示等功能，并支持在线开发、在线调试，多人协同编辑、一键发布UDF资源和函数到DataWorks。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/41630/155903215321513_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/41630/156264639221513_zh-CN.png)
 
 ## 功能概述 {#section_v52_jy1_rfb .section}
 
