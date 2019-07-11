@@ -1,43 +1,45 @@
 # 配置PostgreSQL数据源 {#concept_a1x_krb_p2b .concept}
 
-PostgreSQL关系型数据库数据源提供了读取和写入PostgreSQL双向通道的能力，可以通过向导模式和脚本模式配置同步任务。
+PostgreSQL数据源为您提供读取和写入PostgreSQL双向通道的功能，您可以通过向导模式和脚本模式配置同步任务。
 
-**说明：** 标准模式的工作空间支持[数据源隔离](intl.zh-CN/使用指南/数据集成/数据源配置/数据源隔离.md#)功能，您可以分别添加开发环境和生产环境的数据源并进行隔离，以保护您的数据安全。
+**说明：** 标准模式的工作空间支持[数据源隔离](intl.zh-CN/使用指南/数据集成/数据源配置/数据源隔离.md#)功能，您可以分别添加开发环境和生产环境的数据源，并进行隔离，以保护您的数据安全。
 
-如果是在VPC环境下的PostgreSQL，需要注意以下问题。
+如果是在VPC环境下的PostgreSQL，需要注意以下问题：
 
--   自建的PostgreSQL数据源
-    -   不支持测试连通性，但仍支持配置同步任务，创建数据源时单击**确认**即可。
+-   自建的PostgreSQL数据源：
+    -   不支持测试连通性，但仍支持配置同步任务，创建数据源时单击**完成**即可。
     -   必须使用自定义调度资源组运行对应的同步任务，请确保自定义资源组可以连通您的自建数据库，详情请参见[（仅一端不通）数据源网络不通的情况下的数据同步](intl.zh-CN/使用指南/数据集成/最佳实践/（仅一端不通）数据源网络不通的情况下的数据同步.md#)和[（两端都不通）数据源网络不通的情况下的数据同步](intl.zh-CN/使用指南/数据集成/最佳实践/（两端都不通）数据源网络不通的情况下的数据同步.md#)。
--   通过RDS创建的PostgreSQL数据源
+-   通过RDS创建的PostgreSQL数据源。
 
     您无需选择网络环境，系统自动根据您填写的RDS实例信息进行判断。
 
 
 ## 操作步骤 {#section_jy4_q4v_42b .section}
 
-1.  以项目管理员身份进入[DataWorks管理控制台](https://workbench.data.aliyun.com/console)，单击对应项目操作栏中的**进入数据集成**。
-2.  单击**数据源** \> **新增数据源**，弹出支持的数据源。
+1.  以项目管理员身份进入[DataWorks管理控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间操作栏中的**进入数据集成**。
+2.  选择**同步资源管理** \> **数据源**，单击**新增数据源**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667572_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15628073607595_zh-CN.png)
 
 3.  在新增数据源弹出框中，选择数据源类型为**PostgreSQL**。
 4.  填写PostgreSQL数据源的各配置项。
 
-    PostgreSQL数据源类型分为**阿里云数据库（RDS）**、连接串模式（数据集成网络可直接连通）和**连接串模式（数据集成网络不可直接连通）**，您可根据自身情况进行选择。
+    PostgreSQL数据源类型分为**阿里云数据库（RDS）**、**连接串模式（数据集成网络可直接连通）**和**连接串模式（数据集成网络不可直接连通）**，您可以根据自身情况进行选择。
 
     以新增**PostgreSQL** \> **阿里云数据库（RDS）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667581_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15628073607581_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|阿里云数据库（RDS）。|
+    |**数据源类型**|当前选择的数据源类型为**PostgreSQL** \> **阿里云数据库（RDS）**。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**适用环境**|分为开发环境和生产环境。|
+    |**适用环境**|可以选择**开发**或**生产**环境。 **说明：** 仅标准模式工作空间会显示此配置。
+
+ |
     |**地区**|选择相应的Region。|
-    |**RDS实例ID**|您可进入RDS的管控台查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667582_zh-CN.png)
+    |**RDS实例ID**|您可以进入RDS管控台，查看RDS的实例ID。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15628073607582_zh-CN.png)
 
 |
     |**RDS实例主账号ID**|购买RDS实例的主账号的ID。|
@@ -46,42 +48,48 @@ PostgreSQL关系型数据库数据源提供了读取和写入PostgreSQL双向通
 
     以新增**PostgreSQL** \> **连接串模式（数据集成网络可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667584_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15628073607584_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|连接串模式（数据集成网络可直接连通）。|
+    |**数据源类型**|当前选择的数据源类型为**PostgreSQL** \> **连接串模式（数据集成网络可直接连通）**。|
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**适用环境**|分为开发环境和生产环境。|
-    |**JDBC URL**|JDBC连接信息，格式为jdbc:postgresql://ServerIP:Port/Database。|
+    |**适用环境**|可以选择**开发**或**生产**环境。 **说明：** 仅标准模式工作空间会显示此配置。
+
+ |
+    |**JDBC URL**|JDBC连接信息，格式为`jdbc:postgresql://ServerIP:Port/Database`。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
     以新增**PostgreSQL** \> **连接串模式（数据集成网络不可直接连通）**类型的数据源为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15598116667585_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16211/15628073607585_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**数据源类型**|连接串模式（数据集成网络不可直接连通）。|
+    |**数据源类型**|当前选择的数据源类型为**PostgreSQL** \> **连接串模式（数据集成网络不可直接连通）**。 选择此类型的数据源需要使用自定义调度资源才能进行同步，您可以单击**帮助手册**查看详情。
+
+ |
     |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
     |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**适用环境**|分为开发环境和生产环境。|
-    |**资源组**|可以用于执行同步任务，一般添加资源组时可以绑定多台机器。详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
-    |**JDBC URL**|JDBC连接信息，格式为jdbc:postgresql://ServerIP:Port/Database。|
+    |**适用环境**|可以选择**开发**或**生产**环境。 **说明：** 仅标准模式工作空间会显示此配置。
+
+ |
+    |**资源组**|可以用于执行同步任务，通常添加资源组时可以绑定多台机器。详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
+    |**JDBC URL**|JDBC连接信息，格式为`jdbc:postgresql://ServerIP:Port/Database`。|
     |**用户名/密码**|数据库对应的用户名和密码。|
 
 5.  单击**测试连通性**。
-6.  测试连通性通过后，单击**确定**。
+6.  测试连通性通过后，单击**完成**。
 
 ## 测试连通性说明 {#section_8us_cpd_s7c .section}
 
--   经典网络下，能够提供测试连通性能力，可以判断输入的用户名/密码、实例ID/JDBC URL是否正确。
--   专有网络下，如果您使用实例模式配置数据源，可以判断输入的实例ID、主账号ID、用户名/密码是否正确。
+-   经典网络下，能够提供测试连通性能力，可以判断输入的信息是否正确。
+-   专有网络下，如果您使用实例模式配置数据源，可以判断输入的信息是否正确。
 -   专有网络下，如果您将VPC内部地址作为JDBC URL添加数据源，测试连通性会报告失败。
--   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的JDBC URL、用户名/密码是否正确。
+-   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的信息是否正确。
 
 ## 后续步骤 {#section_jb1_tyb_p2b .section}
 
-现在，您已经学习了如何配置PostgreSQL数据源，您可以继续学习下一个教程。在该教程中您将学习如何通过配置PostgreSQL Writer插件。详情请参见[配置PostgreSQL Writer](intl.zh-CN/使用指南/数据集成/作业配置/配置Writer插件/配置PostgreSQL Writer.md#)和[配置PostgreSQL Reader](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置PostgreSQL  Reader.md#)。
+现在，您已经学习了如何配置PostgreSQL数据源，您可以继续学习下一个教程。在该教程中您将学习如何配置PostgreSQL插件。详情请参见[配置PostgreSQL Reader](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置PostgreSQL  Reader.md#)和[配置PostgreSQL Writer](intl.zh-CN/使用指南/数据集成/作业配置/配置Writer插件/配置PostgreSQL Writer.md#)。
 
