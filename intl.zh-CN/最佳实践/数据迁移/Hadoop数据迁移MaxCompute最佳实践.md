@@ -18,7 +18,7 @@
 
     Hadoop集群使用经典网络，区域为华东1（杭州），主实例组ECS计算资源配置公网及内网IP，高可用选择为否（非HA模式）。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317106911593_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611593_zh-CN.png)
 
 2.  MaxCompute
 
@@ -47,7 +47,7 @@
 
     2.  选择运行，出现`Query executed successfully`提示，则说明成功在EMR Hadoop集群上创建了表hive\_doc\_good\_sale。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317106911595_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611595_zh-CN.png)
 
     3.  插入测试数据。您可以选择从OSS或其他数据源导入测试数据，也可以手动插入少量的测试数据。本文中手动插入数据如下。
 
@@ -58,13 +58,13 @@
 
     4.  完成插入数据后，您可以执行`select * from hive_doc_good_sale where pt =1;`语句，检查Hadoop集群表中是否已存在数据可以用于迁移。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317106911596_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611596_zh-CN.png)
 
 2.  利用DataWorks新建目标表
     1.  登录DataWorks控制台，单击相应工作空间操作栏下的**进入数据开发**。
     2.  进入DataStudio（数据开发）页面，选择**新建** \> **表**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317106911597_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611597_zh-CN.png)
 
     3.  在新建表对话框中，填写表名，并单击**提交**。
     4.  进入新建表页面，选择**DDL模式**。
@@ -83,11 +83,11 @@
            PARTITIONED BY (pt string) ;
         ```
 
-        在建表过程中，需要考虑到HIVE数据类型与MaxCompute数据类型的映射，当前数据映射关系请参见[与Hive数据类型映射表](../../../../intl.zh-CN/开发/SQL及函数/附录/与Hive数据类型映射表.md#)。
+        在建表过程中，需要考虑HIVE数据类型与MaxCompute数据类型的映射，当前数据映射关系请参见[与Hive数据类型映射表](../../../../intl.zh-CN/开发/SQL及函数/附录/与Hive数据类型映射表.md#)。
 
-        由于本文使用DataWorks进行数据迁移，而DataWorks数据同步功能当前暂不支持TIMESTAMP类型数据。因此在DataWorks建表语句中，将create\_time设置为STRING类型。上述步骤同样可通过odpscmd命令行工具完成，命令行工具安装和配置请参见[安装并配置客户端](../../../../intl.zh-CN/准备工作/安装并配置客户端.md#)。
+        由于本文使用DataWorks进行数据迁移，而DataWorks数据同步功能暂不支持TIMESTAMP类型数据。因此在DataWorks建表语句中，将create\_time设置为STRING类型。上述步骤同样可通过odpscmd命令行工具完成，命令行工具安装和配置请参见[安装并配置客户端](../../../../intl.zh-CN/准备工作/安装并配置客户端.md#)。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107011598_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611598_zh-CN.png)
 
         **说明：** 考虑到部分HIVE与MaxCompute数据类型的兼容问题，建议在odpscmd客户端上执行以下命令。
 
@@ -98,7 +98,7 @@
 
     6.  完成建表后，单击左侧导航栏中的**表管理**，即可查看当前创建的MaxCompute表。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107011599_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611599_zh-CN.png)
 
 
 ## 数据同步 {#section_esz_swy_bfb .section}
@@ -111,11 +111,11 @@
 
         进入EMR控制台，选择**首页** \> **集群管理** \> **集群** \> **主机列表**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107011600_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611600_zh-CN.png)
 
         您也可以通过单击上图中Master节点的ECS ID，进入ECS实例详情页。然后单击远程连接进入ECS，执行`hadoop dfsadmin –report`命令查看data node。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107011601_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611601_zh-CN.png)
 
         本示例的data node只具有内网地址，很难与DataWorks默认资源组互通，所以需要设置自定义资源组，将master node设置为执行DataWorks数据同步任务的节点。
 
@@ -128,21 +128,21 @@
 
             机器IP需要填写master node公网IP（内网IP有可能不可达）。ECS的UUID需要进入master node管理终端，通过命令dmidecode | grep UUID获取（如果您的hadoop集群并非搭建在EMR环境上，也可以通过该命令获取）。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107011603_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611603_zh-CN.png)
 
         3.  添加服务器后，需要保证master node与DataWorks网络可达。如果您使用的是ECS服务器，需要设置服务器安全组。
             -   如果您使用的内网IP互通，请参见[添加安全组](../../../../intl.zh-CN/使用指南/数据集成/常见配置/添加安全组.md#)。
             -   如果您使用的是公网IP，可以直接设置安全组公网出入方向规则。本文中设置公网入方向放通所有端口（实际应用场景中，为了您的数据安全，强烈建议设置详细的放通规则）。
 
-                ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107111604_zh-CN.png)
+                ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726611604_zh-CN.png)
 
         4.  完成上述步骤后，按照提示安装自定义资源组agent。当前状态显示为**可用**时，则新增自定义资源组成功。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107111605_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726711605_zh-CN.png)
 
             如果状态为**不可用**，您可以登录master node，执行`tail –f/home/admin/alisatasknode/logs/heartbeat.log`命令查看DataWorks与master node之间心跳报文是否超时。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107111606_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726711606_zh-CN.png)
 
 2.  新建数据源
 
@@ -151,11 +151,11 @@
     1.  进入数据集成页面，选择**同步资源管理** \> **数据源**，单击**新增数据源**。
     2.  在新增数据源弹出框中，选择数据源类型为**HDFS**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107111607_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726711607_zh-CN.png)
 
     3.  填写HDFS数据源的各配置项。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107111608_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726711608_zh-CN.png)
 
         |配置|说明|
         |:-|:-|
@@ -176,24 +176,24 @@
 3.  配置数据同步任务
     1.  进入数据开发页面，选择**新建** \> **数据集成** \> **数据同步**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107211609_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726711609_zh-CN.png)
 
     2.  在新建节点对话框中，输入**节点名称**，单击**提交**。
     3.  成功创建数据同步节点后，单击工具栏中的**转换脚本**按钮。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107251387_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726751387_zh-CN.png)
 
     4.  单击提示对话框中的**确认**，即可进入脚本模式进行开发。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107251388_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726751388_zh-CN.png)
 
     5.  单击工具栏中的**导入模板**按钮。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107251389_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726751389_zh-CN.png)
 
     6.  在导入模板对话框中，选择**来源类型**、**数据源**、**目标类型**及**数据源**，单击**确认**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107251390_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726751390_zh-CN.png)
 
     7.  新建同步任务完成后，通过导入模板已生成了基本的读取端配置。此时您可以继续手动配置数据同步任务的读取端数据源，以及需要同步的表信息等。本示例的代码如下所示，更多详情请参见[配置HDFS Reader](../../../../intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置HDFS Reader.md#)。
 
@@ -277,7 +277,7 @@
 
         其中，path参数为数据在Hadoop集群中存放的位置.您可以在登录master node后，执行`hdfs dfs –ls /user/hive/warehouse/hive_doc_good_sale`命令确认。对于分区表，您可以不指定分区，DataWorks数据同步会自动递归到分区路径。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107211611_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726711611_zh-CN.png)
 
     8.  完成配置后，单击**运行**。如果提示任务运行成功，则说明同步任务已完成。如果运行失败，可以通过日志进行排查。
 
@@ -286,7 +286,7 @@
 1.  单击左侧导航栏中的**临时查询**。
 2.  选择**新建** \> **ODPS SQL**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156317107351391_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/156318726751391_zh-CN.png)
 
 3.  编写并执行SQL语句，查看导入hive\_doc\_good\_sale的数据。SQL语句如下所示：
 
