@@ -8,7 +8,7 @@ HDFS Reader实现了从Hadoop分布式文件系统HDFS中，读取文件数据�
 
 TextFile是Hive建表时默认使用的存储格式，数据不进行压缩。本质上TextFile是以文本的形式将数据存放在HDFS中，对于数据集成而言，HDFS Reader在实现上与OSS Reader有很多相似之处。
 
-ORCFile的全名是Optimized Row Columnar file，是对RCFile的优化，这种文件格式可以提供一种高效的方法来存储Hive数据。HDFS Reader利用Hive提供的OrcSerde类，读取解析ORCFile文件的数据。
+ORCFile的全名是Optimized Row Columnar File，是对RCFile的优化，这种文件格式可以提供一种高效的方法来存储Hive数据。HDFS Reader利用Hive提供的OrcSerde类，读取解析ORCFile文件的数据。
 
 **说明：** 
 
@@ -30,7 +30,7 @@ ORCFile的全名是Optimized Row Columnar file，是对RCFile的优化，这种�
 -   csv类型支持压缩格式有gzip、bz2、zip、lzo、lzo\_deflate和snappy。
 -   目前插件中Hive版本为1.1.1，Hadoop版本为2.7.1（Apache适配JDK1.6］，在Hadoop 2.5.0、Hadoop 2.6.0和Hive 1.2.0测试环境中写入正常。
 
-**说明：** HDFS Reader暂不支持单个File支持多线程并发读取，这里涉及到单个File内部切分算法。
+**说明：** HDFS Reader暂不支持单个File多线程并发读取，此处涉及到单个File内部切分算法。
 
 ## 支持的数据类型 {#section_mtj_dck_p2b .section}
 
@@ -91,10 +91,10 @@ RCFile、ParquetFile、ORCFile、TextFile和SequenceFile中的类型，会默认
 
 **说明：** 由于TextFile和ORCFile是两种不同的文件格式，所以HDFS Reader对这两种文件的解析方式也存在差异，这种差异导致Hive支持的复杂复合类型（例如map、array、struct和union）在转换为数据集成支持的String类型时，转换的结果格式略有差异，以map类型为例。
 
--   ORCFile map类型经HDFS eader 析转换成数据集成支持的 Sring类型后，结果为\{job=80, team=60, person=70\}。
--   TextFile map类型经HDFS Reader解析转换成数据集成支持的 string 类型后，结果为job:80, team:60, person:70。
+-   ORCFile map类型经HDFS Reader解析，转换成数据集成支持的STRING类型后，结果为`{job=80, team=60, person=70}`。
+-   TextFile map类型经HDFS Reader解析，转换成数据集成支持的STRING类型后，结果为`{job:80, team:60, person:70}`。
 
-从上面的转换结果可以看出，数据本身没有变化，但是表示的格式略有差异，所以如果您配置的文件路径中要同步的字段在Hive中是复合类型的话，建议配置统一的文件格式 。
+如上述转换结果所示，数据本身没有变化，但是表示的格式略有差异。所以如果您配置的文件路径中要同步的字段在Hive中是复合类型的话，建议配置统一的文件格式 。
 
  **最佳实践建议：** 
 
