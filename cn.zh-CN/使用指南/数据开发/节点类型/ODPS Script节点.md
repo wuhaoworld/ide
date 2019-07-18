@@ -1,22 +1,26 @@
 # ODPS Script节点 {#concept_lxj_tcb_ygb .concept}
 
-ODPS Script节点是MaxCompute基于2.0的SQL引擎提供的脚本模式。编译脚本时，将一个多语句的SQL脚本文件作为一个整体进行编译，不需逐条语句进行编译。将其作为一个整体提交运行，生成一个执行计划，保证一次排队、一次执行，充分利用MaxCompute的资源。
+ODPS Script节点的SQL开发模式是MaxCompute基于2.0的SQL引擎提供的脚本开发模式。
+
+编译脚本时，将一个多语句的SQL脚本文件作为一个整体进行编译，不需逐条语句进行编译。将其作为一个整体提交运行，生成一个执行计划，保证一次排队、一次执行，充分利用MaxCompute的资源。
+
+## 新建ODPS Script节点 {#section_jv8_45g_rag .section}
 
 1.  进入DataStudio（数据开发）页面，选择**新建** \> **数据开发** \> **ODPS Script**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156092963648439_zh-CN.png)
+    ![ODPS Script](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156345490148439_zh-CN.png)
 
     **说明：** 您也可以找到相应的业务流程，右键单击**数据开发**，选择**新建数据开发节点** \> **ODPS Script**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156092963748438_zh-CN.png)
+    ![ODPS Script](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156345490151558_zh-CN.png)
 
 2.  填写新建节点对话框中的配置，单击**提交**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156092963748435_zh-CN.png)
+    ![提交](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156345490148435_zh-CN.png)
 
 3.  编辑ODPS SCRIPT节点。
 
-    您可在此节点中进行脚本模式的脚本编辑，详情请参见[编写SQL脚本](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/编写SQL脚本.md#)。
+    您可以在此节点中进行脚本模式的脚本编辑，详情请参见[编写SQL脚本](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发SQL程序/编写SQL脚本.md#)。
 
 4.  节点调度配置。
 
@@ -39,7 +43,7 @@ ODPS Script节点是MaxCompute基于2.0的SQL引擎提供的脚本模式。编�
 
 Script Mode的SQL编译较为简单，只需按照业务逻辑，用类似于普通编程语言的方式进行编译，不需考虑如何组织语句。
 
-``` {#codeblock_vqt_3oj_0pt}
+``` {#codeblock_vqt_3oj_0pt .lanuage-shell}
 --SET语句
 set odps.sql.type.system.odps2=true;
 [set odps.stage.reducer.num=***;]
@@ -78,7 +82,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 -   脚本模式下，只有所有输入的数据都准备完成，才会生成一个作业进行数据处理。
 -   脚本模式下，如果一个表被写入后，又被读取，会报错。如下所示：
 
-    ``` {#codeblock_r0r_qfk_wxg}
+    ``` {#codeblock_r0r_qfk_wxg .lanuage-shell}
     insert overwrite table src2 select * from src where key > 0;
     @a := select * from src2;
     select * from @a;
@@ -86,7 +90,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 
     为避免先写后读，可以进行如下修改。
 
-    ``` {#codeblock_wmj_418_ho3}
+    ``` {#codeblock_wmj_418_ho3 .lanuage-shell}
     @a := select * from src where key > 0;
     insert overwrite table src2 select * from @a;
     select * from @a;
@@ -95,7 +99,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 
 示例如下：
 
-``` {#codeblock_drc_7g4_n6w}
+``` {#codeblock_drc_7g4_n6w .lanuage-shell}
 create table if not exists dest(key string , value bigint) partitioned by (d string);
 create table if not exists dest2(key string,value bigint ) partitioned by (d string);
 @a := select * from src where value >0;
