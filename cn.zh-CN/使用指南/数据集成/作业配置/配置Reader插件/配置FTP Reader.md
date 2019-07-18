@@ -84,7 +84,7 @@ FTP Reader实现了从远程FTP文件读取数据并转为数据同步协议的�
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16222/15634460207697_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16222/15634486367697_zh-CN.png)
 
     |配置|说明|
     |--|--|
@@ -101,7 +101,7 @@ FTP Reader实现了从远程FTP文件读取数据并转为数据同步协议的�
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，将鼠标放至需要删除的字段上，即可单击**删除**按钮进行删除。
 
-    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16222/15634460207701_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16222/15634486367701_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -111,7 +111,7 @@ FTP Reader实现了从远程FTP文件读取数据并转为数据同步协议的�
 
 3.  通道控制。
 
-    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16222/15634460207704_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15634486367675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
