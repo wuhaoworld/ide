@@ -4,15 +4,15 @@
 
 1.  进入DataStudio（数据开发）页面，选择**新建** \> **数据开发** \> **AnalyticDB for MySQL**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156222336550741_zh-CN.png)
+    ![AnalyticDB for MySQL](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156353380350741_zh-CN.png)
 
     **说明：** 您也可以找到相应的业务流程，右键单击**数据开发**，选择**新建数据开发节点** \> **AnalyticDB for MySQL**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156222336648438_zh-CN.png)
+    ![AnalyticDB for MySQL](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/133906/156353380348438_zh-CN.png)
 
 2.  在新建节点对话框中，填写**节点名称**，选择**目标文件夹**（用于节点代码分类管理，可以不选），单击**目标文件夹**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156222336650833_zh-CN.png)
+    ![新建节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156353380350833_zh-CN.png)
 
 3.  编辑AnalyticDB for MySQL节点。
 
@@ -20,15 +20,15 @@
 
     1.  选择数据源。
 
-        选择任务要执行的目标数据源。如果下拉选项中没有需要的数据源，单击右侧的**新建数据源**，前往**新建数据源**页面进行新建，详情请参见[数据源配置](cn.zh-CN/使用指南/数据集成/数据源配置/支持的数据源.md#)。
+        选择任务要执行的目标数据源。如果下拉选项中没有需要的数据源，单击右侧的**新建数据源**，前往**新建数据源**页面进行新建，详情请参见[数据源配置](intl.zh-CN/使用指南/数据集成/数据源配置/支持的数据源.md#)。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156222336650753_zh-CN.png)
+        ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156353380350753_zh-CN.png)
 
     2.  编辑SQL语句。
 
         选择相应的数据源后，即可根据AnalyticDB for MySQL支持的语法，编写SQL语句。通常支持DML语句，您也可以执行DDL语句。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156222336650754_zh-CN.png)
+        ![编辑SQL语句](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156353380450754_zh-CN.png)
 
     3.  保存并执行SQL语句。
 
@@ -36,9 +36,9 @@
 
 4.  节点调度配置。
 
-    单击节点任务编辑在区域右侧的**调度配置**，即可进入节点调度配置页面，详情请参见[调度配置](cn.zh-CN/使用指南/数据开发/调度配置/基本属性.md#)模块。
+    单击节点任务编辑在区域右侧的**调度配置**，即可进入节点调度配置页面，详情请参见[调度配置](intl.zh-CN/使用指南/数据开发/调度配置/基本属性.md#)模块。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156222336750755_zh-CN.png)
+    ![节点调度配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/790663/156353380450755_zh-CN.png)
 
 5.  提交节点任务。
 
@@ -46,10 +46,10 @@
 
 6.  发布节点任务。
 
-    具体操作请参见[发布管理](cn.zh-CN/使用指南/数据开发/发布管理/任务发布.md#)。
+    具体操作请参见[发布管理](intl.zh-CN/使用指南/数据开发/发布管理/任务发布.md#)。
 
 7.  在生产环境测试。
 
-    具体操作请参见[周期任务](cn.zh-CN/使用指南/运维中心/任务列表/周期任务.md#)。
+    具体操作请参见[周期任务](intl.zh-CN/使用指南/运维中心/任务列表/周期任务.md#)。
 
 
