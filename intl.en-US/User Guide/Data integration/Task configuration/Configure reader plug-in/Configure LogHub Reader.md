@@ -8,7 +8,7 @@ Honed originally by the Big Data demands of Alibaba Group, Log Service \(or "LOG
 
 LogHub Reader consumes real-time log data in LogHub by using the following version of Log Service Java SDK:
 
-```
+``` {#codeblock_0cp_mf3_009}
 <dependency>
     <groupId>com.aliyun.openservices</groupId>
     <artifactId>aliyun-log</artifactId>
@@ -46,7 +46,7 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
 |project|It refers to the project name of the target Log Service, which is the resource management component in the Log Service for isolating and controlling resources.|Yes|N/A|
 |logstore|It refers to the name of the target Logstore. Logstore is a component of the Log Service for collecting, storing, and querying log data.|Yes|N/A|
 |batchSize|It refers to the number of data entries queried from the Log Service at a time.|No|128|
-|column|Column names in each data entry. Here, you can set a metadata item in the Log Service as the synchronization column. Supported metadata items include "C\_Topic", "C\_MachineUUID", "C\_HostName", "C\_Path", and "C\_LogTime", which represents the log topic, unique identifier of the collection machine, host name, path, and log time, respectively. The sub-table represents the log theme, the acquisition machine uniquely identified, the host name, path, log time, and so on.
+|column|Column names in each data entry. Here, you can set a metadata item in the Log Service as the synchronization column. Supported metadata items include "Topic", "MachineUUID", "HostName", "Path", and "LogTime", which represents the log topic, unique identifier of the collection machine, host name, path, and log time, respectively. The sub-table represents the log theme, the acquisition machine uniquely identified, the host name, path, log time, and so on.
 
  **Note:** The values of fields in the format are case insensitive.
 
@@ -74,7 +74,7 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
 
     Configure the source and destination of the data for the synchronization task.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15580594977878_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15640370007878_en-US.png)
 
     Configurations:
 
@@ -85,7 +85,7 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
 
     The source table field on the left and the target table field on the right are one-to-one relationships, click **Add row** to add a single field and click **Delete** to delete the current field.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15580594977879_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16233/15640370007879_en-US.png)
 
     -   Peer mapping: Click **Enable Same-Line Mapping** to establish a corresponding mapping relationship in the peer, note that match the data type.
     -   Automatic formatting: The fields are automatically sorted based on corresponding rules.
@@ -98,20 +98,20 @@ LogHub Reader supports LogHub type conversion, as shown in the following table:
     -   If the value you entered cannot be parsed, the type is displayed as Not identified.
 3.  Control the tunnel
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15580594977675_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15640370007675_en-US.png)
 
     Configurations:
 
     -   DMU: A unit which measures the resources consumed during data integration, including CPU, memory, and network bandwidth. One DMU represents the minimum amount of resources used for a data synchronization task.
     -   Concurrent job count: The maximum number of threads used to concurrently read or write data into the data storage media in a data synchronization task. In wizard mode, configure a concurrency for the specified task on the wizard page.
     -   The maximum number of errors indicates the maximum number of dirty data records.
-    -   Task resource group: The machine on which the task runs. If the number of tasks is large, the default Resource Group is used to wait for a resource. We recommend you add a Custom Resource Group \(currently only East China 1, East China 2 supports adding custom resource groups\). For more information, see[Add task resources](intl.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).
+    -   Task resource group: The machine on which the task runs. If the number of tasks is large, the default Resource Group is used to wait for a resource. We recommend you add a Custom Resource Group \(currently only East China 1, East China 2 supports adding custom resource groups\). For more information, see[Add task resources](reseller.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).
 
 ## Development in script mode {#section_cp2_wsh_p2b .section}
 
 The following is a script configuration sample. For details about parameters, see the preceding Parameter Description.
 
-```
+``` {#codeblock_3uy_wqh_cqc}
 {
  "type": "job",
  "version": "1.0"} //Indicates the version.
@@ -126,10 +126,10 @@ The following is a script configuration sample. For details about parameters, se
                  "col2",
                  "col3",
                  "col4",
-                 "C_topic", // log theme
-                 "C_hostname", // host name
-                 "C_path", // path
-                 "C_logtime" // log time
+                 "topic", // log theme
+                 "hostname", // host name
+                 "path", // path
+                 "logtime" // log time
              ],
              "beginDateTime":"", // start time of data consumption
              "batchSize": "", // number of data lines to query from the log service at once
