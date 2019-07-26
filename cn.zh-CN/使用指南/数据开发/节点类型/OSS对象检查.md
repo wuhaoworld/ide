@@ -6,15 +6,15 @@
 
 1.  进入数据开发页面，选择**新建** \> **控制** \> **OSS对象检查**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156161332645563_zh-CN.png)
+    ![OSS对象检查](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156412013145563_zh-CN.png)
 
 2.  填写新建节点对话框中的配置，单击**提交**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156161332645564_zh-CN.png)
+    ![新建节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156412013145564_zh-CN.png)
 
 3.  新建成功后，进行**OSS对象检查节点配置**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156161332645565_zh-CN.png)
+    ![节点配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156412013245565_zh-CN.png)
 
     |序号|配置|说明|
     |--|--|--|
@@ -22,14 +22,14 @@
     |2|**超时时间**|在超时时间内，每5秒检测该OSS对象是否存在于OSS中。如果超出超时时间，仍未检测到OSS对象的存在，则OSS对象检查任务会失败。|
     |3|**选择存储地址**|您可以选择以下两种存储地址：     -   **自己的存储**：检测当前租户下的OSS对象。
     -   **别人的存储**：检测非当前租户下的OSS对象。
- ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156161332645573_zh-CN.png)
+ ![存储地址](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/163479/156412013245573_zh-CN.png)
 
 |
 
     **说明：** 
 
     -   任务在运行时，会通过MaxCompute访问身份检查OSS对象，请确认OSS Bucket的权限设置，详情请参见[OSS的STS模式授权](../../../../intl.zh-CN/开发/外部表/OSS的STS模式授权.md#)。
-    -   在开发/生产环境中，任务会通过开发/生产环境访问身份访问身份检查OSS对象，请确认OSS Bucket的权限设置。
+    -   在开发/生产环境中，任务会通过开发/生产环境访问身份检查OSS对象，请确认OSS Bucket的权限设置。
 4.  在RAM中授权MaxCompute访问OSS的权限。
 
     MaxCompute结合了阿里云的访问控制服务（RAM）和令牌服务（STS），来解决账号的安全问题。
