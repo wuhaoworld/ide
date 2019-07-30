@@ -1,27 +1,27 @@
 # 配置MongoDB Reader {#concept_lsz_f2p_p2b .concept}
 
-MongoDB Reader插件利用MongoDB的Java客户端MongoClient进行MongoDB的读操作。本文为您介绍MongoDB Reader支持的数据类型、字段映射和数据源等参数及配置举例。
+本文将为您介绍MongoDB Reader支持的数据类型、字段映射和数据源等参数及配置示例。
 
-最新版本的Mongo已经将DB锁的粒度从DB级别降低到document级别，配合MongoDB强大的索引功能，即可达到高性能读取MongoDB的需求。
+MongoDB Reader插件通过MongoDB的Java客户端MongoClient，进行MongoDB的读操作。最新版本的Mongo已经将DB锁的粒度，从DB级别降低到document级别，配合MongoDB强大的索引功能，即可达到高性能读取MongoDB的需求。
 
 **说明：** 
 
--   如果您使用的是云数据库MongoDB版，MongoDB默认会有root账号。出于安全策略的考虑，数据集成仅支持使用MongoDB数据库对应账号进行连接，您添加使用MongoDB数据源时，也请避免使用root作为访问账号。
+-   如果您使用的是云数据库MongoDB版，MongoDB默认会有root账号。出于安全策略的考虑，数据集成仅支持使用MongoDB数据库对应账号进行连接。您添加使用MongoDB数据源时，也请避免使用root作为访问账号。
 -   query不支持JS语法。
 
-MongoDB Reader通过数据集成框架从MongoDB并行地读取数据，通过主控的Job程序按照指定规则对MongoDB中的数据进行分片并行读取，然后将MongoDB支持的类型通过逐一判断转换成数据集成支持的类型。
+MongoDB Reader通过数据集成框架从MongoDB并行地读取数据，通过主控的Job程序，按照指定规则对MongoDB中的数据进行分片并行读取，然后将MongoDB支持的类型通过逐一判断转换为数据集成支持的类型。
 
 ## 类型转换列表 {#section_m2v_hxm_q2b .section}
 
-MongoDB Reader支持大部分MongoDB类型，但也存在部分没有支持的情况，请注意检查您的类型。
+MongoDB Reader支持大部分MongoDB类型，但也存在部分没有支持的情况，请注意检查您的数据类型。
 
 MongoDB Reader针对MongoDB类型的转换列表，如下所示。
 
 |类型分类|MongoDB数据类型|
 |:---|:----------|
-|Long|int，long，document.int和document.long|
+|Long|int、long、document.int和document.long|
 |Double|double和document.double|
-|String|string，array，document.string，document.array和combine|
+|String|string、array、document.string、document.array和combine|
 |Date|date和document.date|
 |Boolean|bool和document.bool|
 |Bytes|bytes和document.bytes|
@@ -31,19 +31,19 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
 -   document类型为嵌入文档类型，即object类型。
 -   combine类型的使用如下：
 
-    使用MongoDB Reader插件读出数据时，支持将MongoDB document中的多个字段合并成一个json串。
+    使用MongoDB Reader插件读出数据时，支持将MongoDB document中的多个字段合并成一个JSON串。
 
-    例如将MongoDB中的字段导入到MaxCompute，有字段如下（下文均省略了value使用key来代替整个字段）的三个document，其中a b是所有document均有的公共字段，x\_n是不固定字段。
+    例如将MongoDB中的字段导入至MaxCompute，有字段如下（下文均省略了value使用key来代替整个字段）的三个document，其中a、b是所有document均有的公共字段，x\_n是不固定字段。
 
-    ```
-    doc1： a b x_1 x_2
-    doc2:  a b x_2 x_3 x_4
-    doc3:  a b x_5
-    ```
+    `doc1： a b x_1 x_2`
 
-    配置文件中要明确指出需要一一对应的字段，需要合并的字段则需另取名称（不可与document中已存在字段同名），并指定类型为combine，如：
+    `doc2: a b x_2 x_3 x_4`
 
-    ```
+    `doc3: a b x_5`
+
+    配置文件中要明确指出需要一一对应的字段，需要合并的字段则需另取名称（不可与document中已存在字段同名），并指定类型为combine，如下所示：
+
+    ``` {#codeblock_ahg_pqf_dlp .language-json}
     "column": [
     {
     "name": "a",
@@ -60,7 +60,7 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
     ]
     ```
 
-    最终导出的MaxCompute结果为：
+    最终导出的MaxCompute结果如下所示：
 
     |odps\_column1|odps\_column2|
     |:------------|:------------|
@@ -75,12 +75,12 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
 |:-|:-|:---|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
 |collectionName|MonogoDB的集合名。|是|无|
-|column|MongoDB的文档列名，配置为数组形式表示MongoDB的多个列。 -   name：Column的名字。
--   type：Column的类型。
--   splitter：因为MongoDB支持数组类型，但CDP框架本身不支持数组类型，所以MongoDB读出来的数组类型要通过这个分隔符合并成字符串。
+|column|MongoDB的文档列名，配置为数组形式表示MongoDB的多个列。 -   name：column的名字。
+-   type：column的类型。
+-   splitter：因为MongoDB支持数组类型，但数据集成框架本身不支持数组类型，所以MongoDB读出来的数组类型，需要通过该分隔符合并成字符串。
 
  |是|无|
-|query|您可以通过该配置型来限制返回MongoDB数据范围，例如您可以配置`"query":"{'operationTime':{'$gte':ISODate('${last_day}T00:00:00.424+0800')}}"`，限制返回operationTime大于等于$\{last\_day\}零点的数据，这里$\{last\_day\}为 DataWorks调度参数，格式为$\[yyyy-mm-dd\]。您可以根据需要具体使用其他MongoDB支持的条件操作符号（$gt、$lt、$gte和$lte等），逻辑操作符（and和or等），函数（max、min、sum、avg和ISODate等），详情请参见MongoDB查询语法。|否|无|
+|query|您可以通过该配置型来限制返回MongoDB数据范围，仅支持时间类型。例如您可以配置`"query":"{'operationTime':{'$gte':ISODate('${last_day}T00:00:00.424+0800')}}"`，限制返回operationTime大于等于$\{last\_day\}零点的数据。此处$\{last\_day\}为 DataWorks调度参数，格式为$\[yyyy-mm-dd\]。您可以根据需要具体使用其他MongoDB支持的条件操作符号（$gt、$lt、$gte和$lte等），逻辑操作符（and和or等），函数（max、min、sum、avg和ISODate等），详情请参见MongoDB查询语法。|否|无|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
@@ -90,21 +90,21 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
 
 配置一个从MongoDB抽取数据到本地的作业，详情请参见上述参数说明。
 
-```
+``` {#codeblock_11e_lmj_2w1 .language-json}
 {
     "type":"job",
     "version":"2.0",//版本号
     "steps":[
             "reader": {
-            "plugin": "mongodb", //插件名称
+            "plugin": "mongodb", //插件名称。
             "parameter": {
-                "datasource": "datasourceName", //数据源名称
-                "collectionName": "tag_data", //集合名称
+                "datasource": "datasourceName", //数据源名称。
+                "collectionName": "tag_data", //集合名称。
                 "query":"",
                 "column": [
                          {
-                              "name": "unique_id", //字段名称
-                              "type": "string"  //字段类型
+                              "name": "unique_id", //字段名称。
+                              "type": "string"  //字段类型。
                           },
                           {
                               "name": "sid",
@@ -173,7 +173,7 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
                 ]
             }
         },
-        { //下面是关于Writer的模板，可以参考相应的写插件文档
+        { //下面是关于Writer的模板，您可以查找相应的写插件文档。
             "stepType":"stream",
             "parameter":{},
             "name":"Writer",
@@ -182,12 +182,11 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
     ],
     "setting":{
         "errorLimit":{
-            "record":"0"//错误记录数
+            "record":"0"//错误记录数。
         },
         "speed":{
-            "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流
-            "concurrent":1,//作业并发数
-            "dmu":1//DMU值
+            "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流。
+            "concurrent":1,//作业并发数。  
         }
     },
     "order":{
@@ -201,5 +200,5 @@ MongoDB Reader针对MongoDB类型的转换列表，如下所示。
 }
 ```
 
-**说明：** 暂时不支持取出array里的指定元素。
+**说明：** 暂时不支持取出array中的指定元素。
 
