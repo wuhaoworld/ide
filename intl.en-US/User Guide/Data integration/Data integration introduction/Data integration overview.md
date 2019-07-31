@@ -16,7 +16,7 @@ Data integration supports diverse data sources as follows:
 -   Big data \(MaxCompute,AnalyticDB,HDFS\),
 -   MPP database \(HybridDB for MySQL\).
 
-For more information, see [Supported data sources](reseller.en-US/User Guide/Data integration/Data source configuration/Supported data sources.md#).
+For more information, see [Supported data sources](intl.en-US/User Guide/Data integration/Data source configuration/Supported data sources.md#).
 
 **Note:** The data sources configured information varies greatly from each other, and the parameter configuration information must be queried in detail based on the actual scenario. For this reason, the detailed parameter descriptions are available on the data source configuration and job configuration pages, which can be queried and used as needed.
 
@@ -59,6 +59,6 @@ Note:
 
 ## References {#section_q1q_hw5_42b .section}
 
--   For a detailed description of data synchronization task configuration, see [create a data synchronization task](reseller.en-US/User Guide/Data integration/Task configuration/Configure reader plug-in/Wizard mode configuration.md#).
+-   For a detailed description of data synchronization task configuration, see [create a data synchronization task](intl.en-US/User Guide/Data integration/Task configuration/Configure reader plug-in/Wizard mode configuration.md#).
 -   For a detailed introduction to processing unstructured data such as OSS, see [access OSS unstructured data](https://www.alibabacloud.com/help/doc-detail/45389.html).
 
