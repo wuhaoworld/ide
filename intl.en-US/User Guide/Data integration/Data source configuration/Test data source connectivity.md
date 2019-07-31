@@ -75,7 +75,7 @@ In the preceding table, "-" means this item is unavailable. "No" means the conne
     -   Currently, cross-region sources connectivity tests is not supported.
     -   Financial Cloud networks do not support connectivity tests.
 
-Currently, data synchronization is implemented solely by adding a custom resource group. For more information, see [Data Synchronization Configuration for the VPC \(Financial Cloud\)](https://www.alibabacloud.com/help/doc-detail/55474.html).
+Currently, data synchronization is implemented solely by adding a custom resource group.
 
 For created ECS data sources, add the scheduling cluster IP address to the security group for both inbound and outbound traffic in the public network and classic network. If the security group is not added, a disconnection error may occur during synchronization. For more information, see [Add security group](intl.en-US/User Guide/Data integration/Common configuration/Add security group.md#).
 
@@ -93,17 +93,17 @@ The following example describes the billing of synchronizing data from RDS to Ma
 
 Currently, data integration is free of charge, but you might still be billed for certain products. Configuring MaxCompute data synchronization in DataWorks is free of charge, but you will be billed for manually adding the parameter in the script mode to set a public IP address for the MaxCompute tunnel. However, this parameter is unavailable in the template generated in the script mode.
 
-## Conclusion { .section}
+## Conclusion {#section_ot8_7nl_m14 .section}
 
 When a connectivity test fails, you need to verify the data source region, network type, and whether the full instance ID, database name and user name are valid in the RDS whitelist. Examples of common errors are as follows:
 
 -   The Database Password is invalid as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15580590397520_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15645384407520_en-US.png)
 
 -   The network connection failed as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15580590397521_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15645384407521_en-US.png)
 
 -   The network disconnected during synchronization or because of other conditions.
 
@@ -131,7 +131,7 @@ When a connectivity test fails, you need to verify the data source region, netwo
 
     A test connection exception occurred resulting in the data source connectivity test exception. The displayed error message is as follows:
 
-    ```
+    ``` {#codeblock_z04_fy9_7ob}
     error message: Timed out after 5000 ms while waiting for a server that matches ReadPreferenceServerSelector{readPreference=primary}. Client view of cluster state is {type=UNKNOWN, servers=[(xxxxxxxxxx), type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
     ```
 
