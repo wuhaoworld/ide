@@ -6,21 +6,23 @@ MaxCompute提供了[Python SDK](../../../../intl.zh-CN/SDK参考/Python SDK.md#)
 
 **说明：** PyODPS节点底层的Python版本为2.7。
 
+PyODPS节点主要针对MaxCompute的Python SDK应用。对于纯Python代码的执行，您可以使用Shell节点执行上传至DataWorks的py脚本。
+
 PyODPS节点获取到本地处理的数据不能超过50MB，节点运行时占用的内存不能超过1G，否则节点任务会被系统Kill。请避免在PyODPS节点中写入过多的数据处理代码。
 
 ## 新建PyODPS节点 {#section_eyd_w3l_p2b .section}
 
-1.  进入数据开发，选择**新建** \> **数据开发** \> **数据开发**。
+1.  进入数据开发，选择**新建** \> **数据开发** \> **PyODPS**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16292/15628391987651_zh-CN.png)
+    ![PyODPS](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16292/15646434537651_zh-CN.png)
 
     **说明：** 您也可以找到相应的业务流程，右键单击**数据开发**，选择**新建数据开发节点** \> **PyODPS**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156283919851147_zh-CN.png)
+    ![PyODPS](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156464345351147_zh-CN.png)
 
 2.  填写新建节点对话框中的配置，单击**提交**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156283919951148_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156464345351148_zh-CN.png)
 
 3.  编辑PyODPS节点。
     1.  ODPS入口。
@@ -89,21 +91,21 @@ PyODPS节点获取到本地处理的数据不能超过50MB，节点运行时占�
 
         **说明：** 由于默认资源组无法直接访问外网环境，建议您有公网访问需求时，使用自定义资源组或独享调度资源。仅专业版DataWorks提供自定义资源组，任意版本均可购买独享调度资源，详情请参见[DataWorks独享资源](../../../../intl.zh-CN/产品定价/预付费（包年包月）/DataWorks独享资源.md#)。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156283919934264_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156464345334264_zh-CN.png)
 
     2.  赋值完成后，提交节点并进入运维中心页面，进行**测试运行**，即可查看赋值结果。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156283919934265_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156464345434265_zh-CN.png)
 
     3.  您可以在**调度配置** \> **基础属性**中，配置自定义参数。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156283919934268_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156464345434268_zh-CN.png)
 
         **说明：** 自定义参数需要使用args\['参数名'\]的形式调用，例如`print (args['ds'])`。
 
     4.  完成配置后，提交节点并进入运维中心页面，进行**测试运行**，即可查看赋值结果。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156283919934289_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16295/156464345434289_zh-CN.png)
 
 5.  提交节点任务。
 
@@ -115,7 +117,7 @@ PyODPS节点获取到本地处理的数据不能超过50MB，节点运行时占�
 
 7.  在生产环境测试。
 
-    具体操作请参见[周期任务](intl.zh-CN/使用指南/运维中心/任务列表/周期任务.md#)。
+    具体操作请参见[周期任务](intl.zh-CN/使用指南/运维中心/周期任务运维/周期任务.md#)。
 
 
 ## PyODPS节点预装模块列表 {#section_e7s_rm3_cyl .section}
