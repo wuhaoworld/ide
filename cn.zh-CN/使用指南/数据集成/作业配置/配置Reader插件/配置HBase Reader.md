@@ -5,23 +5,23 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
 ## 支持的功能 {#section_sh9_13y_83s .section}
 
 -   支持HBase0.94.x和HBase1.1.x版本
-    -   如果您的HBase版本为HBase0.94.x，Reader端的插件请选择hbase094x。
+    -   如果您的HBase版本为HBase0.94.x，Reader端的插件请选择094x。
 
         ``` {#codeblock_2qv_4n7_5rh}
         "reader": {
-                "plugin": "hbase094x"
+                "plugin": "094x"
             }
         ```
 
-    -   如果您的HBase版本为HBase1.1.x，Reader端的插件请选择hbase11x。
+    -   如果您的HBase版本为HBase1.1.x，Reader端的插件请选择11x。
 
         ``` {#codeblock_uyh_swh_ftr}
         "reader": {
-                "plugin": "hbase11x"
+                "plugin": "11x"
             }
         ```
 
-        **说明：** HBase1.1.x插件当前可兼容HBase 2.0，如果您在使用上遇到问题请提交工单。
+        **说明：** HBase1.1.x插件当前可以兼容HBase 2.0，如果您在使用上遇到问题请提交工单。
 
 -   支持normal和multiVersionFixedColumn模式
     -   normal模式：把HBase中的表当成普通二维表（横表）进行读取，获取最新版本数据。
