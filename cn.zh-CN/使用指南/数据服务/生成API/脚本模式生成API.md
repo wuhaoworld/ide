@@ -6,10 +6,13 @@
 
 ## 配置API基础信息 {#section_qdt_jzh_r2b .section}
 
-1.  进入**API服务列表** \> **生成API**页面。
+1.  进入**API服务列表** \> **生成API**页面，单击**脚本模式**。
+
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/156499846954269_zh-CN.png)
+
 2.  单击**脚本模式**，填写API基础信息。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16407/15542820178791_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16407/15649984698791_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -43,7 +46,7 @@
 
     在代码编辑区中输入SQL代码。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/15542820178802_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/15649984698802_zh-CN.png)
 
     **说明：** SELECT查询的字段为API的返回参数，WHERE条件处的参数为API的请求参数，请求参数请使用$\{\}标识。
 
@@ -51,7 +54,7 @@
 
     编写好API查询SQL后，单击右侧的**请求参数**，设置参数的名称、参数类型、示例值、默认值和描述。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/15542820178803_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/15649984698803_zh-CN.png)
 
     **说明：** 为了帮助API的调用者更全面地了解API，请尽量全面地填写API的参数信息。
 
@@ -59,7 +62,7 @@
 
     单击右侧的**返回参数**，设置参数的名称、参数类型示例值和描述，并可进行返回结果分页和使用过滤器等高级配置。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/155428201743280_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/156499847043280_zh-CN.png)
 
     配置过程中需要注意返回结果分页的设置。
 
@@ -91,7 +94,7 @@
 
 完成API参数的配置并保存后，单击右上角的**测试**，即可进入API测试环节。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/155428201743281_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16408/156499847043281_zh-CN.png)
 
 填写好参数值，单击**开始测试**，即可在线发送API请求，在右侧可以看到API请求详情及返回内容。如果测试失败，请仔细查看错误提示并做相应的修改重新测试。
 
