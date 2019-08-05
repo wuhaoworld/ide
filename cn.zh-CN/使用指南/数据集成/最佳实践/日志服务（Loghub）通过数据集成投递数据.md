@@ -1,12 +1,12 @@
 # 日志服务（Loghub）通过数据集成投递数据 {#concept_uk4_vgb_pfb .concept}
 
-本文将以LogHub数据同步至MaxCompute为例，为您介绍如何通过数据集成同步LogHub数据至数据集成已支持的目的端数据源（如MaxCompute、OSS、OTS、RDBMS、DataHub等）。
+本文将以LogHub数据同步至MaxCompute为例，为您介绍如何通过数据集成功能同步LogHub数据至数据集成已支持的目的端数据源（如MaxCompute、OSS、OTS、RDBMS和DataHub等）。
 
-**说明：** 此功能已在华北2、华东2、华南1、香港、美西1、亚太东南1、欧洲中部1、亚太东南2、亚太东南3、亚太东北1、亚太南部1等多个Region发布上线。
+**说明：** 此功能已在华北2、华东2、华南1、香港、美西1、亚太东南1、欧洲中部1、亚太东南2、亚太东南3、亚太东北1、亚太南部1等多个地域发布。
 
 ## 支持场景 {#section_ogh_b2g_4fb .section}
 
--   支持跨Region的LogHub与MaxCompute等数据源的数据同步。
+-   支持跨地域的LogHub与MaxCompute等数据源的数据同步。
 -   支持不同阿里云账号下的LogHub与MaxCompute等数据源间的数据同步。
 -   支持同一阿里云账号下的LogHub与MaxCompute等数据源间的数据同步。
 -   支持公共云与金融云账号下的LogHub与MaxCompute等数据源间的数据同步。
@@ -15,9 +15,9 @@
 
 以B账号进入数据集成配置同步任务，将A账号的LogHub数据同步至B账号的MaxCompute为例。
 
-1.  用A账号的AccessId和Accesskey建LogHub数据源。
+1.  用A账号的AccessId和Accesskey创建LogHub数据源。
 
-    此时B账号可以拖A账号下所有sls project的数据。
+    此时B账号可以拖A账号下所有SLS Project的数据。
 
 2.  用A账号下子账号A1的AccessId和Accesskey创建LogHub数据源。
     -   A给A1赋权日志服务的通用权限，即`AliyunLogFullAccess`和`AliyunLogReadOnlyAccess`，详情请参见[授权RAM子用户访问日志服务资源](https://www.alibabacloud.com/help/doc-detail/47664.htm)。
@@ -29,7 +29,7 @@
 
         根据下述策略进行授权后，B账号通过子账号A1只能同步日志服务project\_name1以及project\_name2的数据。
 
-        ```
+        ``` {#codeblock_nng_vvd_3cg}
         {
         "Version": "1",
         "Statement": [
@@ -64,7 +64,7 @@
 2.  进入**同步资源管理** \> **数据源**页面，单击右上角的**新增数据源**。
 3.  选择数据源类型为**LogHub**，填写新增LogHub数据源对话框中的配置。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020796914350_zh-CN.png)
+    ![Loghub](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714350_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -85,7 +85,7 @@
 2.  填写新建数据同步节点对话框中的配置，单击**提交**，进入数据同步任务配置页面。
 3.  选择数据来源。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020796914351_zh-CN.png)
+    ![数据来源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714351_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -95,15 +95,15 @@
     |**日志结束时间**|数据消费的结束时间位点，为时间范围（左闭右开）的右边界，为yyyyMMddHHmmss格式的时间字符串（比如20180111013010），可以和DataWorks的调度时间参数配合使用。|
     |**批量条数**|一次读取的数据条数，默认为256。|
 
-    数据预览默认收起，您可单击进行预览。
+    数据预览默认收起，您可以单击进行预览。
 
-    **说明：** 数据预览是选择LogHub中的几条数据展现在预览框，可能您同步的数据会跟您的预览的结果不一样，因为您同步的数据会指定开始时间可结束时间。
+    **说明：** 数据预览是选择LogHub中的几条数据展现在预览框，可能您同步的数据会跟您的预览的结果不一样，因为您同步的数据会指定开始时间和结束时间。
 
 4.  选择数据去向。
 
-    选择MaxCompute数据源及目标表ok。
+    选择MaxCompute数据源及目标表。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020796914352_zh-CN.png)
+    ![数据去向](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714352_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -120,35 +120,30 @@
 
     选择字段的映射关系。需对字段映射关系进行配置，左侧源头表字段和右侧目标表字段为一一对应的关系。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020797014353_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714353_zh-CN.png)
 
 6.  通道控制。
 
     配置作业速率上限和脏数据检查规则。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020797014354_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714354_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**DMU**|数据集成的计费单位。**说明：** 设置DMU时，需注意DMU的值限制了最大并发数的值，请合理配置。
-
- |
-    |**作业并发数**|配置时会结合读取端指定的切分建，将数据分成多个Task，多个Task同时运行，以达到提速的效果。|
-    |**同步速率**|设置同步速率可保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
-    |**错误记录数超过**|脏数据，类似源端是Varchar类型的数据，写到Int类型的目标列中，导致因为转换不合理而无法写入的数据。同步脏数据的设置，主要在于控制同步数据的质量问题。建议根据业务情况，合理配置脏数据条数。|
-    |**任务资源组**|配置同步任务时，指定任务运行所在的资源组，默认运行在默认资源组上。当项目调度资源紧张时，也可以通过新增自定义资源组的方式来给调度资源进行扩容，然后将同步任务指定在自定义资源组上运行，新增自定义资源组的操作请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。您可根据数据源网络情况、项目调度资源情况和业务重要程度，进行合理配置。
-
-|
+    |**任务期望最大并发数**|数据同步任务内，可以从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
+    |**同步速率**|设置同步速率可以保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
+    |**错误记录数**|错误记录数，表示脏数据的最大容忍条数。|
+    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议购买独享数据集成资源或添加自定义资源组，详情请参见[DataWorks独享资源](../../../../intl.zh-CN/产品定价/预付费（包年包月）/DataWorks独享资源.md#)和[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
 
 7.  运行任务。
 
-    您可通过以下两种方式运行任务。
+    您可以通过以下两种方式运行任务。
 
     -   直接运行（一次性运行）
 
         单击任务上方的**运行**按钮，将直接在数据集成页面运行任务，运行之前需要配置自定义参数的具体数值。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020797014355_zh-CN.png)
+        ![运行](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801814355_zh-CN.png)
 
         如上图所示，代表同步10:10到17:30这段时间的LogHub记录到MaxCompute。
 
@@ -156,24 +151,24 @@
 
         单击**提交**按钮，将同步任务提交到调度系统中，调度系统会按照配置属性在从第二天开始自动定时执行。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020797038844_zh-CN.png)
+        ![提交](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801838844_zh-CN.png)
 
-        如上图，设置开始时间和结束时间：startTime=$\[yyyymmddhh24miss-10/24/60\]系统前10分钟到 endTime=$\[yyyymmddhh24miss-5/24/60\]系统前5分钟时间。
+        如上图所示，设置开始时间和结束时间：startTime=$\[yyyymmddhh24miss-10/24/60\]系统前10分钟到 endTime=$\[yyyymmddhh24miss-5/24/60\]系统前5分钟时间。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/155020798014356_zh-CN.png)
+        ![时间](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801814356_zh-CN.png)
 
-        如上图所示，设置按分钟调度，从00：00到23:59每5分钟调度一次。
+        如上图所示，设置按分钟调度，从00:00~23:59每5分钟调度一次。
 
 
 ## 通过脚本模式配置同步任务 {#section_hcl_h4g_4fb .section}
 
 如果您需要通过脚本模式配置此任务，单击工具栏中的转换脚本，选择**确认**即可进入脚本模式。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24565/155020798014347_zh-CN.png)
+![脚本配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24565/156496801814347_zh-CN.png)
 
-您可根据自身进行配置，示例脚本如下。
+您可以根据自身进行配置，示例脚本如下。
 
-```
+``` {#codeblock_rey_ure_n2a .language-python}
 {
 "type": "job",
 "version": "1.0",
@@ -181,10 +176,10 @@
 "reader": {
 "plugin": "loghub",
 "parameter": {
-"datasource": "loghub_lzz",//数据源名，保持跟您添加的数据源名一致
-"logstore": "logstore-ut2",//目标日志库的名字，logstore是日志服务中日志数据的采集、存储和查询单元。
-"beginDateTime": "${startTime}",//数据消费的开始时间位点，为时间范围（左闭右开）的左边界
-"endDateTime": "${endTime}",//数据消费的开始时间位点，为时间范围（左闭右开）的右边界
+"datasource": "loghub_lzz",//数据源名，需要和您添加的数据源名一致。
+"logstore": "logstore-ut2",//目标日志库的名字，LogStore是日志服务中日志数据的采集、存储和查询单元。
+"beginDateTime": "${startTime}",//数据消费的开始时间位点，为时间范围（左闭右开）的左边界。
+"endDateTime": "${endTime}",//数据消费的开始时间位点，为时间范围（左闭右开）的右边界。
 "batchSize": 256,//一次读取的数据条数，默认为256。
 "splitPk": "",
 "column": [
@@ -197,11 +192,11 @@
 "writer": {
 "plugin": "odps",
 "parameter": {
-"datasource": "odps_first",//数据源名，保持跟您添加的数据源名一致
-"table": "ok",//目标表名
+"datasource": "odps_first",//数据源名，需要和您添加的数据源名一致。
+"table": "ok",//目标表名。
 "truncate": true,
-"partition": "",//分区信息
-"column": [//目标列名
+"partition": "",//分区信息。
+"column": [//目标列名。
 "key1",
 "key2",
 "key3"
@@ -210,8 +205,8 @@
 },
 "setting": {
 "speed": {
-"mbps": 8,/作业速率上限
-"concurrent": 7//并发数
+"mbps": 8,//作业速率上限。
+"concurrent": 7//并发数。
 }
 }
 }
