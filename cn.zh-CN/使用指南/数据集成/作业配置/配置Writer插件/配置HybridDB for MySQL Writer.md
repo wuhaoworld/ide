@@ -46,7 +46,7 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表如下所�
 
     配置同步任务的**数据来源**和**数据去向**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/155859634232039_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/156517007932039_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -60,7 +60,7 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表如下所�
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，单击**删除**即可删除当前字段 。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/155859634232041_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62205/156517007932041_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -71,21 +71,23 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表如下所�
 
 3.  **通道控制**
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/155859634232018_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/156517007932018_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
-    |**DMU**|数据集成消耗资源（包括CPU、内存、网络等资源分配）的度量单位。一个DMU描述了一个数据集成作业最小运行能力，即在限定的CPU、内存、网络等资源情况下对于数据同步的处理能力。|
-    |**作业并发数**|可将此属性视为数据同步任务内，可从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
+    |**任务期望最大并发数**|数据同步任务内，可以从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
+    |**同步速率**|设置同步速率可以保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
     |**错误记录数**|错误记录数，表示脏数据的最大容忍条数。|
-    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议添加自定义资源组（目前只有华东1，华东2支持添加自定义资源组），详情请参见[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
+    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议购买独享数据集成资源或添加自定义资源组，详情请参见[DataWorks独享资源](../../../../intl.zh-CN/产品定价/预付费（包年包月）/DataWorks独享资源.md#)和[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
+
+    96811
 
 
 ## 脚本开发介绍 {#section_vw5_p3r_5fb .section}
 
 脚本配置样例如下，详情请参见上述参数说明。
 
-```
+``` {#codeblock_55z_6uv_8cr}
 {
     "type": "job",
     "steps": [
@@ -130,7 +132,6 @@ HybridDB for MySQL Writer针对HybridDB for MySQL类型的转换列表如下所�
             "concurrent": 7,//并发数
             "throttle": true,//同步速度限流
             "mbps": 1,//限流值
-            "dmu": 5//dmu值
         }
     }
 }
