@@ -41,9 +41,9 @@ SQL Server Writer针对SQL Server的类型转换列表，如下所示。
 |column|目标表需要写入数据的字段，字段之间用英文逗号分隔。例如`"column":["id","name","age"]`。如果要依次写入全部列，使用\*表示，例如`"column":["*"]`。|是|无|
 |preSql|执行数据同步任务之前率先执行的SQL语句。目前向导模式仅允许执行一条SQL语句，脚本模式可以支持多条SQL语句，例如清除旧数据。|否|无|
 |postSql|执行数据同步任务之后执行的SQL语句。目前向导模式仅允许执行一条SQL语句，脚本模式可以支持多条SQL语句，例如加上某一个时间戳。|否|无|
-|writeMode|选择导入模式，可以支持insert方式。insert：当主键/唯一性索引冲突时，数据集成视为脏数据但保留原有的数据。
+|writeMode|选择导入模式，可以支持insert方式。 insert：当主键/唯一性索引冲突时，数据集成视为脏数据但保留原有的数据。
 
-|否|insert|
+ |否|insert|
 |batchSize|一次性批量提交的记录数大小，该值可以极大减少数据集成与PostgreSQL的网络交互次数，并提升整体吞吐量。但是该值设置过大可能会造成数据集成运行进程OOM情况。|否|1024|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
@@ -52,7 +52,7 @@ SQL Server Writer针对SQL Server的类型转换列表，如下所示。
 
     配置同步任务的数据来源和数据去向。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16255/15413892308218_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16255/15651701498218_zh-CN.png)
 
     配置项说明如下：
 
@@ -65,26 +65,27 @@ SQL Server Writer针对SQL Server的类型转换列表，如下所示。
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，单击**删除**即可删除当前字段 。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16255/15413892308219_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16255/15651701508219_zh-CN.png)
 
     -   同行映射：单击**同行映射**可以在同行建立相应的映射关系，请注意匹配数据类型。
     -   自动排版：可以根据相应的规律自动排版。
 3.  通道控制
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15413892307675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15651701507675_zh-CN.png)
 
-    配置项说明如下：
+    |配置|说明|
+    |:-|:-|
+    |**任务期望最大并发数**|数据同步任务内，可以从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
+    |**同步速率**|设置同步速率可以保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
+    |**错误记录数**|错误记录数，表示脏数据的最大容忍条数。|
+    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议购买独享数据集成资源或添加自定义资源组，详情请参见[DataWorks独享资源](../../../../intl.zh-CN/产品定价/预付费（包年包月）/DataWorks独享资源.md#)和[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
 
-    -   DMU：数据集成消耗资源（包括CPU、内存、网络等资源分配）的度量单位。一个DMU描述了一个数据集成作业最小运行能力，即在限定的CPU、内存、网络等资源情况下对于数据同步的处理能力。
-    -   作业并发数：可将此属性视为数据同步任务内，可从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度
-    -   错误记录数：错误记录数，表示脏数据的最大容忍条数。
-    -   任务资源组：任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议添加自定义资源组（目前只有华东1，华东2支持添加自定义资源组），详情请参见[新增调度资源](intl.zh-CN/使用指南/数据集成/常见配置/新增调度资源.md#)。
 
 ## 向导模式介绍 {#section_cp2_wsh_p2b .section}
 
 配置写入SQL Server的作业，具体参数填写请参见参数说明。
 
-```
+``` {#codeblock_ds4_ylq_kma}
 {
     "type":"job",
     "version":"2.0",//版本号
@@ -118,7 +119,6 @@ SQL Server Writer针对SQL Server的类型转换列表，如下所示。
         "speed":{
             "throttle":false,////false代表不限流，下面的限流的速度不生效，true代表限流
             "concurrent":1,//作业并发数
-            "dmu":1//DMU值
         }
     },
     "order":{
