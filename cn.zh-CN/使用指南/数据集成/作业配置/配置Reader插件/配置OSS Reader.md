@@ -90,9 +90,9 @@ json
 
 1.  选择数据源。
 
-    配置同步任务的数据来源和数据去向。
+    配置同步任务的**数据来源**和**数据去向**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15631876937815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15656702357815_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -110,7 +110,7 @@ json
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15631876937818_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15656702357818_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -120,7 +120,7 @@ json
 
 3.  通道控制。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15631876937675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15656702357675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -203,4 +203,86 @@ json
     }
 }
 ```
+
+## ORC/Parquet文件读取OSS {#section_u07_y9c_p9r .section}
+
+目前通过复用HDFS Reader的方式完成OSS读取ORC/Parquet格式的文件，在OSS Reader已有参数的基础上，增加了Path、FileFormat等扩展配置参数，参数含义请参见[配置HDFS Reader](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置HDFS Reader.md#)。
+
+-   以ORC文件格式读取OSS，示例如下：
+
+    ``` {#codeblock_t0k_4qt_aeb}
+    
+    {
+          "stepType": "oss",
+          "parameter": {
+            "datasource": "",
+            "fileFormat": "orc",
+            "path": "/tests/case61/orc__691b6815_9260_4037_9899_aa8e61dc7e4b",
+            "column": [
+              {
+                "index": 0,
+                "type": "long"
+              },
+              {
+                "index": "1",
+                "type": "string"
+              },
+              {
+                "index": "2",
+                "type": "string"
+              }
+            ]
+          }
+        }
+    ```
+
+-   以Parquet文件格式读取OSS，示例如下：
+
+    ``` {#codeblock_yju_tdr_nfg}
+    
+    {
+          "stepType": "oss",
+          "parameter": {
+            "datasource": "",
+            "fileFormat": "parquet",
+            "path": "/tests/case61/parquet",
+            "parquetSchema": "message test { required int64 int64_col;\n required binary str_col (UTF8);\nrequired group params (MAP) {\nrepeated group key_value {\nrequired binary key (UTF8);\nrequired binary value (UTF8);\n}\n}\nrequired group params_arr (LIST) {\n  repeated group list {\n    required binary element (UTF8);\n  }\n}\nrequired group params_struct {\n  required int64 id;\n required binary name (UTF8);\n }\nrequired group params_arr_complex (LIST) {\n  repeated group list {\n    required group element {\n required int64 id;\n required binary name (UTF8);\n}\n  }\n}\nrequired group params_complex (MAP) {\nrepeated group key_value {\nrequired binary key (UTF8);\nrequired group value {\n  required int64 id;\n required binary name (UTF8);\n  }\n}\n}\nrequired group params_struct_complex {\n  required int64 id;\n required group detail {\n  required int64 id;\n required binary name (UTF8);\n  }\n  }\n}",
+            "column": [
+              {
+                "index": 0,
+                "type": "long"
+              },
+              {
+                "index": "1",
+                "type": "string"
+              },
+              {
+                "index": "2",
+                "type": "string"
+              },
+              {
+                "index": "3",
+                "type": "string"
+              },
+              {
+                "index": "4",
+                "type": "string"
+              },
+              {
+                "index": "5",
+                "type": "string"
+              },
+              {
+                "index": "6",
+                "type": "string"
+              },
+              {
+                "index": "7",
+                "type": "string"
+              }
+            ]
+          }
+        }
+    ```
+
 
