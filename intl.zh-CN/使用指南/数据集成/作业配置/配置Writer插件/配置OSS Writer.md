@@ -47,22 +47,22 @@ OSS Writer暂时不能实现以下功能：
 |header（高级配置，向导模式不支持）|OSS写出时的表头，例如\['id', 'name', 'age'\]。|否|无|
 |maxFileSize（高级配置，向导模式不支持）|OSS写出时单个Object文件的最大值，默认为10000\*10MB，类似于log4j日志打印时根据日志文件大小轮转。OSS分块上传时，每个分块大小为10MB（也是日志轮转文件最小粒度，即小于10MB的maxFileSize会被作为10MB），每个OSS InitiateMultipartUploadRequest支持的分块最大数量为10000。 轮转发生时，Object名字规则是在原有Object前缀加UUID随机数的基础上，拼接\_1,\_2,\_3等后缀。
 
- |否|100000MB|
-|suffix（高级配置，向导模式不支持）|数据同步写出时，生成的文件名后缀，比如配置suffix为.csv，则最终写出的文件名为fileName\*\*\*\*.csv。|否|无|
+ |否|100,000MB|
+|suffix（高级配置，向导模式不支持）|数据同步写出时，生成的文件名后缀，例如配置suffix为.csv，则最终写出的文件名为fileName\*\*\*\*.csv。|否|无|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
-1.  选择数据源
+1.  选择数据源。
 
-    配置同步任务的数据来源和数据去向。
+    配置同步任务的**数据来源**和**数据去向**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15651702377815_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15656703067815_zh-CN.png)
 
     |配置|说明|
     |--|--|
-    |**数据源**|即上述参数说明中的datasource，一般填写您配置的数据源名称。|
+    |**数据源**|即上述参数说明中的datasource，通常填写您配置的数据源名称。|
     |**Object前缀**|即上述参数说明中的Object，填写OSS文件夹的路径，其中不要填写bucket的名称。|
-    |**文本类型**|包括csv和text两种文本类型。|
+    |**文本类型**|包括csv和text2种文本类型。|
     |**列分隔符**|即上述参数说明中的fieldDelimiter，默认值为（,）。|
     |**编码格式**|即上述参数说明中的encoding，默认值为utf-8。|
     |**null值**|即上述参数说明中的nullFormat，将要表示为空的字段填入文本框，如果源端存在则将对应的部分转换为空。|
@@ -71,15 +71,19 @@ OSS Writer暂时不能实现以下功能：
 
 2.  字段映射，即上述参数说明中的column。
 
-    左侧的源头表字段和右侧的目标表字段为一一对应的关系，单击**添加一行**可增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除 。
+    左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15651702387818_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16229/15656703077818_zh-CN.png)
 
-    同行映射：单击**同行映射**可以在同行建立相应的映射关系，请注意匹配数据类型。
+    |配置|说明|
+    |:-|:-|
+    |**同名映射**|单击**同名映射**，可以根据名称建立相应的映射关系，请注意匹配数据类型。|
+    |**同行映射**|单击**同行映射**，可以在同行建立相应的映射关系，请注意匹配数据类型。|
+    |**取消映射**|单击**取消映射**，可以取消建立的映射关系。|
 
-3.  通道控制
+3.  通道控制。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15651702387675_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15656703077675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -91,7 +95,7 @@ OSS Writer暂时不能实现以下功能：
 
 ## 脚本开发介绍 {#section_cp2_wsh_p2b .section}
 
-脚本配置样例如下所示，具体参数填写请参见参数说明。
+脚本配置示例如下所示，具体参数填写请参见参数说明。
 
 ``` {#codeblock_c3w_74x_hni}
 {
@@ -139,4 +143,62 @@ OSS Writer暂时不能实现以下功能：
     }
 }
 ```
+
+## ORC/Parquet文件写入OSS {#section_x06_h7i_q9q .section}
+
+目前通过复用HDFS Writer的方式完成OSS写ORC/Parquet格式的文件，在OSS Writer已有参数的基础上，增加了Path、FileFormat等扩展配置参数，参数含义请参见[配置HDFS Writer](intl.zh-CN/使用指南/数据集成/作业配置/配置Writer插件/配置HDFS Writer.md#)。
+
+-   以ORC文件格式写入OSS，示例如下：
+
+    ``` {#codeblock_qdx_wtn_pzt}
+    {
+          "stepType": "oss",
+          "parameter": {
+            "datasource": "",
+            "fileFormat": "orc",
+            "path": "/tests/case61",
+            "fileName": "orc",
+            "writeMode": "append",
+            "column": [
+              {
+                "name": "col1",
+                "type": "BIGINT"
+              },
+              {
+                "name": "col2",
+                "type": "DOUBLE"
+              },
+              {
+                "name": "col3",
+                "type": "STRING"
+              }
+            ],
+            "writeMode": "append",
+            "fieldDelimiter": "\t",
+            "compress": "NONE",
+            "encoding": "UTF-8"
+          }
+        }
+    ```
+
+-   以Parquet文件格式写入OSS，示例如下：
+
+    ``` {#codeblock_05c_2ac_flc}
+    {
+          "stepType": "oss",
+          "parameter": {
+            "datasource": "",
+            "fileFormat": "parquet",
+            "path": "/tests/case61",
+            "fileName": "test",
+            "writeMode": "append",
+            "fieldDelimiter": "\t",
+            "compress": "SNAPPY",
+            "encoding": "UTF-8",
+            "parquetSchema": "message test { required int64 int64_col;\n required binary str_col (UTF8);\nrequired group params (MAP) {\nrepeated group key_value {\nrequired binary key (UTF8);\nrequired binary value (UTF8);\n}\n}\nrequired group params_arr (LIST) {\n  repeated group list {\n    required binary element (UTF8);\n  }\n}\nrequired group params_struct {\n  required int64 id;\n required binary name (UTF8);\n }\nrequired group params_arr_complex (LIST) {\n  repeated group list {\n    required group element {\n required int64 id;\n required binary name (UTF8);\n}\n  }\n}\nrequired group params_complex (MAP) {\nrepeated group key_value {\nrequired binary key (UTF8);\nrequired group value {\n  required int64 id;\n required binary name (UTF8);\n  }\n}\n}\nrequired group params_struct_complex {\n  required int64 id;\n required group detail {\n  required int64 id;\n required binary name (UTF8);\n  }\n  }\n}",
+            "dataxParquetMode": "fields"
+          }
+        }
+    ```
+
 
