@@ -31,15 +31,15 @@ Confirming the target data source is supported by Data Integration, after you ca
 1.  Enter the [DataWorks management console](https://workbench.data.aliyun.com/console) as a developer, and click **Data Development** in the corresponding project Action column.
 2.  Click **Data Development** in the left-hand navigation pane to open the Business Process navigator.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087357611_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721927611_en-US.png)
 
 3.  Right-click **Business Flow** in the navigation pane to create **Data Integration Node** \> **Data Sync**, and enter the synchronization task's name.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087357612_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721927612_en-US.png)
 
 4.  After creating the synchronization task, you can manually configure the reader data source and the target table information for the data synchronization task. For more information on how to select a data source to read from, see [Configuring Reader](https://www.alibabacloud.com/help/faq-list/74300.htm).
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087357614_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721927614_en-US.png)
 
 
 **Note:** Incremental data synchronization is required for many tasks when configuring read-side data sources. You can now obtain relative date in conjunction with [Parameter configuration](intl.en-US/User Guide/Data development/Scheduling configuration/Parameter configuration.md#) to complete the requirement to obtain the incremental data.
@@ -57,7 +57,7 @@ When you complete the configuration for both read/write, you need to specify a m
 -   Enable same-line mapping: Automatically sets the mapping relationship for the same row of data.
 -   Automatic layout: The field order is displayed after the mapping relationship is set.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087357615_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721927615_en-US.png)
 
 **Note:** The field types mapped between columns should be data compatible.
 
@@ -65,7 +65,7 @@ When you complete the configuration for both read/write, you need to specify a m
 
 When the preceding steps are configured, the efficiency configuration is required. The efficiency configuration mainly includes DMU settings, synchronous concurrency number settings, synchronous rate settings, synchronous dirty data settings and synchronize information, such as Resource Group settings.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087357616_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721927616_en-US.png)
 
 Parameters:
 
@@ -84,7 +84,7 @@ Parameters:
 
 Use scheduling parameters to filter synchronization task data. The following figure shows how to configure scheduling parameters in the synchronization task.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087367617_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721937617_en-US.png)
 
 In the preceding figure, you can declare a schedule parameter variable in the form of a $\{variable name\}. When the variable declaration is complete, write the initialization value of the variable in the scheduled parameter properties, the value initialized here by the variable is represented with a dollar sign \($\). The content can either be a time expression or a constant.
 
@@ -98,7 +98,7 @@ Declare the following parameters in the code of your synchronization task.
 -   cyctime: Obtain the current run time, in the form of yyyymmddhhmiss.
 -   DataWorks provides two system default scheduling parameters: bizdate and cycletime.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15647087367618_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16216/15658721937618_en-US.png)
 
 ## Configure scheduling properties {#section_a4t_rnc_p2b .section}
 
