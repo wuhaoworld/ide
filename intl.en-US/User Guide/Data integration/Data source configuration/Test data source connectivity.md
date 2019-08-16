@@ -59,7 +59,7 @@
 |DataHub|ApsaraDB|Classic network|Yes|-|
 |VPC network|No|-|
 
-**Note:** For more information about when to add a Custom Resource Group, see [Add scheduling resources](reseller.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).
+**Note:** For more information about when to add a Custom Resource Group, see [Add scheduling resources](intl.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).
 
 ## Description {#section_uy4_1hv_42b .section}
 
@@ -77,7 +77,7 @@ In the preceding table, "-" means this item is unavailable. "No" means the conne
 
 Currently, data synchronization is implemented solely by adding a custom resource group.
 
-For created ECS data sources, add the scheduling cluster IP address to the security group for both inbound and outbound traffic in the public network and classic network. If the security group is not added, a disconnection error may occur during synchronization. For more information, see [Add security group](reseller.en-US/User Guide/Data integration/Common configuration/Add security group.md#).
+For created ECS data sources, add the scheduling cluster IP address to the security group for both inbound and outbound traffic in the public network and classic network. If the security group is not added, a disconnection error may occur during synchronization. For more information, see [Add security group](intl.en-US/User Guide/Data integration/Common configuration/Add security group.md#).
 
 You cannot add an extensive port range on the ECS security group page. To add them, use the security group API of ECS. For more information, see [AuthorizeSecurityGroup](https://www.alibabacloud.com/help/doc-detail/25554.htm).
 
@@ -99,11 +99,11 @@ When a connectivity test fails, you need to verify the data source region, netwo
 
 -   The Database Password is invalid as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15645414137520_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15659472637520_en-US.png)
 
 -   The network connection failed as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15645414137521_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15659472637521_en-US.png)
 
 -   The network disconnected during synchronization or because of other conditions.
 
@@ -137,6 +137,6 @@ When a connectivity test fails, you need to verify the data source region, netwo
 
 -   Troubleshooting
 
-    If you are using MongoDB without VPC connection. You must add a whitelist for the connectivity test of the MongoDB data source. For more information, see [Add whitelist](reseller.en-US/User Guide/Data integration/Common configuration/Add whitelist.md#).
+    If you are using MongoDB without VPC connection. You must add a whitelist for the connectivity test of the MongoDB data source. For more information, see [Add whitelist](intl.en-US/User Guide/Data integration/Common configuration/Add whitelist.md#).
 
 
