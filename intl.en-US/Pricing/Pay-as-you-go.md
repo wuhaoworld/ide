@@ -21,7 +21,7 @@ When DataWorks is activated in pay-as-you-go mode, the following billing items a
 -   After you activate these billing items, the system automatically activates DataWorks Basic Edition for free.
 -   If you perform a smoke test in the development environment, instances are generated and billed.
 
-For more information, see [DataWorks Pay-As-You-Go mode details](intl.en-US/Pricing/Appendix/DataWorks Pay-As-You-Go mode details.md#).
+For more information, see [DataWorks Pay-As-You-Go mode details](reseller.en-US/Pricing/Appendix/DataWorks Pay-As-You-Go mode details.md#).
 
 ## Shared resource groups for scheduling {#section_58d_999_h12 .section}
 
@@ -41,7 +41,7 @@ For more information, see [DataWorks Pay-As-You-Go mode details](intl.en-US/Pric
 
  China \(Shenzhen\)
 
- Hong Kong
+ China\(Hong Kong\)
 
  |1|10|Daily|0.00|
     |11|500|Daily|0.15|
@@ -106,12 +106,20 @@ For more information, see [DataWorks Pay-As-You-Go mode details](intl.en-US/Pric
 
     |Region|Minimum number of instances|Maximum number of instances|Billing cycle|Fee \(USD/day\)|
     |------|---------------------------|---------------------------|-------------|---------------|
-    |China \(Hangzhou\)|1|10|Daily|0.00|
-    |China \(Shanghai\)|11|500|Daily|0.15|
-    |China \(Beijing\)|501|5,000|Daily|0.93|
-    |China \(Shenzhen\)|5,001|20,000|Daily|3.10|
-    |Hong Kong|20,001|50,000|Daily|7.74|
-    | |50,001|120,000|Daily|15.48|
+    |China \(Hangzhou\) China \(Shanghai\)
+
+ China \(Beijing\)
+
+ China \(Shenzhen\)
+
+ China\(Hong Kong\)
+
+ |1|10|Daily|0.00|
+    |11|500|Daily|0.15|
+    |501|5,000|Daily|0.93|
+    |5,001|20,000|Daily|3.10|
+    |20,001|50,000|Daily|7.74|
+    |50,001|120,000|Daily|15.48|
     |Singapore Australia \(Sydney\)
 
  Malaysia \(Kuala Lumpur\)
