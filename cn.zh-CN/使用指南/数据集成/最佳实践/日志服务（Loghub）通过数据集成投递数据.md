@@ -2,7 +2,7 @@
 
 本文将以LogHub数据同步至MaxCompute为例，为您介绍如何通过数据集成功能同步LogHub数据至数据集成已支持的目的端数据源（如MaxCompute、OSS、OTS、RDBMS和DataHub等）。
 
-**说明：** 此功能已在华北2、华东2、华南1、香港、美西1、亚太东南1、欧洲中部1、亚太东南2、亚太东南3、亚太东北1、亚太南部1等多个地域发布。
+**说明：** 此功能已在华北2、华东2、华南1、中国（香港）、美西1、亚太东南1、欧洲中部1、亚太东南2、亚太东南3、亚太东北1、亚太南部1等多个地域发布。
 
 ## 支持场景 {#section_ogh_b2g_4fb .section}
 
@@ -64,7 +64,7 @@
 2.  进入**同步资源管理** \> **数据源**页面，单击右上角的**新增数据源**。
 3.  选择数据源类型为**LogHub**，填写新增LogHub数据源对话框中的配置。
 
-    ![Loghub](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714350_zh-CN.png)
+    ![Loghub](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781314350_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -85,7 +85,7 @@
 2.  填写新建数据同步节点对话框中的配置，单击**提交**，进入数据同步任务配置页面。
 3.  选择数据来源。
 
-    ![数据来源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714351_zh-CN.png)
+    ![数据来源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781314351_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -103,7 +103,7 @@
 
     选择MaxCompute数据源及目标表。
 
-    ![数据去向](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714352_zh-CN.png)
+    ![数据去向](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781314352_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -120,13 +120,13 @@
 
     选择字段的映射关系。需对字段映射关系进行配置，左侧源头表字段和右侧目标表字段为一一对应的关系。
 
-    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714353_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781414353_zh-CN.png)
 
 6.  通道控制。
 
     配置作业速率上限和脏数据检查规则。
 
-    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801714354_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781414354_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -143,7 +143,7 @@
 
         单击任务上方的**运行**按钮，将直接在数据集成页面运行任务，运行之前需要配置自定义参数的具体数值。
 
-        ![运行](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801814355_zh-CN.png)
+        ![运行](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781414355_zh-CN.png)
 
         如上图所示，代表同步10:10到17:30这段时间的LogHub记录到MaxCompute。
 
@@ -151,11 +151,11 @@
 
         单击**提交**按钮，将同步任务提交到调度系统中，调度系统会按照配置属性在从第二天开始自动定时执行。
 
-        ![提交](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801838844_zh-CN.png)
+        ![提交](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781438844_zh-CN.png)
 
         如上图所示，设置开始时间和结束时间：startTime=$\[yyyymmddhh24miss-10/24/60\]系统前10分钟到 endTime=$\[yyyymmddhh24miss-5/24/60\]系统前5分钟时间。
 
-        ![时间](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156496801814356_zh-CN.png)
+        ![时间](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24566/156594781514356_zh-CN.png)
 
         如上图所示，设置按分钟调度，从00:00~23:59每5分钟调度一次。
 
@@ -164,7 +164,7 @@
 
 如果您需要通过脚本模式配置此任务，单击工具栏中的转换脚本，选择**确认**即可进入脚本模式。
 
-![脚本配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24565/156496801814347_zh-CN.png)
+![脚本配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24565/156594781514347_zh-CN.png)
 
 您可以根据自身进行配置，示例脚本如下。
 
