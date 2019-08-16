@@ -2,7 +2,7 @@
 
 This topic describes how to add a corresponding whitelist and security group when you use DataWorks in different regions.
 
-To ensure the database security and stability, you can add IP addresses or IP segments for database access to the whitelist or [Add security group](reseller.en-US/User Guide/Data integration/Common configuration/Add security group.md#) of the target instance before using certain database instances. 
+To ensure the database security and stability, you can add IP addresses or IP segments for database access to the whitelist or [Add security group](reseller.en-US/User Guide/Data integration/Common configuration/Add security group.md#) of the target instance before using certain database instances.
 
 **Note:** You can only add whitelists for Data Integration tasks. Adding whitelists in other types of tasks are not supported.
 
@@ -13,18 +13,18 @@ To ensure the database security and stability, you can add IP addresses or IP se
 
     Currently, the supported regions are China East 2 \(Shanghai\), China South 1 \(Shenzhen\), Hong Kong, and Asia Pacific SOU 1 \(Singapore\). The default region is China East 2, and you can switch to other regions where your project is located, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16265/15514338898537_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16265/15659477218537_en-US.jpg)
 
 3.  Select the whitelist for your project region.
 
-    Some data sources have whitelist restrictions and require adding Data Integration IP addresses to whitelists. Common data sources, such as RDS, MongoDB, and Redis, require adding IP addresses to whitelists in their consoles. The following are two scenarios for adding a whitelist:
+    Some data sources have whitelist restrictions and require adding Data Integration IP addresses to whitelists. Common data sources, such as RDS, MongoDB, and Redis, require adding IP addresses to whitelists in their consoles. The following are two scenarios for adding a whitelist:
 
     -   When a sync task is running on the custom resource group, you must authorize machines for the custom resource group, and add the machine intranet IP addresses and Internet IP addresses to the data source whitelist.
     -   Each region has different whitelist entries, and select the region whitelist from the following table.
 
         |Region|Whitelist|
         |:-----|:--------|
-        |China East 1 \(Hangzhou\)|100.64.0.0/8,11.193.102.0/24,11.193.215.0/24,11.194.110.0/24,11.194.73.0/24,118.31.157.0/24,47.97.53.0/24,11.196.23.0/24,47.99.12.0/24,47.99.13.0/24,114.55.197.0/24,11.197.246.0/24,11.197.247.0/24|
+        |China East 1\(Hangzhou\)|100.64.0.0/8,11.193.102.0/24,11.193.215.0/24,11.194.110.0/24,11.194.73.0/24,118.31.157.0/24,47.97.53.0/24,11.196.23.0/24,47.99.12.0/24,47.99.13.0/24,114.55.197.0/24,11.197.246.0/24,11.197.247.0/24|
         |China East 2 \(Shanghai\)|11.193.109.0/24,11.193.252.0/24,47.101.107.0/24,47.100.129.0/24,106.15.14.0/24,10.117.28.203,10.117.39.238,10.143.32.0/24,10.152.69.0/24,10.153.136.0/24,10.27.63.15,10.27.63.38,10.27.63.41,10.27.63.60,10.46.64.81,10.46.67.156,11.192.97.0/24,11.192.98.0/24,11.193.102.0/24,11.218.89.0/24,11.218.96.0/24,11.219.217.0/24,11.219.218.0/24,11.219.219.0/24,11.219.233.0/24,11.219.234.0/24,118.178.142.154,118.178.56.228,118.178.59.233,118.178.84.74,120.27.160.26,120.27.160.81,121.43.110.160,121.43.112.137,100.64.0.0/8|
         |China South 1 \(Shenzhen\)|100.106.46.0/24,100.106.49.0/24,10.152.27.0/24,10.152.28.0/24,11.192.91.0/24,11.192.96.0/24,11.193.103.0/24,100.64.0.0/8,120.76.104.0/24,120.76.91.0/24,120.78.45.0/24|
         |Hong Kong|10.152.162.0/24,11.192.196.0/24,11.193.11.0/24,100.64.0.0/8,11.192.196.0/24,47.89.61.0/24,47.91.171.0/24,11.193.118.0/24,47.75.228.0/24|
