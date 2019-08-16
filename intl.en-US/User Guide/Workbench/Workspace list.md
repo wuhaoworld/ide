@@ -1,6 +1,6 @@
 # Workspace list {#concept_yrh_vng_r2b .concept}
 
-In the Alibaba Cloud DTplus console, you can view all workspaces under the current account of the **Workspace List** page. Enter workspace to configure workspaces, change calculation services, create, activate, disable, and delete workspaces.
+In the Alibaba Cloud DTplus console, you can view all workspaces under the current account of the **Workspace List** page. Enter workspace to configure workspaces, achange calculation services, create, activate, disable, and delete workspaces.
 
 ## Procedure {#section_dhr_f4g_r2b .section}
 
@@ -8,7 +8,7 @@ In the Alibaba Cloud DTplus console, you can view all workspaces under the curre
 2.  Click **DataWorks console** to enter the console overview page.
 3.  Go to the **Workspace List** page to view all workspaces under the current account.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248729_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549978729_en-US.jpg)
 
 
 ## Create workspace {#section_jhg_s4g_r2b .section}
@@ -17,7 +17,7 @@ In the Alibaba Cloud DTplus console, you can view all workspaces under the curre
 
     The new workspace is created under the current region. You may need to purchase related services for the region. Data development, O&M center, and data management are selected by default.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248730_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549978730_en-US.png)
 
     -   Choose Calculation Engine Services
         -   MaxCompute: MaxCompute is a big data processing platform developed by Alibaba. It is mainly used for batch structural data storage and processing, which can provide massive data warehouse solution and big data modeling service.
@@ -25,11 +25,11 @@ In the Alibaba Cloud DTplus console, you can view all workspaces under the curre
     -   Choose DataWorks services
         -   Data integration: A data synchronization platform that provides stable, efficient, and elastically scalable services. Data integration is designed to implement fast and stable data migration and synchronization between multiple heterogeneous data sources in complex network environments. For more information, see [Data integration overview](reseller.en-US/User Guide/Data integration/Data integration introduction/Data integration overview.md#).
         -   Data development: Data development helps you design data computing processes according to business requirements and automatically run dependent tasks in the scheduling system. For more information, see [Data development overview](reseller.en-US/User Guide/Data development/Solution.md#).
-        -   O&M center: The O&M center is a place where tasks and instances are displayed and operated. You can view all your tasks in Task List and perform such operations on the displayed tasks. For more information, see [Operation center overview](reseller.en-US/User Guide/O&M Center/O&M center overview.md#).
-        -   Data management: Data management of Alibaba Cloud DTplus platform displays the global data view and metadata details of an organization, and enables operations, such as divided permission management, data lifecycle management, and approval and management of data table, resource, and function permissions. For more information, see [Data management overview](reseller.en-US/User Guide/Data management/Introduction.md#).
+        -   O&M center: The O&M center is a place where tasks and instances are displayed and operated. You can view all your tasks in Task List and perform such operations on the displayed tasks. For more information, see [Operation center overview](reseller.en-US/User Guide/O&M Center/O&M center overview.md#).
+        -   Data management: Data management of Alibaba Cloud DTplus platform displays the global data view and metadata details of an organization, and enables operations, such as divided permission management, data lifecycle management, and approval and management of data table, resource, and function permissions. For more information, see [Data management overview](reseller.en-US/User Guide/Data management/Introduction.md#).
 2.  Configure the basic information and advanced settings of the new workspace.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248731_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549978731_en-US.png)
 
     -   Basic configuration
         -   Workspace name: The workspace name must be 3 to 27 characters in length.
@@ -46,7 +46,7 @@ In the Alibaba Cloud DTplus console, you can view all workspaces under the curre
 
 When the workspace is created successfully, the Workspace List displays the corresponding content.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248732_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549978732_en-US.jpg)
 
 -   Workspace status: The workspace is typically classified into five states: normal, initialization, initialization failure, deleting and deleted. Creating a workspace initially displays an initialized state, and then generally shows the results of initialization failure or normal.
 
@@ -65,19 +65,19 @@ You can configure some basic and advanced attributes of the current workspace by
 
 Click **Configuration** for the workspace to be configured.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248733_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549978733_en-US.jpg)
 
 ## Enter workspace {#section_odk_gtg_r2b .section}
 
 Click **Enter Workspace** to configure a workspace, go to the Data Development page for specific operations.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248734_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549988734_en-US.jpg)
 
 ## Modify service {#section_kb2_rtg_r2b .section}
 
 Modify services is typically for changing calculation engine services and DataWorks. To change services, you must purchase a service, and then choose a corresponding service to modify it. Based on your purchase, the payment mode is automatically displayed. You can top up, upgrade, downgrade, and renew your MaxCompute.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248735_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549988735_en-US.jpg)
 
 -   Top up: You can top up your services when the services receive an outstanding bill warning.
 -   Upgrade/Downgrade: If your MaxCompute Pay-As-You-Go resource is unable to meet your business demand, you can upgrade the resource by purchasing more services.
@@ -92,7 +92,7 @@ Modify services is typically for changing calculation engine services and DataWo
 
 Click **More** after the corresponding item name to delete and disable the item.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248736_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549988736_en-US.jpg)
 
 -   Delete a workspace
 
@@ -102,12 +102,12 @@ Click **More** after the corresponding item name to delete and disable the item.
 
     -   The Delete Workspace verification code is always YES .
     -   The delete workspace operation is irreversible, exercise caution when performing this operation.
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248737_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549988737_en-US.jpg)
 
 -   Disable a workspace
 
     Once a workspace is disabled, the cycle scheduling task stops generating instances. The instances generated runs automatically before being disabled. However, you cannot log on to the workspace to view their status.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15514205248738_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16187/15659549988738_en-US.jpg)
 
 
