@@ -2,7 +2,7 @@
 
 This topic describes how to add a corresponding security group when you use DataWorks \(formerly known as Data IDE\) in different regions.
 
-To ensure the databases security and stability, you must add IP addresses or IP segments for accessing the database to [Add whitelist](reseller.en-US/User Guide/Data integration/Common configuration/Add whitelist.md#) or security group of the target instance before using certain database instances. This article describes how to add a corresponding security group when you are using DataWorks \(formerly known as Data IDE\) in different regions.
+To ensure the databases security and stability, you must add IP addresses or IP segments for accessing the database to [Add whitelist](intl.en-US/User Guide/Data integration/Common configuration/Add whitelist.md#) or security group of the target instance before using certain database instances. This article describes how to add a corresponding security group when you are using DataWorks \(formerly known as Data IDE\) in different regions.
 
 ## Add a security group {#section_djc_kj5_q2b .section}
 
@@ -15,7 +15,7 @@ To ensure the databases security and stability, you must add IP addresses or IP 
     |China \(Shanghai\)|sg-uf6ir5g3rlu7thymywza|1156529087455811|
     |China \(Shenzhen\)|sg-wz9ar9o9jgok5tajj7ll|1156529087455811|
     |Asia Pacific SE 1\(Singapore\)|sg-t4n222njci99ik5y6dag|1156529087455811|
-    |Hong Kong|Sg-j6c28uqpqb27yc3tjmb6|1156529087455811|
+    |China\(Hong Kong\)|Sg-j6c28uqpqb27yc3tjmb6|1156529087455811|
     |US West 1 \(Silicon Valley\)|sg-rj9bowpmdvhyl53lza2j|1156529087455811|
     |US East 1|sg-0xienf2ak8gs0puz68i9|1156529087455811|
     |China \(Beijing\)|sg-2ze3236e8pcbxw61o9y0|1156529087455811|
