@@ -6,12 +6,12 @@ This topic describes the latest progress and plan of upgrading Data Management t
 
 -   Version: DataWorks Data Map
 -   Date: May 21, 2019
--   Region: China \(Shanghai\), China \(Hangzhou\), China \(Shenzhen\), Hong Kong, and Singapore
+-   Region: China \(Shanghai\), China \(Hangzhou\), China \(Shenzhen\), China\(Hong Kong\), and Singapore
 -   Description: Developed based on Data Management, Data Map provides features by role and controls permissions such as the data preview permission and table creation permission. It helps you build an enterprise-level knowledge base.
 -   Plan:
     -   May 21, 2019: first batch of users in China \(Shanghai\)
     -   May 22, 2019: second batch of users in China \(Shanghai\), and users in China \(Hangzhou\) and China \(Shenzhen\)
-    -   May 23, 2019: third batch of users in China \(Shanghai\), and users in Hong Kong and Singapore
+    -   May 23, 2019: third batch of users in China \(Shanghai\), and users in China\(Hong Kong\) and Singapore
 
 ## Feature comparison between Data Map and Data Management {#section_1ip_4rb_rpr .section}
 
