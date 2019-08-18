@@ -10,13 +10,13 @@ App Studio helps different types of users quickly build webpages for data viewin
 
 -   Top navigation bar
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591041851_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635141851_en-US.png)
 
     -   **Project** 
 
         From the Project menu, you can select **Create Project**, **Import Project from Git**, **Open Project**, **Character Set**, and **Project Information**. By selecting Project Information, you can view information about a project, including the project ID, project type, Git repo URL, and creation time.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591141852_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635141852_en-US.png)
 
     -   **File** 
 
@@ -26,7 +26,7 @@ App Studio helps different types of users quickly build webpages for data viewin
 
         From the Edit menu, you can perform common editing operations. To search all the code in the project and open the related file, select Find in Path. For more information, see [Find in Path](intl.en-US/User Guide/App Studio/Features/Code editing/Find in Path.md#).
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591141854_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635141854_en-US.png)
 
     -   **Version** 
 
@@ -73,13 +73,13 @@ App Studio helps different types of users quickly build webpages for data viewin
 
         Before using App Studio, you must specify the SSH key and Git configuration. You can also select Preference to set properties as you like. Currently, you can only set the font size. App Studio will support setting the color, style, theme, and keyboard shortcuts in the future.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591141879_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635141879_en-US.png)
 
     -   **Help** 
 
         From the Help menu, you can select Documentation, Keyboard Shortcuts, Version History, and Clear Local Cache.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591141880_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635241880_en-US.png)
 
     -   **Feedback** 
 
@@ -90,17 +90,17 @@ App Studio helps different types of users quickly build webpages for data viewin
 
         To go to the project area, click the icon framed in red in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591141956_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635241956_en-US.png)
 
         To go to the API definition area, click the icon framed in red in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591241957_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635241957_en-US.png)
 
     -   API definition area
 
         You can click Add API to add an API. In the API list, you can click Generate Code in the Actions column of an API to generate the API class code. In the Generate Code dialog box, you can click the arrow to synchronize the new code on the left to the local code on the right.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591241958_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635241958_en-US.png)
 
     -   Project area
         -   Folder-related operations
@@ -116,7 +116,7 @@ App Studio helps different types of users quickly build webpages for data viewin
 -   Editing area
     -   Right-click operations
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591241963_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635241963_en-US.png)
 
         |Operation|Description|
         |:--------|:----------|
@@ -174,21 +174,21 @@ App Studio helps different types of users quickly build webpages for data viewin
 -   Icons in the upper-right corner
     -   Alibaba Coding Guidelines
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591241975_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635341975_en-US.png)
 
     -   Build
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591241976_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635341976_en-US.png)
 
         **Note:** You can perform this operation only when you are running or debugging a project.
 
     -   Run/Debug Configurations
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591241978_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635341978_en-US.png)
 
     -   Debugging entry
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591341981_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635341981_en-US.png)
 
         The icons from left to right are respectively used to run, debug, and stop a project.
 
@@ -197,7 +197,7 @@ App Studio helps different types of users quickly build webpages for data viewin
 
         If you click the Run or Debug icon for a project, this tab appears, showing the progress and information of the project.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591342013_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635342013_en-US.png)
 
     -   PROBLEM tab
 
@@ -207,7 +207,7 @@ App Studio helps different types of users quickly build webpages for data viewin
 
         When running or debugging a project, you can click the Terminal tab and run bash or vim commands on the ECS instance.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610591342016_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/136608/156610635442016_en-US.png)
 
     -   Version Control tab
 
