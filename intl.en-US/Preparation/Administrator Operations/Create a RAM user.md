@@ -18,14 +18,14 @@ If you are the only user of this product, skip this section. To create your own 
 
 The AccessKey facilitates smooth operation of the tasks created in DataWorks. Therefore, a primary account must create an AccessKey for the RAM user, or allow RAM account users to create and manage their own AccessKey information.
 
--   **Create an AccessKey for a RAM user**
+-   **Create an AccessKey for a RAM user** 
     1.  Use your primary account to log on to the **RAM** \> **Indentities** \> **Users** page, and click RAM user account.
     2.  Click **Create AccessKey**, and enter the verification code sent to your mobile phone. The AccessKey is created for the RAM user account.
 
         **Note:** The AccessKeySecret of the RAM user will appear only once. Please record the AccessKeySecret and keep it confidential. If you lose it, create a new one.
 
--   **Authorize the RAM users to create and manage their own AccessKeys**
-    1.  The main account enters the **RAM** \> **Indentifies** \> **Settings** page, click **update RAM User Security Settings** from the Actions column.
+-   **Authorize the RAM users to create and manage their own AccessKeys** 
+    1.  The main account enters the **RAM** \> **Identity Management** \> **Settings** page, click **update RAM User Security Settings** from the Actions column.
     2.  Select RAM User Security Settings tab, and select **Manage AccessKey** \> **allowed**, click **OK** to complete settings.
 
         If this option is not selected, by default the RAM user cannot create nor manage AccessKey. After **allow the user to manage their own AccessKey**, RAM user account logon to Alibaba cloud, you can create the AccessKey in the console.
@@ -37,7 +37,7 @@ The AccessKey facilitates smooth operation of the tasks created in DataWorks. Th
 
 If you want to create projects with your RAM account, you may need **AliyunDataWorksFullAccess** policy permission.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16176/155142020813331_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16176/156617867413331_en-US.png)
 
 ## Delivery RAM account to other users {#section_sng_tzp_r2b .section}
 
