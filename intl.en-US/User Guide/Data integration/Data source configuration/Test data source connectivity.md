@@ -31,7 +31,7 @@
 |HybridDB for PostgreSQL released|ApsaraDB|Classic network|Yes|-|
 |VPC network|Under development|Yes|
 |MaxCompute \(for MaxCompute data sources\)|ApsaraDB|Classic network|Yes|-|
-|AnalyticDB \(for ADS data sources\)|ApsaraDB|Classic network|Yes|-|
+|AnalyticDB for MySQL 2.0|ApsaraDB|Classic network|Yes|-|
 |VPC network|Under development|Yes|
 |OSS|ApsaraDB|Classic network|Yes|-|
 |VPC network|Yes|-|
@@ -99,11 +99,11 @@ When a connectivity test fails, you need to verify the data source region, netwo
 
 -   The Database Password is invalid as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15659472637520_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15663589227520_en-US.png)
 
 -   The network connection failed as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15659472637521_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16196/15663589227521_en-US.png)
 
 -   The network disconnected during synchronization or because of other conditions.
 
