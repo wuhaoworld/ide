@@ -4,7 +4,7 @@ This topic describes the data types and parameters supported by HybridDB for Pos
 
 HybridDB for PostgreSQL Writer writes data into a HybridDB for PostgreSQL database. At the underlying implementation level, HybridDB for PostgreSQL Writer connects to a remote HybridDB for PostgreSQL database through JDBC, and runs SELECT statements to extract data from the database. On the public cloud, RDS provides the HybridDB for PostgreSQL storage engine.
 
-**Note:** You must configure a data source before configuring HybridDB for PostgreSQL Writer. For more information, see [Configure a HybridDB for PostgreSQL data source](intl.en-US/User Guide/Data integration/Data source configuration/Configure HybridDB for PostgreSQL data source.md#).
+**Note:** You must configure a data source before configuring HybridDB for PostgreSQL Writer. For more information, see [Configure a HybridDB for PostgreSQL data source](reseller.en-US/User Guide/Data integration/Data source configuration/Configure HybridDB for PostgreSQL data source.md#).
 
 In short, HybridDB for PostgreSQL Writer connects to a remote HybridDB for PostgreSQL database through a JDBC connector, generates SELECT statements based on the configuration, and sends the statements to the remote database. Then, HybridDB for PostgreSQL Writer assembles SQL execution results into abstract datasets in custom data types of Data Integration, and passes the datasets to the downstream writer.
 
@@ -51,7 +51,7 @@ HybridDB for PostgreSQL Writer converts the data types in HybridDB for PostgreSQ
 
     Configure the data source and destination for a synchronization task.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/156635223132069_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/156635233532069_en-US.png)
 
     |Parameter|Description|
     |:--------|:----------|
@@ -64,7 +64,7 @@ HybridDB for PostgreSQL Writer converts the data types in HybridDB for PostgreSQ
 
     Each source table field on the left maps a destination table field on the right. To add a mapping, click **Add**.To delete the current mapping, move the cursor over a line and click **Delete**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/156635223132070_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62195/156635233532070_en-US.png)
 
     |Configuration|Description|
     |:------------|:----------|
@@ -79,7 +79,7 @@ HybridDB for PostgreSQL Writer converts the data types in HybridDB for PostgreSQ
     |:------------|:----------|
     |**Concurrent Jobs**|The maximum number of threads used to concurrently read data from the source or write data into the data storage media in a data synchronization task. In Wizard Mode, you can configure the concurrency for a task on the wizard page.|
     |**Dirty Data Records Allowed**|The maximum number of errors or dirty data records allowed.|
-    |**Task Resource Group**|The machines on which tasks are run. If a large number of tasks are run on the default resource group, some tasks may be delayed due to insufficient resources. In this case, we recommend that you add a custom resource group. For more information, see [Add task resources](intl.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).|
+    |**Task Resource Group**|The machines on which tasks are run. If a large number of tasks are run on the default resource group, some tasks may be delayed due to insufficient resources. In this case, we recommend that you add a custom resource group. For more information, see [Add task resources](reseller.en-US/User Guide/Data integration/Common configuration/Add task resources.md#).|
 
 
 ## Development in Script Mode {#section_ugh_hnr_5fb .section}
