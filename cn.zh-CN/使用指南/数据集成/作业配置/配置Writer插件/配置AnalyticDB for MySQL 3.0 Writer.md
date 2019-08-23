@@ -42,7 +42,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
     配置同步任务的**数据来源**和**数据去向**。
 
-    ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462971/156652995657156_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462971/156655216957374_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -51,12 +51,13 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
     |**导入前准备语句**|即上述参数说明中的preSql，输入执行数据同步任务之前率先执行的SQL语句。|
     |**导入后完成语句**|即上述参数说明中的postSql，输入执行数据同步任务之后执行的SQL语句。|
     |**主键冲突**|即上述参数说明中的writeMode，可以选择需要的导入模式。|
+    |**批量插入条数**|即上述参数说明中的batchSize，提交数据写的批量条数，当wirteMode为insert时，该值才会生效。|
 
 2.  字段映射，即上述参数说明中的column。
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462970/156652995657152_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462970/156655216957152_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -73,7 +74,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
 3.  通道控制。
 
-    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15665299577675_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15665521697675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -88,6 +89,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 脚本配置示例如下，详情请参见上述参数说明。
 
 ``` {#codeblock_0jz_dsp_oac}
+
 
 
 {
