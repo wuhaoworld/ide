@@ -23,7 +23,7 @@ POLARDB Reader针对POLARDB类型的转换列表，如下所示。
 
 **说明：** 
 
--   除上述罗列字段类型外，其他类型均不支持。
+-   除上述罗列字段类型外，其它类型均不支持。
 -   POLARDB Reader插件将tinyint\(1\)视作整型。
 
 ## 参数说明 {#section_vpb_wfr_5fb .section}
@@ -31,7 +31,7 @@ POLARDB Reader针对POLARDB类型的转换列表，如下所示。
 |参数|描述|必选|默认值|
 |:-|:-|:-|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
-|table|选取的需要同步的表名称，一个数据集成Job只能同步一张表。|是|无|
+|table|选取的需要同步的表名称。|是|无|
 |column|所配置的表中需要同步的列名集合，使用JSON的数组描述字段信息 。默认使用所有列配置，例如\[\*\]。 -   支持列裁剪，即列可以挑选部分列进行导出。
 -   支持列换序，即列可以不按照表Schema信息顺序进行导出。
 -   支持常量配置，您需要按照SQL语法格式，例如`["id", "table","1","'mingya.wmy'","'null'", "to_char(a+1)","2.3","true"]`。
@@ -52,19 +52,21 @@ POLARDB Reader针对POLARDB类型的转换列表，如下所示。
 
  |否|无|
 |where|筛选条件，在实际业务场景中，往往会选择当天的数据进行同步，将where条件指定为gmt\_create\>$bizdate。 -   where条件可以有效地进行业务增量同步。如果不填写where语句，包括不提供where的key或value，数据同步均视作同步全量数据。
--   不可以将where条件指定为limit 10，这不符合MySQL SQL WHERE子句约束。
+-   将where条件指定为limit 10不符合WHERE子句约束，不建议使用。
 
  |否|无|
 |querySql（高级模式，向导模式不提供）|在部分业务场景中，where配置项不足以描述所筛选的条件，您可以通过该配置型来自定义筛选SQL。当配置该项后，数据同步系统就会忽略column、table和where配置项，直接使用该项配置的内容对数据进行筛选。例如需要进行多表 join 后同步数据，使用`select a,b from table_a join table_b on table_a.id = table_b.id`。当您配置querySql时，POLARDB Reader直接忽略column、table和where条件的配置，querySql优先级大于table、column、where、splitPk选项。datasource会使用它解析出用户名和密码等信息。|否|无|
-|singleOrMulti（只适合分库分表）|表示分库分表，向导模式转换成脚本模式主动生成此配置`“singleOrMulti”: “multi”`，但是配置脚本任务模板不会直接生成此配置必须手动添加，否则只会识别第一个数据源。singleOrMulti只是前端在用，后端没有用这个进行分库分表判断。|是|multi|
+|singleOrMulti（只适合分库分表）|表示分库分表，向导模式转换成脚本模式会主动生成`“singleOrMulti”: “multi”`配置，但脚本模式不会自动生成，您需要手动添加。如果不添加该配置，则仅识别第1个数据源。 **说明：** 仅前端使用singleOrMulti，后端没有使用该参数判断分库分表。
+
+ |是|multi|
 
 ## 向导开发介绍 {#section_jvk_sgr_5fb .section}
 
 1.  选择数据源。
 
-    配置同步任务的数据来源和数据去向。
+    配置同步任务的**数据来源**和**数据去向**。
 
-    ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62197/156353441932058_zh-CN.png)
+    ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62197/156681322932058_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -79,7 +81,7 @@ POLARDB Reader针对POLARDB类型的转换列表，如下所示。
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，将鼠标放至需要删除的字段上，即可单击**删除**按钮进行删除。
 
-    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/156353441932015_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/156681322932015_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -90,19 +92,19 @@ POLARDB Reader针对POLARDB类型的转换列表，如下所示。
 
 3.  通道控制。
 
-    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/156353441932018_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62209/156681322932018_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
     |**任务期望最大并发数**|数据同步任务内，可以从源并行读取或并行写入数据存储端的最大线程数。向导模式通过界面化配置并发数，指定任务所使用的并行度。|
     |**同步速率**|设置同步速率可以保护读取端数据库，以避免抽取速度过大，给源库造成太大的压力。同步速率建议限流，结合源库的配置，请合理配置抽取速率。|
     |**错误记录数**|错误记录数，表示脏数据的最大容忍条数。|
-    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议购买独享数据集成资源或添加自定义资源组，详情请参见[DataWorks独享资源](../../../../intl.zh-CN/产品定价/预付费（包年包月）/DataWorks独享资源.md#)和[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
+    |**任务资源组**|任务运行的机器，如果任务数比较多，使用默认资源组出现等待资源的情况，建议购买独享数据集成资源或添加自定义资源组，详情请参见[DataWorks独享资源](../../../../intl.zh-CN/产品定价/包年包月/DataWorks独享资源.md#)和[新增任务资源](intl.zh-CN/使用指南/数据集成/常见配置/新增任务资源.md#)。|
 
 
 ## 脚本开发介绍 {#section_vw5_p3r_5fb .section}
 
-单库单表的脚本样例如下，详情请参见上述参数说明。
+单库单表的脚本示例如下，详情请参见上述参数说明。
 
 ``` {#codeblock_fss_6eo_fdc .language-json}
 {
