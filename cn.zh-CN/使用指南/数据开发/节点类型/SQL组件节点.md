@@ -6,11 +6,11 @@ SQL组件是一种带有多个输入参数和输出参数的SQL代码过程模�
 
 1.  进入DataStudio（数据开发）页面，选择**新建** \> **数据开发** \> **SQL组件节点**。
 
-    ![SQL组件节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/156496835454120_zh-CN.png)
+    ![SQL组件节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/156686847954120_zh-CN.png)
 
     **说明：** 您也可以找到相应的业务流程，右键单击**数据开发**，选择**新建数据开发节点** \> **SQL组件节点**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/156496835454121_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/156686848054121_zh-CN.png)
 
 2.  填写新建节点对话框中的配置，单击**提交**。
 
@@ -20,11 +20,11 @@ SQL组件是一种带有多个输入参数和输出参数的SQL代码过程模�
     -   租户成员创建的组件在公共组件下。
     新建节点时，选择节点类型为**SQL组件节点**类型，并为该节点指定名字。
 
-    ![SQL组件节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/15649683547777_zh-CN.png)
+    ![SQL组件节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/15668684807777_zh-CN.png)
 
     为选定的组件指定参数。
 
-    ![指定参数](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/15649683547779_zh-CN.png)
+    ![指定参数](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/15668684807779_zh-CN.png)
 
     输入参数名称后，选择参数类型为Table或String。
 
@@ -61,7 +61,7 @@ SQL组件是一种带有多个输入参数和输出参数的SQL代码过程模�
 
 ## 界面功能 {#section_h3p_32q_p2b .section}
 
-![界面功能](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/15649683547780_zh-CN.png)
+![界面功能](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16297/15668684807780_zh-CN.png)
 
 界面功能说明如下：
 
