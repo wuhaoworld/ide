@@ -1,12 +1,12 @@
 # 配置AnalyticDB for PostgreSQL数据源 {#concept_z3q_wyb_5fb .concept}
 
-AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for PostgreSQL的双向功能，本文将为您介绍如何配置AnalyticDB for PostgreSQL数据源。
+AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for PostgreSQL的双向功能，可以通过向导模式和脚本模式配置同步任务。
 
-**说明：** 标准模式的工作空间支持[数据源隔离](intl.zh-CN/使用指南/数据集成/数据源配置/数据源隔离.md#)功能，您可以分别添加开发环境和生产环境的数据源并进行隔离，以保护您的数据安全。
+**说明：** 
 
-您可以通过[向导模式配置](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/向导模式配置.md#)和[脚本模式配置](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/脚本模式配置.md#)配置同步任务。
+标准模式的工作空间支持[数据源隔离](intl.zh-CN/使用指南/数据集成/数据源配置/数据源隔离.md#)功能，您可以分别添加开发环境和生产环境的数据源并进行隔离，以保护您的数据安全。
 
-**说明：** 如果是在VPC环境下的AnalyticDB for PostgreSQL，需要注意以下问题。
+如果是在VPC环境下的AnalyticDB for PostgreSQL，需要注意以下问题：
 
 -   自建的PostgreSQL数据源
     -   不支持测试连通性，但仍支持配置同步任务，创建数据源时单击**完成**即可。
@@ -18,30 +18,47 @@ AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for Post
 
 ## 操作步骤 {#section_uvj_mzr_5fb .section}
 
-1.  以项目管理员身份进入[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间操作栏中的**进入数据集成**。
+1.  以项目管理员身份登录[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间操作栏中的**进入数据集成**。
 2.  选择**同步资源管理** \> **数据源**，单击**新增数据源**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15629255017595_zh-CN.png)
+    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15668671297595_zh-CN.png)
 
 3.  在新增数据源弹出框中，选择数据源类型为**AnalyticDB for PostgreSQL**。
 4.  填写AnalyticDB for PostgreSQL数据源的各配置项。
 
-    以新增**AnalyticDB for PostgreSQL** \> **阿里云数据库（AnalyticDB）**类型的数据源为例。
+    AnalyticDB for PostgreSQL数据源类型包括**阿里云数据库（AnalyticDB）**和**连接串模式（数据集成网络可直接连通）**。
 
-    ![](images/32075_zh-CN.jpeg)
+    -   以新增**AnalyticDB for PostgreSQL** \> **阿里云数据库（AnalyticDB）**类型的数据源为例。
 
-    |配置|说明|
-    |:-|:-|
-    |**数据源类型**|当前选择的数据源类型为**AnalyticDB for PostgreSQL** \> **阿里云数据库（AnalyticDB）**。|
-    |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
-    |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
-    |**适用环境**|可以选择**开发**或**生产**环境。 **说明：** 仅标准模式工作空间会显示此配置。
+        ![配置](images/32075_zh-CN.jpeg)
+
+        |配置|说明|
+        |:-|:-|
+        |**数据源类型**|当前选择的数据源类型为**AnalyticDB for PostgreSQL** \> **阿里云数据库（AnalyticDB）**。|
+        |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
+        |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+        |**适用环境**|可以选择**开发**或**生产**环境。 **说明：** 仅标准模式工作空间会显示此配置。
 
  |
-    |**RDS实例ID**|您可以进入AnalyticDB for PostgreSQL的控制台，查看相应的实例ID。|
-    |**主账号ID**|您可以进入AnalyticDB for PostgreSQL控制台的安全设置页面，查看相应的信息。![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156292550132076_zh-CN.png)
+        |**RDS实例ID**|您可以进入AnalyticDB for PostgreSQL的控制台，查看相应的实例ID。|
+        |**主账号ID**|您可以进入AnalyticDB for PostgreSQL控制台的安全设置页面，查看相应的信息。![安全设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156686712932076_zh-CN.png)
 
 |
+
+    -   以新增**AnalyticDB for PostgreSQL** \> **连接串模式（数据集成网络可直接连通）**类型的数据源为例。
+
+        ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156686712957838_zh-CN.png)
+
+        |配置|说明|
+        |:-|:-|
+        |**数据源类型**|当前选择的数据源类型为**AnalyticDB for PostgreSQL** \> **连接串模式（数据集成网络可直接连通）**。|
+        |**数据源名称**|数据源名称必须以字母、数字、下划线组合，且不能以数字和下划线开头。|
+        |**数据源描述**|对数据源进行简单描述，不得超过80个字符。|
+        |**适用环境**|可以选择**开发**或**生产**环境。 **说明：** 仅标准模式工作空间会显示此配置。
+
+ |
+        |**JDBC URL**|JDBC连接信息，格式为`jdbc:postgresql://ServerIP:Port/Database`。|
+        |**用户名/密码**|数据库对应的用户名和密码。|
 
 5.  单击**测试连通性**。
 6.  测试连通性通过后，单击**完成**。
@@ -57,5 +74,5 @@ AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for Post
 
 ## 后续步骤 {#section_xsp_r1s_5fb .section}
 
-现在，您已经学习了如何配置AnalyticDB for PostgreSQL数据源，您可以继续学习下一个教程。在该教程中，您将学习如何配置AnalyticDB for PostgreSQL插件。详情请参见[配置AnalyticDB for PostgreSQL Reader](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置AnalyticDB for PostgreSQL Reader.md#)和[配置AnalyticDB for PostgreSQL Writer](intl.zh-CN/使用指南/数据集成/作业配置/配置Writer插件/配置AnalyticDB for PostgreSQL Writer.md#)。
+现在，您已经学习了如何配置AnalyticDB for PostgreSQL数据源，您可以继续学习下一个教程。在该教程中，您将学习如何配置AnalyticDB for PostgreSQL插件，详情请参见[配置AnalyticDB for PostgreSQL Reader](intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置AnalyticDB for PostgreSQL Reader.md#)和[配置AnalyticDB for PostgreSQL Writer](intl.zh-CN/使用指南/数据集成/作业配置/配置Writer插件/配置AnalyticDB for PostgreSQL Writer.md#)。
 
