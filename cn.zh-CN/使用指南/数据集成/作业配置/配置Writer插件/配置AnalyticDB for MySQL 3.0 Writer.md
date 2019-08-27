@@ -2,11 +2,11 @@
 
 本文将为您介绍AnalyticDB for MySQL 3.0 Writer支持的数据类型、字段映射和数据源等参数及配置示例。
 
-开始配置AnalyticDB for MySQL 3.0 Writer插件前，请首先配置好数据源，详情请参见[配置AnalyticDB for MySQL 3.0数据源](cn.zh-CN/.md#)。
+开始配置AnalyticDB for MySQL 3.0 Writer插件前，请首先配置好数据源。
 
 ## 类型转换列表 {#section_hft_qel_x54 .section}
 
-AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列表，如下表所示。
+AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列表，如下所示。
 
 |类型|AnalyticDB for MySQL 3.0数据类型|
 |:-|:---------------------------|
@@ -42,7 +42,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
     配置同步任务的**数据来源**和**数据去向**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462971/156655216957374_zh-CN.png)
+    ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462971/156686725557374_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -57,7 +57,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462970/156655216957152_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462970/156686725557152_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -74,7 +74,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
 3.  通道控制。
 
-    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15665521697675_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15668672557675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -89,9 +89,6 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 脚本配置示例如下，详情请参见上述参数说明。
 
 ``` {#codeblock_0jz_dsp_oac}
-
-
-
 {
     "type": "job",
     "steps": [
