@@ -1,12 +1,12 @@
 # 使用MaxCompute分析IP来源最佳实践 {#concept_q25_ygl_5fb .concept}
 
-本文将为您介绍如何在MaxCompute上分析IP来源，包括下载、上传IP地址库数据及编写UDF函数、编写SQL四个步骤。
+本文将为您介绍如何在MaxCompute上分析IP来源，包括下载、上传IP地址库数据、编写UDF函数和编写SQL四个步骤。
 
 ## 背景介绍 {#section_rfz_jz1_pgb .section}
 
 [淘宝IP地址库](http://ip.taobao.com/)的查询接口为[IP地址字串](http://ip.taobao.com/service/getIpInfo.php?ip=[ip%E5%9C%B0%E5%9D%80%E5%AD%97%E4%B8%B2])，使用示例如下。
 
-![查询接口](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849231905_zh-CN.png)
+![查询接口](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889531905_zh-CN.png)
 
 由于在MaxCompute中禁止使用HTTP请求，目前可以通过以下三种方式，实现在MaxCompute中查询IP。
 
@@ -28,7 +28,7 @@
 1.  首先您需要获取地址库数据。地址库您可以自行获取，本文仅提供一个[UTF8格式的不完整的地址库demo](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/102762/cn_zh/1547530733280/ipdata.txt.utf8)。
 2.  下载UTF-8地址库数据到本地后，检查数据格式，示例如下。
 
-    ![检查格式](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849331907_zh-CN.png)
+    ![检查格式](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889531907_zh-CN.png)
 
     前四个数据是IP地址的起始地址与结束地址：前两个是十进制整数形式，后两个是点分形式。这里我们使用整数形式，以便计算IP是否属于这个网段。
 
@@ -66,14 +66,14 @@
 
 3.  使用SQL语句`select * from ipresource limit 10;`查看ipresource表前10条的样本数据，示例如下。
 
-    ![查看样本](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849331909_zh-CN.png)
+    ![查看样本](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889531909_zh-CN.png)
 
 
 ## 编写UDF函数 {#section_uht_3kl_5fb .section}
 
 1.  右键单击相应业务流程下的**资源**，选择**新建资源** \> **Python**。
 
-    ![确定](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849331910_zh-CN.png)
+    ![确定](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889631910_zh-CN.png)
 
 2.  在**新建资源**对话框中，填写**资源名称**，并勾选**上传为ODPS资源**，单击**确定**。
 3.  在新建的Python资源内，编写Python资源代码，示例如下。
@@ -91,19 +91,19 @@
 
     单击**提交并解锁**。
 
-    ![提交并解锁](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849331911_zh-CN.png)
+    ![提交并解锁](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889631911_zh-CN.png)
 
 4.  右键单击相应业务流程下的**函数**，选择**新建函数**。
 5.  在新建函数对话框中，填写**函数名称**，单击**提交**。
 6.  编辑函数配置，单击**提交并解锁**。
 
-    ![提交并解锁](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849331913_zh-CN.png)
+    ![提交并解锁](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889631913_zh-CN.png)
 
     本示例中，函数的类名为`ipint.ipint`，资源列表填写上文提交的资源的名称。
 
 7.  验证ipint函数是否生效并满足预期，您可以在DataWorks上新建一个ODPS SQL类型节点，执行SQL语句进行查询，示例如下。
 
-    ![执行SQL](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849331914_zh-CN.png)
+    ![执行SQL](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889631914_zh-CN.png)
 
 
 您也可以在本地创建ipint.py文件，使用[MaxCompute客户端](../../../../intl.zh-CN/工具及下载/客户端.md#)上传资源。
@@ -172,7 +172,7 @@ WHERE ipint('1.2.24.2') >= start_ip
 AND ipint('1.2.24.2') <= end_ip
 ```
 
-![执行](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156384849431915_zh-CN.png)
+![执行](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/156686889631915_zh-CN.png)
 
 通过为保证数据准确性，您可以定期从淘宝IP库获取数据来维护ipresource表。
 
