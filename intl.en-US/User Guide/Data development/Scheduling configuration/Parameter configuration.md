@@ -1,125 +1,209 @@
 # Parameter configuration {#concept_t2q_jmq_p2b .concept}
 
-To ensure tasks can dynamically adapt to environment changes when running automatically at the scheduled time, DataWorks provides the parameter configuration feature. Pay special attention to the following two issues before configuring parameters:
+In common data R&D scenarios, the node code of various types does not remain unchanged after compilation every time when it is called. Before calculation, You need to dynamically import values such as the date and time based on requirement changes and time changes to replace variable values.
 
--   No space can be added on either side of the equation mark "=" of a parameter. For example: bizdate=$bizdate
+DataWorks provides the parameter configuration feature to apply to such business scenarios. After configuring parameters, you can assign them to nodes that are automatically and periodically scheduled to parse the required values. Currently, parameters are divided into system parameters and custom parameters \(recommended\). This section describes the parameters in detail and uses examples to show how to operate them.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15525327787838_en-US.png)
+## Parameter types {#section_sgx_4jk_lgb .section}
 
--   Multiple parameters \(if any\) must be separated by spaces.
+|Parameter type|Call method|Applicable type|Parameter text box example|
+|--------------|-----------|---------------|--------------------------|
+|System parameters: including bdp.system.bizdate and bdp.system.cyctime|To use the system parameters in the scheduling system, directly reference $\{bdp.system.bizdate\} and $\{bdp.system.cyctime\} in the code without having to set them in the Parameter text box. The system automatically replaces the values of the parameters.|All node types|None|
+|Non-system parameters: custom parameters \(recommended\)|Reference $\{key1\},$\{key2\} in the code and enter "key1=value1 key2=value2" in the Parameter text box.|Non-SHELL nodes| -   Constant parameters: param1="abc" param2=1234
+-   Variables: param1=$\[yyyymmdd\], which is calculated based on the value of bdp.system.cyctime
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15525327787839_en-US.png)
+ |
+|Reference $1 $2 $3 in the code and enter "value1 value2 value3" in the Parameter text box.|Shell nodes|Constant parameters: "abc" 1234 Variables: $\[yyyymmdd\], which is calculated based on the value of bdp.system.cyctime.
+
+ |
+
+As described in the preceding table, The variable values are based on the values of system parameters. You can use custom variables to flexibly define the obtained part and format.
+
+**Note:** Choose **Schedule** \> **Basic Information** and assign values to non-system parameters in the **Parameter** text box \(assign values to scheduling variables\). Note the following when configuring parameters:
+
+-   No space can be added on either side of the equation mark \(=\) of a parameter. Correct example: `bizdate=$bizdate`
+
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15669950037838_en-US.png)
+
+-   Multiple parameters \(if any\) must be separated with spaces.
+
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15669950047839_en-US.png)
 
 
 ## System parameters {#section_dp4_2sq_p2b .section}
 
 DataWorks provides two system parameters, which are defined as follows:
 
--   $\{bdp.system.cyctime\}: It is defined as the scheduled run time of an instance. Default format: yyyymmddhh24miss.
--   $\{bdp.system.bizdate\}: It is defined as the business date on which an instance is calculated. Default business data is one day before the running date, which is displayed in default format: yyyymmdd.
+-   $\{bdp.system.cyctime\}: The scheduled runtime of an instance. Default format: yyyymmddhh24miss.
+-   $\{bdp.system.bizdate\}: The business date on which an instance is calculated, in the default format of yyyymmdd. The default business date is one day before the scheduled runtime.
 
-According to the definitions, the formula for calculating the runtime and business date is as follows: `Runtime = Business date + 1`.
+According to the definitions, the formula for calculating the scheduled runtime and business date is as follows: `Scheduled runtime = Business date + 1`.
 
-To use the system parameters, directly reference '$\{bizdate\}' in the code without setting system parameters in the editing box, and the system will automatically replace the reference fields of system parameters in the code.
+To use the system parameters, directly reference $\{bizdate\} in the code without having to set them in the Parameter text box. The system automatically replaces the fields that reference this system parameter in the code.
 
-**Note:** The scheduling attribute of a periodic task is configured with a scheduled runtime. Therefore, you can backtrack the business date based on the scheduled runtime of an instance and retrieve the values of system parameters for the instance.
+**Note:** The scheduling attributes of a periodic node are configured to define the scheduling rules of the runtime. Therefore, you can calculate the business date based on the scheduled runtime of an instance and obtain the values of system parameters for the instance.
 
-## Example {#section_ipn_tyq_p2b .section}
+The scheduling parameter configuration of a PyODPS node is slightly different from that of a common node. For more information, see [PyODPS node](reseller.en-US/User Guide/Data development/Node type/PyODPS node.md#).
 
-Set an ODPS\_SQL task that runs every hour between 00:00 and 23:59 every day. To use system parameters in the code, perform the following statement.
+Example of system parameters
 
-```
-insert overwrite table tb1 partition(ds ='20180606') select
-c1,c2,c3
-from (
-select * from tb2
-where ds ='${bizdate}');
-```
+Set a MaxCompute SQL node to be run once every hour from 00:00 to 23:59 every day. To use system parameters in the code, follow these steps:
 
-## Configure scheduling parameters for a non-Shell node {#section_djc_gzq_p2b .section}
+1.  Directly reference system parameters in the code. The node code is as follows:
 
-**Note:** The name of a variable in the SQL code can contain only a-z, A-Z, numbers, and underlines. If the variable name is "date", the value "$bizdate" is automatically assigned to this variable, and you do not need to assign the value in the scheduling parameter configuration. Even if another value is assigned, this value is not used in the code because the value "$bizdate" is automatically assigned in the code by default.
+    ``` {#codeblock_v1n_l8b_av4}
+    insert overwrite table tb1 partition(ds ='20150304') select
+    c1,c2,c3
+    from (
+    select * from tb2
+    where ds ='${bdp.system.cyctime}') t
+    full outer join(
+    select * from tb3
+    where ds = '${bdp.system.bizdate}') y
+    on t.c1 = y.c1;
+    ```
 
-For a non-Shell node, you need to first add $\{variable name\} \(indicating that the function is referenced\) in the code, then input a specific value to assign the value to the scheduling parameter.
+2.  After the preceding step, your node is partitioned by using the system parameters. Set the [scheduling time attributes](reseller.en-US/User Guide/Data development/Scheduling configuration/Scheduling time.md#) and [scheduling dependencies](reseller.en-US/User Guide/Data development/Scheduling configuration/Dependencies.md#). In this example, Recurrence is set to Hour.
+3.  After setting the scheduling cycle and dependency, submit the node. You can check the node in [O&M](reseller.en-US/User Guide/O&M Center/Task list/Cyclic task.md#). The node generates periodic instances during running from the second day. You can right-click an instance and select **View Log** to view the time when the system parameters are parsed.
 
-For example, for an ODPS SQL node, add $\{variable name\} in the code, and then configure the parameter item "variable name=built-in scheduling parameter" for the node.
+    For example, the scheduling system creates 24 running instances for the node on January 14, 2019. Because the business date is January 13, 2019 \(the day before the running date\) for all instances, $\{bdp.system.bizdate\} is always displayed as 20190113. The runtime is the running date plus the scheduled time. Therefore, $\{bdp.system.cyctime\} is displayed as 20190114000000 plus the scheduled time of each instance.
 
-1.  For a parameter referenced in the code, you must add the resolved value during scheduling.
+    Open the run logs of each instance and search for the replaced values of parameters in the code:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15525327787840_en-US.png)
+    -   Because the scheduled time for the first instance is 2019-01-14 00:00:00, bdp.system.bizdate is replaced with 20190113, and bdp.system.cyctime is replaced with 20190114000000.
+    -   Because the scheduled time for the second instance is 2019-01-14 01:00:00, bdp.system.bizdate is replaced with 20190113, and bdp.system.cyctime is replaced with 20190114010000.
+    -   Similarly, because the scheduled time for the twenty-fourth instance is 2019-01-14 23:00:00, bdp.system.bizdate is replaced with 20190113, and bdp.system.cyctime is replaced with 20190114230000.
 
-2.  Values must be assigned to variables referenced in the code. The value assignment rule is variable name=parameter.
+## Custom parameters for non-SHELL nodes {#section_djc_gzq_p2b .section}
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15525327787841_en-US.png)
+To configure a scheduling parameter for a non-SHELL node, add $\{Variable name\} in the code to reference the function, and then assign a value to the scheduling parameter.
 
+**Note:** The name of a variable in the SQL code can contain only lowercase letters \(a–z\), uppercase letters \(A–Z\), digits, and underscores \(\_\). If the variable name is date, the value of $bizdate is automatically assigned to this variable. \(For more information, see the list of built-in scheduling parameters\). You do not need to assign a value during scheduling parameter configuration. Even if another value is assigned, it is not used in the code because the value of $bizdate is automatically assigned in the code by default.
 
-## Configure scheduling parameters for a Shell node {#section_slh_x1r_p2b .section}
+**Example of custom parameters for non-SHELL nodes**
 
-The parameter configuration procedure of a Shell node is similar to that of a non-Shell node except that rules are different. For a Shell node, variable names cannot be customized and must be named '$1,$2,$3...'.
+Set a MaxCompute SQL node to run once every hour from 00:00 to 23:59 every day. To use the custom variables thishour and lasthour in the code, follow these steps:
 
-For example, for a Shell node, the Shell syntax declaration in the code is: $1, and the node parameter configuration in scheduling is: $xxx \(built-in scheduling parameter\). That is, the value of $xxx is used to replace $1 in the code.
+1.  Reference the parameters in the code as follows:
 
-1.  For a parameter referenced in the code, you must add the resolved value during scheduling.
+    ``` {#codeblock_t0o_2r5_yv5}
+    insert overwrite table tb1 partition(ds ='20150304')  select
+     c1,c2,c3
+    from (
+     select * from tb2
+     where ds ='${thishour}') t
+    full outer join(
+     select * from tb3
+     where ds = '${lasthour}') y
+    on t.c1 = y.c1;
+    ```
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15525327787842_en-US.png)
+2.  Choose **Schedule** \> **Basic Information** and assign values to the variables referenced in the code in the **Parameter** text box.
 
-    **Note:** For a Shell node, when the number of parameters reaches 10, $\{10\} should be used to declare the variable.
+    Configure the custom parameters as follows:
 
-2.  Values must be assigned to variables referenced in the code. The value assignment rule is parameter 1 parameter 2 parameter 3....\( Replaced variables are resolved based on the parameter location, for example, $1 is resolved to parameter 1\).
+    -   thishour=$\[yyyy-mm-dd/hh24:mi:ss\]
+    -   lasthour=$\[yyyy-mm-dd/hh24:mi:ss-1/24\]
+    **Note:** The value of yyyy-mm-dd/hh24:mi:ss corresponds to that of cyctime. For more information, see **Custom variables**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16301/15525327787843_en-US.png)
+    You can enter `thishour=$[yyyy-mm-dd/hh24:mi:ss] lasthour=$[yyyy-mm-dd/hh24:mi:ss-1/24]` in the **Parameter** text box.
 
+3.  Set the node to be run once every hour.
+4.  After setting the scheduling cycle and dependency, submit the node. You can check the node in [O&M](reseller.en-US/User Guide/O&M Center/Task list/Cyclic task.md#). The node generates periodic instances during running from the second day. You can right-click an instance and select **View Log** to view the time when the custom parameters are parsed. Because the value of cyctime is 20190114010000, the value of thishour is 2019-01-14/01:00:00, and the value of lasthour, which represents the last hour, is 2019-01-14/00:00:00.
 
-## The variable value is a fixed value {#section_a4l_gcr_p2b .section}
+## Custom parameters for SHELL nodes {#section_slh_x1r_p2b .section}
 
-Take an SQL node for example. For $\{variable name\} in the code, configure the parameter item "variable name="fixed value"" for the node.
+The parameter configuration procedure of a SHELL node is similar to that of a non-SHELL node except that the rules are different. For a SHELL node, variable names cannot be customized. Instead, they must be named $1, $2, $3, and so on. For example, for a SHELL node, the SHELL syntax declaration in the code is: $1 is configured as $xxx \(built-in scheduling parameter\) during scheduling parameter configuration for the node. That is, the value of $xxx is used to replace $1 in the code.
 
-Code: select xxxxxx type=’$\{type\}’
+**Note:** For a SHELL node, when the number of parameters reaches 10, use $\{10\} to declare the variable.
 
-Value assigned to the scheduling variable: type="aaa"
+**Example of custom parameters for SHELL nodes**
 
-During scheduling, the variable in the code is replaced by type='aaa'.
+Set a SHELL node to be run once at 01:00 each day. To use the custom constant parameter myname and the custom variable parameter ct in the code, follow these steps:
 
-## The variable value is a built-in scheduling parameter {#section_mk5_wcr_p2b .section}
+1.  Reference the parameters in the code as follows:
 
-Take an SQL node for example. For $\{variable name\} in the code, configure the parameter item "variable name=scheduling parameter"" for the node.
+    ``` {#codeblock_yuw_n97_z21}
+    echo "hello $1, two days ago is $2, the system param is ${bdp.system.cyctime}";
+    ```
+
+2.  Choose **Schedule** \> **Basic Information** and assign values to the variables referenced in the code in the **Parameter** text box. Value assignment rule: parameter 1 parameter 2 parameter 3 ... \( Replaced variables are parsed based on the parameter location, for example, $1 is replaced with the value of parameter 1\). In this example, set $1 and $2 to abcd and $\[yyyy-mm-dd-2\], respectively.
+3.  Set the node to be run once at 01:00 every day.
+4.  After setting the scheduling cycle and dependency, submit the node. You can check the node in [O&M](reseller.en-US/User Guide/O&M Center/Task list/Cyclic task.md#). The node generates periodic instances during running from the second day. Right-click an instance and select **View Log**. The logs show that $1 in the code is replaced with constant abcd, $2 is replaced with 2019-01-12 \(two days before the running date\), and $\{bdp.system.cyctime\} is replaced with 20190114010000.
+
+## Custom variables {#section_pcz_4ql_lgb .section}
+
+A custom variable can be a **constant parameter** or a **built-in scheduling parameter**.
+
+ **Variable value being a constant value** 
+
+For example, an SQL node includes the variable $\{Variable name\} in the code. Configure the parameter item Variable name='Fixed value' for the node.
+
+Code: select xxxxxx type='$\{type\}'
+
+Value assigned to the scheduling variable: type='aaa'
+
+When the node is being scheduled, the variable in the code is replaced with type='aaa'.
+
+ **Variable value being a variable** 
+
+**Variables** are **built-in scheduling parameters** whose values depend on the system parameters $\{bdp.system.bizdate\} and $\{bdp.system.cyctime\}.
+
+For example, an SQL node includes the variable $\{Variable name\} in the code. Configure the parameter item Variable name=Scheduling parameter for the node.
 
 Code: select xxxxxx dt=$\{datetime\}
 
 Value assigned to the scheduling variable: datetime=$bizdate
 
-During scheduling, if today is July 22, 2017, the variable in the code is replaced by dt=20170721.
+When the node is being scheduled on July 22, 2017, the variable in the code is replaced with dt=20170721.
 
-## Built-in scheduling parameter list {#section_ccj_zcr_p2b .section}
+**List of variables**
 
-$bizdate: business date in the format of yyyymmdd NOTE: This parameter is widely used, and is the date of the previous day by default during routine scheduling.
+**$bizdate**: The business date in the format of yyyymmdd. Note: For daily scheduling, this parameter is set to the day before the current date by default.
 
-For example, In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$bizdate. Today is July 22, 2017. When the node is executed today, $bizdate is replaced by pt=20170721.
+For example, the code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$bizdate. When the node is run on July 22, 2017, $bizdate is replaced with pt=20170721.
 
-For example, In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$gmtdate. Today is July 22, 2017. When the node is executed today, $gmtdate is replaced by pt=20170722.
+**$cyctime**: The time at which the node is scheduled to run. If no scheduling time is configured for a daily node, cyctime is set to 00:00 of the current day. The time is accurate to the second. This parameter is usually used for nodes that are scheduled by hour or minute. Example: cyctime=$cyctime.
 
-$cyctime: scheduled time of the task. If no scheduled time is configured for a daily task, cyctime is 00:00 of the current day. The time is accurate to hour, minute, and second, and is generally used for a hour-level or minute-level scheduling task. Example: cyctime=$cyctime.
+**Note:** The time parameters configured by using $\[\] and $\{\} are different. $bizdate indicates the business date that is one day before the current date by default. $cyctime indicates the time at which the node is scheduled to run. If no scheduling time is configured for a daily node, cyctime is set to 00:00 of the current day. The time is accurate to the second. This parameter is usually used for nodes that are scheduled by hour or minute. For example, if the node is scheduled to run at 00:30 on the current day, $cyctime is yyyy-mm-dd 00:30:00. A \{\} parameter is involved in the computation with bizdate as the benchmark. During data patching, the parameter value is replaced with the selected business date. A \[\] parameter is involved in the computation with cyctime as the benchmark, which is calculated in the same way as the time in Oracle. During data patching, the parameter value is replaced with the selected business date plus one day. For example, if the date 20140510 is selected as the business date, cyctime is replaced with 20140511.
 
-**Note:** Pay attention to the difference between the time parameters configured using $\[\] and $\{\}. $bizdate: business date, which is one day before the current time by default. $cyctime: It is the scheduled time of the task. If no scheduled time is configured for a daily task, the task is executed on 00:00 of the current day. The time is accurate to hour, minute, and second, and is generally used for an hour-level or minute-level scheduling task. If a task is scheduled to run on 00:30, for example, on the current day, the scheduled time is yyyy-mm-dd 00:30:00. If the time parameter is configured using \[\], cyctime is used as the benchmark for running. For more information about the usage, see the instructions below. The time calculation method is the same with that of Oracle. During data population, the parameter is replaced by the selected business date plus 1 day. For example, if the business date 20140510 is selected during data population, cyctime will be replaced by 20140511.
+Examples of **$cyctime**: \(Assume that $cyctime=20140515103000\)
 
-$jobid: ID of the workflow to which a task belongs. Example: jobid=$jobid.
+-   $\[yyyy\] = 2014, $\[yy\] = 14, $\[mm\] = 05, $\[dd\] = 15, $\[yyyy-mm-dd\] = 2014-05-15, $\[hh24:mi:ss\] = 10:30:00, $\[yyyy-mm-dd hh24:mi:ss\] = 2014-05-1510:30:00
+-   $\[hh24:mi:ss - 1/24\] = 09:30:00
+-   $\[yyyy-mm-dd hh24:mi:ss -1/24/60\] = 2014-05-1510:29:00
+-   $\[yyyy-mm-dd hh24:mi:ss -1/24\] = 2014-05-15 09:30:00
+-   $\[add\_months\(yyyymmdd,-1\)\] = 20140415
+-   $\[add\_months\(yyyymmdd,-12\*1\)\] = 20130515
+-   $\[hh24\] =10
+-   $\[mi\] =30
 
-$nodeid: ID of a node. Example: nodeid=$nodeid
+Method for testing **$cyctime**:
 
-$taskid: ID of a task, that is, ID of a node instance. Example: taskid=$taskid.
+After the instance start to run, right-click the node and select **View Node Attribute**. Check whether the scheduling time is the time at which the instance is run periodically.
 
-$bizmonth: business month in the format of yyyymm.
+The value of the parameter in Running Parameter is replaced with the scheduling time minus 1 hour.
 
--   If the month of a business date is equal to the current month, $bizmonth = Month of the business date - 1; otherwise, $bizmonth = Month of the business date.
--   For example: In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$bizmonth. Today is July 22, 2017. When the node is executed today, $bizmonth is replaced by pt=201706.
+**$jobid**: The ID of the workflow to which a node belongs. Example: jobid=$jobid.
 
-$gmtdate: current date in the format of yyyymmdd. The value of this parameter is the current date by default. During data population, gmtdate that is input is the business date plus 1.
+**$nodeid**: The ID of a node. Example: nodeid=$nodeid.
 
-Custom parameter $\{…\} Parameter description:
+**$taskid**: The ID of a node, that is, the ID of a node instance. Example: taskid=$taskid.
 
--   Time format customized based on $bizdate, where yyyy indicates the 4-digit year, yy indicates the 2-digit month, mm indicates the month, and dd indicates the day. The parameter can be combined as expected, for example, $\{yyyy\}, $\{yyyymm\}, $\{yyyymmdd\}, and $\{yyyy-mm-dd\}.
--   $bizdate is accurate to year, month, and day. Therefore, the custom parameter $\{……\} can only represent the year, month, or day.
--   Methods for obtaining the period before or after a certain duration:
+**$bizmonth**: The business month in the format of yyyymm.
+
+-   Note: If the month of a business date is equal to the current month, the value of $bizmonth is the month of the business date minus 1. Otherwise, the value of $bizmonth is the month of the business date.
+-   For example, the code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$bizmonth. When the node is run on July 22, 2017, $bizmonth is replaced with pt=201706.
+
+**$gmtdate**: The current date in the format of yyyymmdd. The value of this parameter is the current date by default. During data patching, the value of gmtdate that is imported is the business date plus 1.
+
+For example, the code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$gmtdate. When the node is run on July 22, 2017, $gmtdate is replaced with pt=20170722.
+
+**$\{...\}** custom parameter
+
+-   You can customize a time format based on **$bizdate**, where yyyy indicates the four-digit year, yy indicates the two-digit year, mm indicates the month, and dd indicates the day. You can use any combination of these parameters, for example, $\{yyyy\}, $\{yyyymm\}, $\{yyyymmdd\}, and $\{yyyy-mm-dd\}.
+-   $bizdate is accurate to the day. Therefore, $\{...\} can only represent the year, month, or day.
+-   Methods for obtaining the period plus or minus a certain duration:
 
     Next N years: $\{yyyy+N\}
 
@@ -138,63 +222,33 @@ Custom parameter $\{…\} Parameter description:
     Previous N days: $\{yyyymmdd-N\}
 
 
-$\{yyyymmdd\}: business date in the format of yyyymmdd. The value is consistent with that of $bizdate.
+**$\{yyyymmdd\}**: The business date in the format of yyyymmdd. The value of this parameter is the same as that of $bizdate, and the parameter supports various separators, for example, yyyy-mm-dd.
 
--   This parameter is widely used, and is the date of the previous day by default during routine scheduling. The format of this parameter can be customized, for example, the format of $\{yyyy-mm-dd\} is yyyy-mm-dd.
--   For example: In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$\{yyyymmdd\}. Today is July 22, 2013. When the node is executed today, $\{yyyymmdd\} is replaced by pt=20130721.
+-   Note: For daily scheduling, this parameter is set to the day before the current date by default. You can customize a time format for this parameter, for example, yyyy-mm-dd for $\{yyyy-mm-dd\}.
+-   Examples:
 
-$\{yyyymmdd-/+N\}: yyyymmdd plus or minus N days
+    -   The code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$\{yyyy-mm-dd\}. When the node is run on July 22, 2018, $\{yyyy-mm-dd\} is replaced with pt=2018-07-21.
+    -   The code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$\{yyyymmdd-2\}. When the node is run on July 22, 2018, $\{yyyymmdd-2\} is replaced with pt=20180719.
+    -   The code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$\{yyyymm-2\}. When the node is run on July 22, 2018, $\{yyyymmdd-2\} is replaced with pt=201805.
+    -   The code of a MaxCompute SQL node includes pt=$\{datetime\}, and the parameter configured for the node is datetime=$\{yyyy-2\}. When the node is run on July 22, 2018, $\{yyyy-2\} is replaced with pt=2016.
+    -   You can assign values to multiple parameters during MaxCompute SQL node configuration, for example, startdatetime=$bizdate enddatetime=$\{yyyymmdd+1\} starttime=$\{yyyy-mm-dd\} endtime=$\{yyyy-mm-dd+1\}.
 
-$\{yyyymm-/+N\}: yyyymm plus or minus N month
+## FAQs {#section_rvd_tfr_p2b .section}
 
-$\{yyyy-/+N\}: year \(yyyy\) plus or minus N years
+-   Q: The table partition format is pt=yyyy-mm-dd hh24:mi:ss, but spaces are not allowed in scheduling parameters. How can I configure the format of $\[yyyy-mm-dd hh24:mi:ss\]?
 
-$\{yy-/+N\}: year \(yy\) plus or minus N years
+    A: Use the custom variables datetime=$\[yyyy-mm-dd\] and hour=$\[hh24:mi:ss\] to obtain the date and time, respectively. Then, join them together to form pt="$\{datetime\} $\{hour\}" in the code. \(Separate the two custom variables with a space\).
 
-yyyymmdd indicates the business date and supports any separator, such as yyyy-mm-dd. The preceding parameters are derived from the year, month, and day of the business date.
+-   Q: The table partition is pt="$\{datetime\} $\{hour\}" in the code. To obtain the data for the last hour when the node is run, the custom variables datetime=$\[yyyymmdd\] and hour=$\[hh24-1/24\] can be used to obtain the date and time, respectively. However, for an instance running at 00:00, the calculation result is 23:00 of the current day, instead of 23:00 of the previous day. What measures can I take in this case?
 
-Example:
+    A: Modify the formula of datetime to $\[yyyymmdd-1/24\] and keep the formula of hour unchanged at $\[hh24-1/24\]. The calculation result is as follows:
 
--   In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$\{yyyy-mm-dd\}. Today is July 22, 2018. When the node is executed today, $\{yyyy-mm-dd\} is replaced by pt=2018-07-21.
--   In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$\{yyyymmdd-2\}. Today is July 22, 2018. When the node is executed today, $\{yyyymmdd-2\} is replaced by pt=20180719.
--   In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$\{yyyymm-2\}. Today is July 22, 2018. When the node is executed today, $\{yyyymm-2\} is replaced by pt=201805.
--   In the code of the ODPS SQL node, pt=$\{datetime\}. In the parameter configuration of the node, datetime=$\{yyyy-2\}. Today is July 22, 2018. When the node is executed today, $\{yyyy-2\} is replaced by pt=2018.
+    -   For an instance that is scheduled to run at 2015-10-27 00:00:00, the values of $\[yyyymmdd-1/24\] and $\[hh24-1/24\] are 20151026 and 23, respectively. This is because the scheduling time minus 1 hour is a time value that belongs to yesterday.
+    -   For an instance that is scheduled to run at 2015-10-27 01:00:00, the values of $\[yyyymmdd-1/24\] and $\[hh24-1/24\] are 20151027 and 00, respectively. This is because the scheduling time minus 1 hour is a time value that belongs to the current day.
 
-In the ODPS SQL node configuration, multiple parameters are assigned values, for example, startdatetime=$bizdate enddatetime=$\{yyyymmdd+1\} starttime=$\{yyyy-mm-dd\} endtime=$\{yyyy-mm-dd+1\}.
+DataWorks offers four node execution modes.
 
-Example: \(Assume $cyctime=20140515103000\)
-
--   $\[yyyy\] = 2014, $\[yy\] = 14, $\[mm\] = 05, $\[dd\] = 15, $\[yyyy-mm-dd\] = 2014-05-15, $\[hh24:mi:ss\] = 10:30:00, $\[yyyy-mm-dd hh24:mi:ss\] = 2014-05-1510:30:00
--   $\[hh24:mi:ss - 1/24\] = 09:30:00
--   $\[yyyy-mm-dd hh24:mi:ss -1/24/60\] = 2014-05-1510:29:00
--   $\[yyyy-mm-dd hh24:mi:ss -1/24\] = 2014-05-15 09:30:00
--   $\[add\_months\(yyyymmdd,-1\)\] = 20140415
--   $\[add\_months\(yyyymmdd,-12\*1\)\] = 20130515
--   $\[hh24\] =10
--   $\[mi\] =30
-
-Method for testing the parameter $cyctime:
-
-After the instance runs, right-click the node to **check the node attribute**. Check whether the scheduled time is the time at which the instance runs periodically.
-
-Result after the parameter value is replaced by the scheduled time minus one hour.
-
-## FAQ {#section_rvd_tfr_p2b .section}
-
--   Q: The table partition format is pt=yyyy-mm-dd hh24:mi:ss, but spaces are not allowed in scheduling parameters. How should I configure the format of $\[yyyy-mm-dd hh24:mi:ss\]?
-
-    A: Use the custom variable parameters datetime=$\[yyyy-mm-dd\] and hour=$\[hh24:mi:ss\] to acquire the date and time, respectively. Then, join them together to form pt="$\{datetime\} $\{hour\}" in code. \(The two custom parameters are separated by space\).
-
--   Q: The table partition is pt="$\{datetime\} $\{hour\}" in code. To acquire the data for the last hour during execution, the custom variable parameters datetime=$\[yyyymmdd\] and hour=$\[hh24-1/24\] can be used to acquire the date and time, respectively. However, for an instance running at 0:00, the calculation result is 23:00 of the current day, instead of 23:00 of the previous day. What measures should be taken in this case?
-
-    A: Modify the formula of datetime to $\[yyyymmdd-1/24\] and remain the formula of hour $\[hh24-1/24\]. The calculation result is as follows:
-
-    -   For an instance with the scheduled time of 2015-10-27 00:00:00, the values of $\[yyyymmdd-1/24\] and $\[hh24-1/24\] are 20151026 and 23, respectively, because the scheduled time minus one hour is a time value belonging to yesterday.
-    -   For an instance with the scheduled time of 2015-10-27 01:00:00, the values of $\[yyyymmdd-1/24\] and $\[hh24-1/24\] are 20151027 and 00, respectively, because the scheduled time minus one hour is a time value belonging to the current day.
-
-Dataworks provides four ways to run.
-
--   Running on data development pages: Temporary value assignment is needed on the parameter configuration page to ensure the proper running. However, the assignment is not saved as the task attribute, and does not take effect in other three running modes.
--   Automatic run at an interval: No configuration is needed in the parameter editing box, and the scheduling system automatically replaces the parameters with the scheduled runtime of the current instance.
--   Test run/data supplement run: A business date needs to be specified when the run is triggered, and the scheduled runtime is derived from the formula described earlier to get the two system parameter values of each instance.
+-   Running on DataStudio: You must assign a temporary value on the parameter configuration page to ensure proper running. The configurations are not saved as node attributes and do not take effect in the other three execution modes.
+-   Automatic running at an interval: No configuration is needed in the Parameter text box. The scheduling system automatically replaces the parameters with the scheduled runtime of the current instance.
+-   Running triggered by testing or data patching: You must specify a business date when the run is triggered. The scheduled runtime is derived from the formula described earlier to get the two system parameter values of each instance.
 
