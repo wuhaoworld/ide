@@ -57,7 +57,9 @@ OpenSearch Writer针对OpenSearch类型的转换列表，如下所示。
 |:-|:-|:---|:--|
 |accessId|阿里云系统登录ID。|是|无|
 |accessKey|阿里云系统登录Key。|是|无|
-|host| |是|无|
+|host| OpenSearch连接的服务地址，您可以在应用详情页面进行查看。
+
+ |是|无|
 |indexName|OpenSearch项目的名称。|是|无|
 |table|写入数据的表名，不能填写多张表，因为DataX不支持同时导入多张表。|是|无|
 |column|需要导入的字段列表。当导入全部字段时，可以配置为`"column":["*"]`。当需要插入部分OpenSearch列时，填写需要插入的列，例如：`"column":["id","name"]`。 OpenSearch支持列筛选、列换序，例如：表有a、b和c三个字段，只需同步c，b两个字段，则可以配置为`["c","b"]`。导入过程中，字段a自动补空，设置为null。
