@@ -9,34 +9,34 @@
 1.  登录[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击相应工作空间后的**进入数据集成**。
 2.  选择左侧导航栏中的**同步资源管理** \> **数据源**，进入数据源管理页面。
 
-    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16269/15647124968569_zh-CN.png)
+    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16269/15671587658569_zh-CN.png)
 
-3.  单击右上角的**新增数据源**，添加一个面向整库迁移的MySQL数据源clone\_databae。
+3.  单击右上角的**新增数据源**，添加一个面向整库迁移的MySQL数据源（clone\_database）。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15647124968560_zh-CN.png)
+    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15671587658560_zh-CN.png)
 
 4.  单击**测试连通性**，验证数据源访问正确无误后，确认并保存该数据源。
-5.  新增数据源成功后，即可在数据源列表中看到新增的MySQL数据源clone\_databae。单击对应MySQL数据源后的**整库迁移批量配置**，即可进入对应数据源的整库迁移功能页面。
+5.  新增数据源成功后，即可在数据源列表中看到新增的MySQL数据源（clone\_database）。单击对应MySQL数据源后的**整库迁移批量配置**，即可进入对应数据源的整库迁移功能页面。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15647124968562_zh-CN.png)
+    ![整库迁移](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15671587658562_zh-CN.png)
 
     整库迁移页面主要分3块功能区域。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15647124968563_zh-CN.png)
+    ![功能区域](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15671587658563_zh-CN.png)
 
     |序号|功能区域|说明|
     |--|----|--|
-    |1|待迁移表筛选区|此处将MySQL数据源clone\_databae下的所有数据库表以表格的形式展现出来，您可以根据实际需要批量选择待迁移的数据库表。|
+    |1|待迁移表筛选区|此处将MySQL数据源（clone\_database）下的所有数据库表以表格的形式展现出来，您可以根据实际需要批量选择待迁移的数据库表。|
     |2|高级设置|此处提供了MySQL数据表和MaxCompute数据表的表名称、列名称、列类型的映射转换规则。|
-    |3|迁移模式、并发控制区|此处可以控制整库迁移的模式（全量、增量）、并发度配置（分批上次、整批上传）、提交迁移任务进度状态信息等。|
+    |3|迁移模式、并发控制区|此处可以控制整库迁移的模式（全量、增量）、并发度配置（分批上传、整批上传）、提交迁移任务进度状态信息等。|
 
 6.  单击**高级设置**，您可以根据具体的需求选择转换规则。例如MaxCompute端建表时统一增加了ods\_这一前缀。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15647124978564_zh-CN.png)
+    ![高级设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15671587658564_zh-CN.png)
 
-7.  在迁移模式、并发控制区中，选择同步方式为每日增量，并配置增量字段为gmt\_modified，数据集成默认会根据您选择的增量字段生成具体每个任务的增量抽取where条件，并配合DataWorks调度参数比如$\{bdp.system.bizdate\}形成针对每天的数据抽取条件。
+7.  在迁移模式、并发控制区中，选择同步方式为每日增量，并配置增量字段为gmt\_modified，数据集成默认会根据您选择的增量字段生成具体每个任务的增量抽取where条件，并配如$\{bdp.system.bizdate\}的DataWorks调度参数，形成针对每天的数据抽取条件。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15647124978565_zh-CN.png)
+    ![条件](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15671587658565_zh-CN.png)
 
     数据集成抽取MySQL库表的数据是通过JDBC连接远程MySQL数据库，并执行相应的SQL语句，将数据从MySQL库中Select出来。由于是标准的SQL抽取语句，可以配置Where子句控制数据范围。此处您可以查看到增量抽取的Where条件如下所示：
 
@@ -50,9 +50,9 @@
 
 8.  单击a1表对应的迁移任务，跳转至数据开发页面，查看迁移结果。
 
-此时便完成了将一个MySQL数据源clone\_databae整库迁移到MaxCompute的工作。这些任务会根据配置的调度周期（默认天调度）被调度执行，您也可以使用DataWorks调度补数据功能完成历史数据的传输。通过**数据集成** \> **整库迁移**功能可以极大减少您初始化上云的配置、迁移成本。
+此时便完成了将一个MySQL数据源（clone\_database）整库迁移到MaxCompute的工作。这些任务会根据配置的调度周期（默认天调度）被调度执行，您也可以使用DataWorks调度补数据功能完成历史数据的传输。通过**数据集成** \> **整库迁移**功能可以极大减少您初始化上云的配置、迁移成本。
 
 查看整库迁移a1表任务执行成功的日志。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15647124978567_zh-CN.png)
+![日志](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16268/15671587668567_zh-CN.png)
 
