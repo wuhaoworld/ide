@@ -2,7 +2,7 @@
 
 本文将为您介绍AnalyticDB for MySQL 3.0 Writer支持的数据类型、字段映射和数据源等参数及配置示例。
 
-开始配置AnalyticDB for MySQL 3.0 Writer插件前，请首先配置好数据源。
+开始配置AnalyticDB for MySQL 3.0 Writer插件前，请先配置好数据源，详情请参见[配置AnalyticDB for MySQL 3.0数据源](cn.zh-CN/使用指南/数据集成/数据源配置/配置AnalyticDB for MySQL 3.0数据源.md#)。
 
 ## 类型转换列表 {#section_hft_qel_x54 .section}
 
@@ -22,8 +22,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 |:-|:-|:-|:--|
 |datasource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须与添加的数据源名称保持一致。|是|无|
 |table|选取的需要同步的表名称。|是|无|
-|writeMode|选择导入模式，可以支持insert into、on duplicate key update和replace into三种方式。 -   insert into：当主键/唯一性索引冲突时会写不进去冲突的行，以脏数据的形式体现。
--   on duplicate key update：没有遇到主键/唯一性索引冲突时，与`insert into`行为一致。冲突时会用新行替换已经指定的字段的语句，写入数据至MySQL。
+|writeMode|选择导入模式，可以支持insert into和replace into两种方式。 -   insert into：当主键/唯一性索引冲突时会写不进去冲突的行，以脏数据的形式体现。
 -   replace into：没有遇到主键/唯一性索引冲突时，与`insert into`行为一致。冲突时会先删除原有行，再插入新行。即新行会替换原有行的所有字段。
 
  |否|insert|
@@ -42,7 +41,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
     配置同步任务的**数据来源**和**数据去向**。
 
-    ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462971/156686725557374_zh-CN.png)
+    ![选择数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462971/156739032857374_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -57,7 +56,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
     左侧的源头表字段和右侧的目标表字段为一一对应的关系。单击**添加一行**可以增加单个字段，鼠标放至需要删除的字段上，即可单击**删除**图标进行删除。
 
-    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462970/156686725557152_zh-CN.png)
+    ![字段映射](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1462970/156739032857152_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -74,7 +73,7 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 
 3.  通道控制。
 
-    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15668672557675_zh-CN.png)
+    ![通道控制](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16221/15673903287675_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -89,6 +88,8 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
 脚本配置示例如下，详情请参见上述参数说明。
 
 ``` {#codeblock_0jz_dsp_oac}
+
+
 {
     "type": "job",
     "steps": [
@@ -102,8 +103,8 @@ AnalyticDB for MySQL 3.0 Writer针对AnalyticDB for MySQL 3.0类型的转换列�
             "stepType": "analyticdb_for_mysql", //插件名。
             "parameter": {
                 "postSql": [], //导入后的准备语句。
-                "tableType": null, //保留字段，默认为空。
-                "datasource": "han***_ads", //数据源名称。
+                "tableType": null, //保留字段，默认空。
+                "datasource": "hangzhou_ads", //数据源名称。
                 "column": [ //同步字段。
                     "id",
                     "value"
