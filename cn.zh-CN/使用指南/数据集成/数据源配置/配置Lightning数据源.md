@@ -4,15 +4,15 @@ MaxCompute Lightning是MaxCompute产品的交互式查询服务，支持以Postg
 
 ## 操作步骤 {#section_jy4_q4v_42b .section}
 
-1.  以项目管理员身份进入[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间操作栏中的**进入数据集成**。
-2.  单击**数据源** \> **新增数据源**，弹出支持的数据源。
+1.  以项目管理员身份登录[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击相应工作空间后的**进入数据集成**。
+2.  选择**同步资源管理** \> **数据源**，单击**新增数据源**。
 
-    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16207/15635122217549_zh-CN.png)
+    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15674232007595_zh-CN.png)
 
 3.  在新增数据源弹出框中，选择数据源类型为**Lightning**。
 4.  填写Lightning数据源的各配置项。
 
-    ![Lightning数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1000681/156351222152196_zh-CN.png)
+    ![Lightning数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/1000681/156742320052196_zh-CN.png)
 
     |配置|说明|
     |:-|:-|
@@ -24,11 +24,11 @@ MaxCompute Lightning是MaxCompute产品的交互式查询服务，支持以Postg
     |**Lightning Endpoint**|Lightning的连接信息，详情请参见[访问域名Endpoint](../../../../cn.zh-CN/开发/交互式分析 (Lightning)/访问域名Endpoint.md#)。|
     |**Port**|默认值为443。|
     |**MaxCompute项目名称**|填写MaxCompute的项目名称。|
-    |**AccessKey ID/AccessKey Secret**|访问秘匙（AccessKey ID和AccessKey Secret），相当于登录密码。|
-    |**JDBC扩展参数**|JDBC扩展参数中的`sslmode=require&prepareThreshold=0`是默认且不可删除的，否则会无法连接。详情请参见[配置JDBC连接](../../../../cn.zh-CN/开发/交互式分析 (Lightning)/通过JDBC连接MaxCompute服务/配置JDBC连接.md#)。|
+    |**AccessKey ID/AccessKey Secret**|访问密钥（AccessKey ID和AccessKey Secret），相当于登录密码。|
+    |**JDBC扩展参数**|JDBC扩展参数中的`sslmode=require&prepareThreshold=0`默认且不可删除，否则会无法连接。详情请参见[配置JDBC连接](../../../../cn.zh-CN/开发/交互式分析 (Lightning)/通过JDBC连接MaxCompute服务/配置JDBC连接.md#)。|
 
 5.  单击**测试连通性**。
-6.  测试连通性通过后，单击**确定**。
+6.  测试连通性通过后，单击**完成**。
 
 ## 测试连通性说明 {#section_je4_f1j_5qu .section}
 
