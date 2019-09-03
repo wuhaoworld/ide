@@ -110,7 +110,7 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
 |:-|:-|:---|:--|
 |haveKerberos|haveKerberos值为true时，表示HBase集群需要kerberos认证。 **说明：** 
 
--   如果该值配置为true，必须要配置下面五个kerberos认证相关参数：
+-   如果该值配置为true，必须要配置以下kerberos认证相关参数：
     -   kerberosKeytabFilePath
     -   kerberosPrincipal
     -   hbaseMasterKerberosPrincipal
@@ -119,8 +119,10 @@ HBase Reader插件实现了从HBase中读取数据。在底层实现上，HBase 
 -   如果HBase集群没有kerberos认证，则不需要配置以上参数。
 
  |否|false|
-|hbaseConfig|连接HBase集群需要的配置信息，JSON格式。必填的配置为hbase.zookeeper.quorum，表示HBase的ZK链接地址。同时可以补充更多HBase client的配置，例如设置scan的cache、batch来优化与服务器的交互。|是|无|
-|mode|读取HBase的模式，支持normal模式、multiVersionFixedColumn模式，即normal/multiVersionFixedColumn。|是|无|
+|hbaseConfig|连接HBase集群需要的配置信息，JSON格式。必填的配置为hbase.zookeeper.quorum，表示HBase的ZK链接地址。同时可以补充更多HBase client的配置，例如设置scan的cache、batch来优化与服务器的交互。 **说明：** 如果是云HBase的数据库，需要使用内网地址连接访问。 
+
+ |是|无|
+|mode|读取HBase的模式，支持normal模式和multiVersionFixedColumn模式。|是|无|
 |table|读取的HBase表名（大小写敏感） 。|是|无|
 |encoding|编码方式，UTF-8或GBK，用于对二进制存储的HBase byte\[\]转为String时的编码。|否|utf-8|
 |column|要读取的HBase字段，normal模式与multiVersionFixedColumn模式下必填。 -   normal模式下
@@ -166,7 +168,7 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
 |maxVersion|指定在多版本模式下的HBase Reader读取的版本数，取值只能为-1或大于1的数字，-1表示读取所有版本。|multiVersionFixedColumn模式下必填项|无|
 |range|指定HBase Reader读取的rowkey范围。 -   startRowkey：指定开始rowkey。
 -   endRowkey：指定结束rowkey。
--   isBinaryRowkey：指定配置的startRowkey和endRowkey转换为 byte\[\]时的方式，默认值为false。如果为true，则调用Bytes.toBytesBinary\(rowkey\)方法进行转换。若为false，则调用 Bytes.toBytes\(rowkey\)。配置格式如下所示：
+-   isBinaryRowkey：指定配置的startRowkey和endRowkey转换为 byte\[\]时的方式，默认值为false。如果为true，则调用`Bytes.toBytesBinary(rowkey)`方法进行转换。如果为false，则调用`Bytes.toBytes(rowkey)`。配置格式如下所示：
 
     ``` {#codeblock_drj_e65_e5y}
 "range": {
@@ -178,8 +180,8 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
 
 
  |否|无|
-|scanCacheSize|HBase client每次rpc从服务器端读取的行数。|否|256|
-|scanBatchSize|HBase client每次rpc从服务器端读取的列数。|否|100|
+|scanCacheSize|HBase client每次RPC从服务器端读取的行数。|否|256|
+|scanBatchSize|HBase client每次RPC从服务器端读取的列数。|否|100|
 
 ## 向导开发介绍 {#section_bp2_wsh_p2b .section}
 
@@ -189,17 +191,17 @@ name指定读取的HBase列，除rowkey外，必须为列族:列名的格式，t
 
 配置一个从HBase抽取数据到本地的作业（normal模式）。
 
-``` {#codeblock_xts_7p4_cp3}
+``` {#codeblock_jap_w84_vb0}
 {
     "type":"job",
-    "version":"2.0",//版本号
+    "version":"2.0",//版本号。
     "steps":[
         {
             "stepType":"hbase",//插件名。
             "parameter":{
                 "mode":"normal",//读取HBase的模式，支持normal模式、multiVersionFixedColumn模式。
-                "scanCacheSize":"256",//HBase client每次rpc从服务器端读取的行数。
-                "scanBatchSize":"100",//HBase client每次rpc从服务器端读取的列数。 
+                "scanCacheSize":"256",//HBase client每次RPC从服务器端读取的行数。
+                "scanBatchSize":"100",//HBase client每次RPC从服务器端读取的列数。 
                 "hbaseVersion":"094x/11x",//HBase版本。
                 "column":[//字段。
                     {
