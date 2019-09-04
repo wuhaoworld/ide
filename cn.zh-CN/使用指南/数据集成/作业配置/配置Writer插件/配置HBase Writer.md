@@ -7,11 +7,11 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 ## 支持的功能 {#section_wv3_x5l_q2b .section}
 
 -   支持HBase0.94.x和HBase1.1.x版本
-    -   如果您的HBase版本为HBase0.94.x，Writer端的插件请选择hbase094x。
+    -   如果您的HBase版本为HBase0.94.x，Writer端的插件请选择094x。
 
         ``` {#codeblock_tg4_21q_2ja}
         "writer": {
-                "hbaseVersion": "hbase094x"
+                "hbaseVersion": "094x"
             }
         ```
 
@@ -19,7 +19,7 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 
         ``` {#codeblock_h8i_8tv_b6y}
         "writer": {
-                "hbaseVersion": "hbase11x"
+                "hbaseVersion": "11x"
             }
         ```
 
@@ -48,10 +48,10 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 
 |类型分类|数据库数据类型|
 |:---|:------|
-|整数类|int、long和short|
-|浮点类|float和double|
-|布尔类|boolean|
-|字符串类|string|
+|整数类|INT、LONG和SHORT|
+|浮点类|FLOAT和DOUBLE|
+|布尔类|BOOLEAN|
+|字符串类|STRING|
 
 ## 参数说明 {#section_jn2_gqh_p2b .section}
 
@@ -59,7 +59,7 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 |:-|:-|:-|:--|
 |haveKerberos|haveKerberos值为true时，表示HBase集群需要kerberos认证。 **说明：** 
 
--   如果该值配置为true，必须要配置下面五个kerberos认证相关参数：
+-   如果该值配置为true，必须要配置以下kerberos认证相关参数：
     -   kerberosKeytabFilePath
     -   kerberosPrincipal
     -   hbaseMasterKerberosPrincipal
@@ -68,10 +68,12 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 -   如果HBase集群没有kerberos认证，则不需要配置以上参数。
 
  |否|false|
-|hbaseConfig|连接HBase集群需要的配置信息，JSON格式。必填的配置为hbase.zookeeper.quorum，表示HBase的ZK链接地址。同时可以补充更多HBase client的配置，例如设置scan的cache、batch来优化与服务器的交互。|是|无|
+|hbaseConfig|连接HBase集群需要的配置信息，JSON格式。必填的配置为hbase.zookeeper.quorum，表示HBase的ZK链接地址。同时可以补充更多HBase client的配置，例如设置scan的cache、batch来优化与服务器的交互。 **说明：** 如果是云HBase的数据库，需要使用内网地址连接访问。
+
+ |是|无|
 |mode|写入HBase的模式，目前仅支持normal模式，后续考虑动态列模式。|是|无|
 |table|要写入的HBase表名（大小写敏感） 。|是|无|
-|encoding|编码方式，UTF-8或GBK，用于String转HBase byte\[\]时的编码。|否|utf-8|
+|encoding|编码方式，UTF-8或GBK，用于STRING转HBase byte\[\]时的编码。|否|utf-8|
 |column|要写入的HBase字段： -   index：指定该列对应Reader端column的索引，从0开始。
 -   name：指定HBase表中的列，格式必须为列族:列名。
 -   type：指定写入的数据类型，用于转换HBase byte\[\]。
@@ -80,7 +82,7 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 |maxVersion|指定在多版本模式下的HBase Reader读取的版本数，取值只能为-1或大于1的数字，-1表示读取所有版本。|multiVersionFixedColumn模式下必填项|无|
 |range|指定HBase Reader读取的rowkey范围： -   startRowkey：指定开始rowkey。
 -   endRowkey：指定结束rowkey。
--   isBinaryRowkey：指定配置的startRowkey和endRowkey转换为byte\[\]时的方式，默认值为false。如果为true，则调用Bytes.toBytesBinary\(rowkey\)方法进行转换。若为false，则调用 Bytes.toBytes\(rowkey\)。配置格式如下所示：
+-   isBinaryRowkey：指定配置的startRowkey和endRowkey转换为byte\[\]时的方式，默认值为false。如果为true，则调用Bytes.toBytesBinary\(rowkey\)方法进行转换。如果为false，则调用Bytes.toBytes\(rowkey\)。
 
     ``` {#codeblock_jjf_5t0_39m}
 "range": {
@@ -89,8 +91,6 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 "isBinaryRowkey":false
 }
     ```
-
-配置格式如下所示。
 
     ``` {#codeblock_ckk_fjq_ztd}
 "column": [
@@ -130,7 +130,7 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 ```
 
  |是|无|
-|versionColumn|指定写入HBase的时间戳。支持当前时间、指定时间列或指定时间（三者选一），如果不配置则表示用当前时间。 -   index：指定对应Reader端column的索引，从0开始，需保证能转换为long。
+|versionColumn|指定写入HBase的时间戳。支持当前时间、指定时间列或指定时间（三者选一），如果不配置则表示用当前时间。 -   index：指定对应Reader端column的索引，从0开始，需保证能转换为LONG。
 -   type：如果是Date类型，会尝试用yyyy-MM-dd HH:mm:ss和yyyy-MM-dd HH:mm:ss SSS解析。如果是指定时间，则index为-1。
 -   value：指定时间的值，LONG类型。
 
@@ -151,14 +151,16 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
 
 
  |否|无|
-|nullMode|读取的数据为null值时，您可通过以下两种方式解决： -   skip：表示不向HBase写这列。
+|nullMode|读取的数据为null值时，您可以通过以下两种方式解决： -   skip：表示不向HBase写该列。
 -   empty：写入HConstants.EMPTY\_BYTE\_ARRAY，即new byte \[0\]。
 
  |否|skip|
-|walFlag|HBae Client向集群中的RegionServer提交数据时（Put/Delete操作），首先会先写WAL（Write Ahead Log）日志（即HLog，一个RegionServer上的所有Region共享一个HLog），只有当WAL日志写成功后，才会接着写MemStore，最后客户端被通知提交数据成功。如果写WAL日志失败，客户端则被通知提交失败。关闭（false）放弃写WAL日志，从而提高数据写入的性能。|否|false|
+|walFlag|HBae Client向集群中的RegionServer提交数据时（Put/Delete操作），首先会先写WAL（Write Ahead Log）日志（即HLog，一个RegionServer上的所有Region共享一个HLog），只有当WAL日志写成功后，才会接着写MemStore，最后客户端被通知提交数据成功。 如果写WAL日志失败，客户端则被通知提交失败。关闭（false）放弃写WAL日志，从而提高数据写入的性能。
+
+ |否|false|
 |writeBufferSize|设置HBae Client的写Buffer大小，单位字节，配合autoflush使用。 autoflush：
 
--   开启（true）：表示HBase Client在写的时候有一条put就执行一次更新。
+ -   开启（true）：表示HBase Client在写的时候有一条put就执行一次更新。
 -   关闭（false）：表示HBase Client在写的时候只有当put填满客户端写缓存时，才实际向HBase服务端发起写请求。
 
  |否|8M|
@@ -176,22 +178,22 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
     "type":"job",
     "version":"2.0",//版本号
     "steps":[
-        { //下面是关于Reader的模板，可以找相应的读插件文档。
+        {
             "stepType":"stream",
             "parameter":{},
             "name":"Reader",
             "category":"reader"
         },
         {
-            "stepType":"hbase",//插件名
+            "stepType":"hbase",//插件名。
             "parameter":{
                 "mode":"normal",//写入HBase的模式。
-                "walFlag":"false",//关闭（false）放弃写WAL日志
-                "hbaseVersion":"094x",//Hbase版本
+                "walFlag":"false",//关闭（false）放弃写WAL日志。
+                "hbaseVersion":"094x",//Hbase版本。
                 "rowkeyColumn":[//要写入的HBase的rowkey列。
                     {
-                        "index":"0",//序列号
-                        "type":"string"//数据类型
+                        "index":"0",//序列号。
+                        "type":"string"//数据类型。
                     },
                     {
                         "index":"-1",
@@ -202,9 +204,9 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
                 "nullMode":"skip",//读取的为null值时，如何处理。
                 "column":[//要写入的HBase字段。
                     {
-                        "name":"columnFamilyName1:columnName1",//字段名
-                        "index":"0",//索引号
-                        "type":"string"//数据类型
+                        "name":"columnFamilyName1:columnName1",//字段名。
+                        "index":"0",//索引号。
+                        "type":"string"//数据类型。
                     },
                     {
                         "name":"columnFamilyName2:columnName2",
@@ -217,9 +219,9 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
                         "type":"string"
                     }
                 ],
-                "writeMode":"api",//写入模是
-                "encoding":"utf-8",//编码格式
-                "table":"",//表名
+                "writeMode":"api",//写入模式。
+                "encoding":"utf-8",//编码格式。
+                "table":"",//表名。
                 "hbaseConfig":{//连接HBase集群需要的配置信息，JSON格式。
                     "hbase.zookeeper.quorum":"hostname",
                     "hbase.rootdir":"hdfs: //ip:port/database",
@@ -232,11 +234,11 @@ HBase Writer插件实现了向HBase中写入数据。在底层实现上，HBase 
     ],
     "setting":{
         "errorLimit":{
-            "record":"0"//错误记录数
+            "record":"0"//错误记录数。
         },
         "speed":{
             "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流。
-            "concurrent":1,//作业并发数
+            "concurrent":1,//作业并发数。
         }
     },
     "order":{
