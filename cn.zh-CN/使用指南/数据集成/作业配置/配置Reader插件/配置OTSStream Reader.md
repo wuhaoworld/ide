@@ -4,17 +4,17 @@
 
 OTSStream Reader插件主要用于Table Store增量数据的导出，增量数据可以看作操作日志，除数据本身外还附有操作信息。
 
-与全量导出插件不同，增量导出插件只有多版本模式，且不支持指定列，这与增量导出的原理有关，导出格式的详细介绍请参见下文。
+与全量导出插件不同，增量导出插件只有多版本模式，且不支持指定列，导出格式的详细介绍请参见下文。
 
 使用插件前必须确保表上已经开启Stream功能，您可以在建表的时候指定开启，也可以使用SDK的UpdateTable接口开启。
 
 开启Stream的方法，如下所示。
 
-```
+``` {#codeblock_9ow_njl_dw5}
 SyncClient client = new SyncClient("", "", "", "");
 建表的时候开启：
 CreateTableRequest createTableRequest = new CreateTableRequest(tableMeta);
-createTableRequest.setStreamSpecification(new StreamSpecification(true, 24)); // 24代表增量数据保留24小时
+createTableRequest.setStreamSpecification(new StreamSpecification(true, 24)); // 24代表增量数据保留24小时。
 client.createTable(createTableRequest);
 如果建表时未开启，可以通过UpdateTable开启:
 UpdateTableRequest updateTableRequest = new UpdateTableRequest("tableName");
@@ -24,11 +24,11 @@ client.updateTable(updateTableRequest);
 
 ## 实现原理 {#section_ngl_bhr_p2b .section}
 
-您使用SDK的UpdateTable功能，指定开启Stream并设置过期时间，即开启了增量功能。开启后，Table Store服务端就会将您的操作日志额外保存起来，每个分区有一个有序的操作日志队列，每条操作日志会在一定时间后被垃圾回收，这个时间即为您指定的过期时间。
+您使用SDK的UpdateTable功能，指定开启Stream并设置过期时间，即开启了增量功能。开启后，Table Store服务端就会将您的操作日志额外保存起来，每个分区有一个有序的操作日志队列，每条操作日志会在一定时间后被垃圾回收，该时间即为您指定的过期时间。
 
-Table Store的SDK提供了几个Stream相关的API用于将这部分操作日志读取出来，增量插件也是通过Table Store SDK的接口获取到增量数据的，并将增量数据转化为多个6元组的形式（pk、colName、version、colValue、opType和sequenceInfo）导入到MaxCompute中。
+Table Store的SDK提供了几个Stream相关的API用于读取这部分的操作日志，增量插件也是通过Table Store SDK的接口获取到增量数据的，默认情况下会将增量数据转化为多个6元组的形式（pk、colName、version、colValue、opType和sequenceInfo）导入至MaxCompute中。
 
-## 导出的数据格式 {#section_n3v_khr_p2b .section}
+## 列模式 {#section_n3v_khr_p2b .section}
 
 在Table Store多版本模型下，表中的数据组织为行\>列\>版本三级的模式， 一行可以有任意列，列名也并非固定的，每一列可以含有多个版本，每个版本都有一个特定的时间戳（版本号）。
 
@@ -37,7 +37,7 @@ Table Store的SDK提供了几个Stream相关的API用于将这部分操作日志
 Table Store有PutRow、UpdateRow和DeleteRow三类数据更改操作。
 
 -   PutRow：写入一行，若该行已存在即覆盖该行。
--   UpdateRow：更新一行，对原行其他数据不做更改， 更新可能包括新增或覆盖（若对应列的对应版本已存在）一些列值、删除某一列的全部版本、删除某一列的某个版本。
+-   UpdateRow：更新一行，不更改原行的其它数据。更新包括新增或覆盖（如果对应列的对应版本已存在）一些列值、删除某一列的全部版本、删除某一列的某个版本。
 -   DeleteRow：删除一行。
 
 Table Store会根据每种操作生成对应的增量数据记录，Reader插件会读出这些记录，并导出为Datax的数据格式。
@@ -65,20 +65,46 @@ Table Store会根据每种操作生成对应的增量数据记录，Reader插件
 
 假设导出的数据如上，共7行，对应Table Store表内的3行，主键分别是（pk1\_V1，pk2\_V1），（pk1\_V2， pk2\_V2），（pk1\_V3， pk2\_V3）。
 
--   对于主键为（pk1\_V1，pk2\_V1）的一行，包含三个操作，分别是写入col\_a列的两个版本和col\_b列的一个版本。
--   对于主键为（pk1\_V2，pk2\_V2）的一行，包含两个操作，分别是删除col\_a列的一个版本、删除col\_b列的全部版本。
--   对于主键为（pk1\_V3， pk2\_V3）的一行，包含两个操作，分别是删除整行、写入col\_a列的一个版本。
+-   对于主键为（pk1\_V1，pk2\_V1）的一行，包括写入col\_a列的两个版本和col\_b列的一个版本等操作。
+-   对于主键为（pk1\_V2，pk2\_V2）的一行，包括删除col\_a列的一个版本和删除col\_b列的全部版本等操作。
+-   对于主键为（pk1\_V3，pk2\_V3）的一行，包括删除整行和写入col\_a列的一个版本等操作。
 
+## 行模式 {#section_4ox_wbx_t0k .section}
+
+您可以通过行模式导出数据，该模式将用户每次更新的记录，抽取成行的形式导出，需要设置mode属性并配置列名，示例如下：
+
+``` {#codeblock_581_eps_iij}
+"parameter": {
+  #parameter中配置下面三项配置(例如datasource、table等其它配置项照常配置)
+  "mode": "single_version_and_update_only", # 配置导出模式
+  "column":[  #按照需求添加需要导出TableStore中的列，您可以自定义设置配置个数。
+          {
+             "name": "uid"  #列名示例，可以是主键或属性列。
+          },
+          {
+             "name": "name"  #列名示例，可以是主键或属性列。
+          },
+  ],
+  "isExportSequenceInfo": false, #single_version_and_update_only模式下只能是false。
+}
+```
+
+行模式导出的数据更接近于原始的行，易于后续处理，但需要注意以下问题：
+
+-   每次导出的行是从用户每次更新的记录中抽取，每一行数据与用户的写入/更新操作一一对应。如果用户存在单独更新某些列的行为，则会出现有一些记录只有被更新的部分列，其它列为空的情况。
+-   行模式不会导出数据的版本号（即每列的时间戳），也无法进行删除操作。
+
+## 数据类型转换列表 {#section_aps_w9i_laf .section}
 
 目前OTSStream Reader支持所有的Table Store类型，其针对Table Store类型的转换列表，如下所示。
 
 |类型分类|OTSStream数据类型|
 |:---|:------------|
-|整数类|Integer|
-|浮点类|Double|
-|字符串类|String|
-|布尔类|Boolean|
-|二进制类|Binary|
+|整数类|INTEGER|
+|浮点类|DOUBLE|
+|字符串类|STRING|
+|布尔类|BOOLEAN|
+|二进制类|BINARY|
 
 ## 参数说明 {#section_nc1_jjr_p2b .section}
 
@@ -86,25 +112,26 @@ Table Store会根据每种操作生成对应的增量数据记录，Reader插件
 |:-|:-|:-|:--|
 |dataSource|数据源名称，脚本模式支持添加数据源，此配置项填写的内容必须要与添加的数据源名称保持一致。|是|无|
 |dataTable|导出增量数据的表的名称。该表需要开启Stream，可以在建表时开启，或者使用UpdateTable接口开启。|是|无|
-|statusTable|Reader插件用于记录状态的表的名称，这些状态可用于减少对非目标范围内的数据的扫描，从而加快导出速度。statusTable是Reader用于保存状态的表，如果该表不存在，Reader会自动创建该表，一次离线导出任务完成后，您不需删除该表，该表中记录的状态可用于下次导出任务中。-   您不需要创建该表，只需要给出一个表名。Reader插件会尝试在您的instance下创建该表，如果该表不存在即创建新表，如果该表已存在，会判断该表的Meta是否与期望一致，如果不一致会抛出异常。
+|statusTable|Reader插件用于记录状态的表的名称，这些状态可用于减少对非目标范围内的数据的扫描，从而加快导出速度。statusTable是Reader用于保存状态的表，如果该表不存在，Reader会自动创建该表，一次离线导出任务完成后，您不需删除该表，该表中记录的状态可用于下次导出任务中。 -   您不需要创建该表，只需要给出一个表名。Reader插件会尝试在您的instance下创建该表，如果该表不存在即创建新表，如果该表已存在，会判断该表的Meta是否与期望一致，如果不一致会抛出异常。
 -   在一次导出完成之后，您不需删除该表，该表的状态可用于下次导出任务。
 -   该表会开启TTL，数据自动过期，因此可认为其数据量很小。
 -   针对同一个instance下的多个不同的dataTable的Reader配置，可以使用同一个statusTable，记录的状态信息互不影响。
 
-综上所述，您配置一个类似TableStoreStreamReaderStatusTable的名称即可，请注意不要与业务相关的表重名。|是|无|
-|startTimestampMillis|增量数据的时间范围（左闭右开）的左边界，单位毫秒。-   Reader插件会从statusTable中找对应startTimestampMillis的位点，从该点开始读取开始导出数据。
+ 综上所述，您配置一个类似TableStoreStreamReaderStatusTable的名称即可，请注意不要与业务相关的表重名。|是|无|
+|startTimestampMillis|增量数据的时间范围（左闭右开）的左边界，单位毫秒。 -   Reader插件会从statusTable中找对应startTimestampMillis的位点，从该点开始读取开始导出数据。
 -   如果statusTable中找不到对应的位点，则从系统保留的增量数据的第一条开始读取，并跳过写入时间小于startTimestampMillis的数据。
 
-|否|无|
-|endTimestampMillis|增量数据的时间范围（左闭右开）的右边界，单位毫秒。-   Reader插件从startTimestampMillis位置开始导出数据后，当遇到第一条时间戳大于等于endTimestampMillis的数据时，结束导出数据，导出完成。
--   当读取完当前全部的增量数据时，结束读取，即使未达到endTimestampMillis。
+ |否|无|
+|endTimestampMillis|增量数据的时间范围（左闭右开）的右边界，单位毫秒。 -   Reader插件从startTimestampMillis位置开始导出数据后，当遇到第一条时间戳大于等于endTimestampMillis的数据时，结束导出数据，导出完成。
+-   当读取完当前全部的增量数据时，即使未达到endTimestampMillis，也会结束读取。
 
-|否|无|
+ |否|无|
 |date|日期格式为yyyyMMdd，如20151111，表示导出该日的数据。如果没有指定date，则必须指定startTimestampMillis和endTimestampMillis，反之也成立。例如采云间调度只支持天级别，所以提供该配置，作用与startTimestampMillis和endTimestampMillis类似。|否|无|
 |isExportSequenceInfo|是否导出时序信息，时序信息包含了数据的写入时间等。默认该值为false，即不导出。|否|无|
-|maxRetries|从TableStore中读增量数据时，每次请求的最大重试次数，默认为30，重试之间有间隔，重试30次的总时间约为5分钟，一般无需更改。|否|无|
-|startTimeString|增量数据的时间范围（左闭右开）的左边界，格式为yyyymmddhh24miss，单位毫秒。|否|无|
-|endTimeString|增量数据的时间范围（左闭右开）的右边界，格式为yyyymmddhh24miss，单位毫秒。|否|无|
+|maxRetries|从TableStore中读增量数据时，每次请求的最大重试次数，默认为30，重试之间有间隔，重试30次的总时间约为5分钟，通常无需更改。|否|无|
+|startTimeString|增量数据的时间范围（左闭右开）的左边界，格式为`yyyymmddhh24miss`，单位为毫秒。|否|无|
+|endTimeString|增量数据的时间范围（左闭右开）的右边界，格式为`yyyymmddhh24miss`，单位为毫秒。|否|无|
+|mode|导出模式，设置为single\_version\_and\_update\_only时为行模式，默认不设置为列模式。|否|无|
 
 ## 向导开发介绍 {#section_q1t_vkr_p2b .section}
 
@@ -114,26 +141,26 @@ Table Store会根据每种操作生成对应的增量数据记录，Reader插件
 
 脚本配置样例如下所示，具体参数填写请参见参数说明。
 
-```
+``` {#codeblock_wm5_35z_77b}
 {
     "type":"job",
-    "version":"2.0",//版本号
+    "version":"2.0",//版本号。
     "steps":[
         {
-            "stepType":"otsstream",//插件名
+            "stepType":"otsstream",//插件名。
             "parameter":{
-                "statusTable":"TableStoreStreamReaderStatusTable",//用于记录状态的表的名称
-                "maxRetries":30,//从 TableStore 中读增量数据时，每次请求的最大重试次数，默认为 30
-                "isExportSequenceInfo":false,//是否导出时序信息
-                "datasource":"$srcDatasource",//数据源
-                "startTimeString":"${startTime}",//增量数据的时间范围（左闭右开）的左边界
-                "table":"",//表名
-                "endTimeString":"${endTime}"//增量数据的时间范围（左闭右开）的右边界
+                "statusTable":"TableStoreStreamReaderStatusTable",//用于记录状态的表的名称。
+                "maxRetries":30,//从 TableStore 中读增量数据时，每次请求的最大重试次数，默认为30。
+                "isExportSequenceInfo":false,//是否导出时序信息。
+                "datasource":"$srcDatasource",//数据源。
+                "startTimeString":"${startTime}",//增量数据的时间范围（左闭右开）的左边界。
+                "table":"",//表名。
+                "endTimeString":"${endTime}"//增量数据的时间范围（左闭右开）的右边界。
             },
             "name":"Reader",
             "category":"reader"
         },
-        { //下面是关于Writer的模板，可以找相应的写插件文档
+        { 
             "stepType":"stream",
             "parameter":{},
             "name":"Writer",
@@ -142,12 +169,11 @@ Table Store会根据每种操作生成对应的增量数据记录，Reader插件
     ],
     "setting":{
         "errorLimit":{
-            "record":"0"//错误记录数
+            "record":"0"//错误记录数。
         },
         "speed":{
-            "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流
-            "concurrent":1,//作业并发数
-            "dmu":1//DMU值
+            "throttle":false,//false代表不限流，下面的限流的速度不生效，true代表限流。
+            "concurrent":1,//作业并发数。
         }
     },
     "order":{
