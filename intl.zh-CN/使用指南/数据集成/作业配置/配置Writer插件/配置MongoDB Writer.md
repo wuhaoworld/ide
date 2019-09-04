@@ -2,17 +2,17 @@
 
 本文为您介绍MongoDB Writer支持的数据类型、写入方式、字段映射和数据源等参数和配置示例。
 
-MongoDB Writer插件利用MongoDB的Java客户端MongoClient进行MongoDB的写操作。最新版本的Mongo已经将DB锁的粒度从DB级别降低到Document级别，配合MongoDB强大的索引功能，基本可以满足数据源向MongoDB写入数据的需求。针对数据更新的需求，通过配置业务主键的方式也可以实现。
+MongoDB Writer插件利用MongoDB的Java客户端MongoClient进行MongoDB的写操作。最新版本的Mongo已经将DB锁的粒度从DB级别降低到Document级别，配合MongoDB强大的索引功能，基本可以满足数据源向MongoDB写入数据的需求。针对数据更新的需求，也可以通过配置业务主键的方式实现。
 
 **说明：** 
 
 -   在开始配置MongoDB Writer插件前，请首先配置好数据源，详情请参见[配置MongoDB数据源](intl.zh-CN/使用指南/数据集成/数据源配置/配置MongoDB数据源.md#)。
 -   如果您使用的是云数据库MongoDB版，MongoDB默认会有root账号。
--   出于安全策略的考虑，数据集成仅支持使用 MongoDB数据库对应账号进行连接，您添加使用MongoDB数据源时，也请避免使用root作为访问账号。
+-   出于安全策略的考虑，数据集成仅支持使用 MongoDB数据库对应账号进行连接。您在添加使用MongoDB数据源时，请避免使用root作为访问账号。
 
-MongoDB Writer通过数据集成框架获取Reader生成的协议数据，然后将支持的类型通过逐一判断转换成MongoDB支持的类型。数据集成本身不支持数组类型，但MongoDB支持数组类型，并且数组类型的索引很强大。
+MongoDB Writer通过数据集成框架获取Reader生成的协议数据，然后将支持的类型通过逐一判断转换为MongoDB支持的类型。数据集成本身不支持数组类型，但MongoDB支持数组类型，并且数组类型具有强大的索引功能。
 
-为了使用MongoDB的数组类型，您可以通过参数的特殊配置，将字符串可以转换成MongoDB中的数组，类型转换之后，便可并行写入MongoDB。
+您可以通过参数的特殊配置，将字符串转换为MongoDB中的数组。转换类型后，即可并行写入MongoDB。
 
 ## 类型转换列表 {#section_m2v_hxm_q2b .section}
 
@@ -49,22 +49,22 @@ MongoDB Writer针对MongoDB类型的转换列表，如下所示。
 |preSql|表示数据同步写出MongoDB前的前置操作，例如清理历史数据等。如果preSql为空，表示没有配置前置操作。配置preSql时，需要确保preSql符合JSON语法要求。preSql的格式要求如下： -   需要配置type字段，表示前置操作类别，支持drop和remove，例如`"preSql":{"type":"remove"}`。
     -   drop：表示删除集合和集合内的数据，collectionName参数配置的集合即是待删除的集合。
     -   remove：表示根据条件删除数据。
-    -   json：您可以通过JSON控制待删除的数据条件，例如`"preSql":{"type":"remove", "json":"{'operationTime':{'$gte':ISODate('${last_day}T00:00:00.424+0800')}}"}`。 此处的`${last_day}`为DataWorks调度参数，格式为`$[yyyy-mm-dd]`。您可以根据需要具体使用其他MongoDB支持的条件操作符号（$gt、$lt、$gte和$lte等）、逻辑操作符（and和or等）或函数（max、min、sum、avg和ISODate等），详情请参见MongoDB查询语法。
+    -   json：您可以通过JSON控制待删除的数据条件，例如`"preSql":{"type":"remove", "json":"{'operationTime':{'$gte':ISODate('${last_day}T00:00:00.424+0800')}}"}`。此处的`${last_day}`为DataWorks调度参数，格式为`$[yyyy-mm-dd]`。您可以根据需要具体使用其它MongoDB支持的条件操作符号（$gt、$lt、$gte和$lte等）、逻辑操作符（and和or等）或函数（max、min、sum、avg和ISODate等），详情请参见MongoDB查询语法。
 
-数据集成通过如下MongoDB标准API执行您的数据，删除query：
+数据集成通过如下MongoDB标准API执行您的数据，删除query。
 
         ``` {#codeblock_mlf_52t_d0g}
 query=(BasicDBObject) com.mongodb.util.JSON.parse(json);                
 col.deleteMany(query);
         ```
 
-**说明：** 如果您需要条件删除数据，建议您优先使用JSON配置形式。
+**说明：** 如果您需要条件删除数据，建议优先使用JSON配置形式。
 
     -   item：您可以在item中配置数据过滤的列名（name）、条件（condition）和列值（value）。例如`"preSql":{"type":"remove","item":[{"name":"pv","value":"100","condition":"$gt"},{"name":"pid","value":"10"}]}`。
 
 数据集成会基于您配置的item条件项，构造查询query条件，进而通过MongoDB标准API执行删除。例如`col.deleteMany(query);`。
 
--   不识别的preSql，不需进行任何前置删除操作。
+-   不识别的preSql，无需进行任何前置删除操作。
 
  |否|无|
 
@@ -79,8 +79,8 @@ col.deleteMany(query);
 ``` {#codeblock_n9j_us5_day .language-json}
 {
     "type": "job",
-    "version": "2.0",//版本号
-    "steps": [//下面是关于Reader的模板，可以查看相应的读插件文档。
+    "version": "2.0",//版本号。
+    "steps": [
         {
             "stepType": "stream",
             "parameter": {},
@@ -88,13 +88,13 @@ col.deleteMany(query);
             "category": "reader"
         },
         {
-            "stepType": "mongodb",//插件名
+            "stepType": "mongodb",//插件名。
             "parameter": {
-                "datasource": "",//数据源名
+                "datasource": "",//数据源名。
                 "column": [
                     {
-                        "name": "name",//列名
-                        "type": "string"//数据类型
+                        "name": "_id",//列名。
+                        "type": "ObjectId"//数据类型。如果replacekey为_id，则此处的type必须配置为ObjectID。如果配置为string，会无法进行替换。
                     },
                     {
                         "name": "age",
@@ -123,29 +123,29 @@ col.deleteMany(query);
                         "type": "date"
                     }
                 ],
-                "writeMode": {//写入模式
+                "writeMode": {//写入模式。
                     "isReplace": "true",
-                    "replaceKey": "id"
+                    "replaceKey": "_id"
                 },
-                "collectionName": "datax_test"//连接名称
+                "collectionName": "datax_test"//连接名称。
             },
             "name": "Writer",
             "category": "writer"
         }
     ],
     "setting": {
-        "errorLimit": {//错误记录数
+        "errorLimit": {//错误记录数。
             "record": "0"
         },
         "speed": {
             "jvmOption": "-Xms1024m -Xmx1024m",
             "throttle": true,//false代表不限流，下面的限流的速度不生效，true代表限流。
-            "concurrent": 1,//作业并发数
-            "mbps": "1"//限流的速度
+            "concurrent": 1,//作业并发数。
+            "mbps": "1"//限流的速度。
         }
     },
     "order": {
-        "hops": [//从reader同步writer
+        "hops": [
             {
                 "from": "Reader",
                 "to": "Writer"
