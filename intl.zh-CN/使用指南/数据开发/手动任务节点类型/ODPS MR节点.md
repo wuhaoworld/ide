@@ -12,16 +12,16 @@ ODPS\_MR类型节点的编辑和使用方法，请参见MaxCompute文档示例[W
 2.  新建业务流程。
     1.  单击左侧导航栏中的**手动业务流程**，选择**新建业务流程**。
 
-        ![新建业务流程](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15676770927961_zh-CN.png)
+        ![新建业务流程](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16319/15676772277961_zh-CN.png)
 
     2.  填写**业务名称**和**描述**，单击**新建**，即可完成业务流程的新建。
 3.  打开新建的业务流程，右键单击**资源**，选择**新建资源** \> **JAR**。
 
-    ![JAR](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/15676770928082_zh-CN.png)
+    ![JAR](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/15676772278082_zh-CN.png)
 
 4.  按照命名规则在新建资源对话框输入资源名称，并选择资源类型为**JAR**，同时选择需要上传本机的JAR包。
 
-    ![选择jar](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16294/15676770927721_zh-CN.png)
+    ![选择jar](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16294/15676772277721_zh-CN.png)
 
     **说明：** 
 
@@ -30,7 +30,7 @@ ODPS\_MR类型节点的编辑和使用方法，请参见MaxCompute文档示例[W
     -   资源名命名规范：1到128个字符，字母、数字、下划线、小数点，大小写不敏感，JAR资源时后缀为.jar。
 5.  单击**确定**，提交资源至调度开发服务器端。
 
-    ![确定](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16294/15676770927722_zh-CN.png)
+    ![确定](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16294/15676772277722_zh-CN.png)
 
 6.  发布节点任务。
 
@@ -41,15 +41,15 @@ ODPS\_MR类型节点的编辑和使用方法，请参见MaxCompute文档示例[W
 
 1.  打开新建的业务流程，右键单击**数据开发**，选择**新建数据开发节点** \> **ODPS MR**。
 
-    ![ODPS MR](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/15676770928086_zh-CN.png)
+    ![ODPS MR](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/15676772278086_zh-CN.png)
 
 2.  在**新建节点**对话框中，填写**节点名称**，单击**提交**。
 
-    ![新建节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/156767709259237_zh-CN.png)
+    ![新建节点](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/156767722759237_zh-CN.png)
 
 3.  双击新建的ODPS MR节点，进入编辑页面编辑节点代码。
 
-    ![界面](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/15676770928124_zh-CN.png)
+    ![界面](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16324/15676772278124_zh-CN.png)
 
     编辑节点代码示例：
 
