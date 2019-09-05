@@ -1,10 +1,10 @@
 # 配置TSDB Writer {#concept_645306 .concept}
 
-TSDB Writer插件实现了将数据点写入阿里巴巴自研TSDB数据库。
+TSDB Writer插件实现了将数据点写入阿里巴巴自主研究的TSDB数据库。
 
 时间序列数据库（Time Series Database , 简称TSDB）是一种高性能、低成本、稳定可靠的在线时序数据库服务。提供高效读写、高压缩比存储、时序数据插值及聚合计算，广泛应用于物联网（IoT）设备监控系统 、企业能源管理系统（EMS）、生产安全监控系统和电力检测系统等行业场景。
 
-TSDB提供百万级时序数据秒级写入，高压缩比低成本存储、预降采样、插值和多维聚合计算，查询结果可视化功能。TSDB可解决由于设备采集点数量大、数据采集频率高，造成的存储成本高、写入和查询分析效率低等问题。
+TSDB提供百万级时序数据秒级写入、高压缩比低成本存储、预降采样、插值和多维聚合计算、查询结果可视化功能。TSDB可以解决由于设备采集点数量大、数据采集频率高造成的存储成本高、写入和查询分析效率低等问题。
 
 目前仅支持脚本模式配置方式，更多详情请参见[时序时空数据库](https://help.aliyun.com/document_detail/55652.html)文档。
 
@@ -20,7 +20,7 @@ TSDB Writer通过HTTP连接TSDB实例，并通过`/api/put`接口将数据点写
 
 |类型分类|数据集成column配置类型|TSDB数据类型|
 |----|--------------|--------|
-|字符串|string|TSDB数据点序列化字符串，包括timestamp、metric、tags和value。|
+|字符串|STRING|TSDB数据点序列化字符串，包括TIMESTAMP、METRIC、TAGS和VALUE。|
 
 ## 参数说明 {#section_exm_21k_fvl .section}
 
@@ -30,9 +30,9 @@ TSDB Writer通过HTTP连接TSDB实例，并通过`/api/put`接口将数据点写
 
  |
 |数据源为TSDB|endpoint|TSDB的HTTP连接地址。|是，格式为`http://IP:Port`。|无|
-|batchSize|每次批量写入数据的条数。|否，数据类型为int，需要确保大于0。|100|
-|maxRetryTime|失败后重试的次数。|否，数据类型为int，需要确保大于1。|3|
-|ignoreWriteError|如果设置为true，则忽略写入错误，继续写入。如果多次重试后仍写入失败，则终止写入任务。|否，数据类型为bool。|false|
+|batchSize|每次批量写入数据的条数。|否，数据类型为INT，需要确保大于0。|100|
+|maxRetryTime|失败后重试的次数。|否，数据类型为INT，需要确保大于1。|3|
+|ignoreWriteError|如果设置为true，则忽略写入错误，继续写入。如果多次重试后仍写入失败，则终止写入任务。|否，数据类型为BOOL。|false|
 |数据源为RDB|endpoint|TSDB的HTTP连接地址。|是，格式为`http://IP:Port`。|无|
 |column|关系型数据库中表的字段名。|是|无 **说明：** 此处的字段顺序，需要和 Reader插件中配置的column字段的顺序保持一致。
 
@@ -45,7 +45,7 @@ TSDB Writer通过HTTP连接TSDB实例，并通过`/api/put`接口将数据点写
  |是|无 **说明：** 此处的字段顺序，需要和 Reader插件中配置的column字段的顺序保持一致。
 
  |
-|batchSize|每次批量写入数据的条数。|否，数据类型为int，需要确保大于0。|100|
+|batchSize|每次批量写入数据的条数。|否，数据类型为INT，需要确保大于0。|100|
 
 ## 向导开发介绍 {#section_spr_tcv_x24 .section}
 
@@ -114,11 +114,8 @@ TSDB Writer通过HTTP连接TSDB实例，并通过`/api/put`接口将数据点写
 ## 性能报告 {#section_m17_ebx_br7 .section}
 
 -   性能数据特征
-
-    从Metric、时间线、Value和采集周期四个方面进行描述。
-
     -   Metric：指定一个Metric为m。
-    -   tagkv：前四个tagkv全排列，形成`10*20*100*100=2,000,000`条时间线，最后IP对应2,000,000条时间线，从1开始自增。
+    -   tagkv：前4个tagkv全排列，形成`10*20*100*100=2,000,000`条时间线，最后IP对应2,000,000条时间线，从1开始自增。
 
         |tag\_k|tag\_v|
         |------|------|
