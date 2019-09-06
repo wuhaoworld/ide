@@ -1,25 +1,27 @@
 # 配置MaxCompute数据源 {#concept_tms_vp1_p2b .concept}
 
-大数据计算服务（MaxCompute，原名ODPS）为您提供了完善的数据导入方案，能够更快速地解决海量数据计算问题。MaxCompute数据源作为数据中枢，为您提供读取和写入MaxCompute双向通道的功能，支持Reader和Writer插件。
+MaxCompute数据源作为数据中枢，为您提供读取和写入MaxCompute双向通道的功能，支持Reader和Writer插件。
+
+大数据计算服务（MaxCompute，原名ODPS）提供完善的数据导入方案，能够更快速地解决海量数据计算问题。
 
 **说明：** 
 
 -   标准模式的工作空间支持[数据源隔离](intl.zh-CN/使用指南/数据集成/数据源配置/数据源隔离.md#)功能，您可以分别添加开发环境和生产环境的数据源并进行隔离，以保护您的数据安全。
--   每个项目空间系统都将生成一个默认的数据源（odps\_first），对应的MaxCompute项目名称为当前项目空间对应的计算引擎MaxCompute项目名称。您可以单击右上方的用户信息，在修改AccessKey信息页面切换默认数据源的AK，但需注意以下问题：
+-   每个项目空间系统都将生成一个默认的数据源（odps\_first），对应的MaxCompute项目名称为当前项目空间对应的计算引擎MaxCompute项目名称。您可以单击右上方的用户信息，在修改AccessKey信息页面切换默认数据源的AK，但需要注意以下问题：
     -   只能从主账号AK切换到主账号AK。
     -   切换时当前必须没有任务在运行中（数据集成或数据开发等一切和DataWorks相关的任务），您自行添加的MaxCompute数据源可以使用子账号AK。
 
 ## 操作步骤 {#section_jy4_q4v_42b .section}
 
-1.  以项目管理员身份进入[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间操作栏中的**进入数据集成**。
+1.  以项目管理员身份进入[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击相应工作空间后的**进入数据集成**。
 2.  选择**同步资源管理** \> **数据源**，单击**新增数据源**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15629272207595_zh-CN.png)
+    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15677447727595_zh-CN.png)
 
 3.  在新增数据源弹出框中，选择数据源类型为**MaxCompute（ODPS）**。
 4.  填写MaxCompute数据源的各配置项。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16204/15629272207543_zh-CN.jpg)
+    ![配置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16204/15677447737543_zh-CN.jpg)
 
     |配置|说明|
     |:-|:-|
@@ -31,12 +33,12 @@
     |**ODPS Endpoint**|默认只读，从系统配置中自动读取。|
     |**Tunnel Endpoint**|MaxCompute Tunnel服务的连接地址，详情请参见[配置Endpoint](../../../../intl.zh-CN/准备工作/配置Endpoint.md#)。|
     |**ODPS项目名称**|MaxCompute（ODPS）项目名称。|
-    |**AccessID/AceessKey**|访问秘匙（AccessKeyID和AccessKeySecret），相当于登录密码。|
+    |**AccessID/AceessKey**|访问密钥（AccessKeyID和AccessKeySecret），相当于登录密码。|
 
 5.  单击**测试连通性**。
 6.  测试连通性通过后，单击**完成**。
 
-    提供测试连通性能力，可以判断输入的信息是否正确 。
+    提供测试连通性功能，可以判断输入的信息是否正确 。
 
 
 ## 后续步骤 {#section_dqv_5d1_p2b .section}
