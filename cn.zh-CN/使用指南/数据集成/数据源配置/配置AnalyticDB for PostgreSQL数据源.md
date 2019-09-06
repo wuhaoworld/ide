@@ -1,6 +1,6 @@
 # 配置AnalyticDB for PostgreSQL数据源 {#concept_z3q_wyb_5fb .concept}
 
-AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for PostgreSQL的双向功能，可以通过向导模式和脚本模式配置同步任务。
+AnalyticDB for PostgreSQL数据源提供读取和写入AnalyticDB for PostgreSQL的双向功能，您可以通过向导模式和脚本模式配置同步任务。
 
 **说明：** 
 
@@ -10,7 +10,7 @@ AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for Post
 
 -   自建的PostgreSQL数据源
     -   不支持测试连通性，但仍支持配置同步任务，创建数据源时单击**完成**即可。
-    -   必须使用自定义调度资源组运行对应的同步任务，请确保自定义资源组可以连通您的自建数据库，详情请参见[（仅一端不通）数据源网络不通的情况下的数据同步](intl.zh-CN/使用指南/数据集成/最佳实践/（仅一端不通）数据源网络不通的情况下的数据同步.md#)和[（两端都不通）数据源网络不通的情况下的数据同步](intl.zh-CN/使用指南/数据集成/最佳实践/（两端都不通）数据源网络不通的情况下的数据同步.md#)。
+    -   必须使用自定义调度资源组运行对应的同步任务，请确保自定义资源组可以连通您的自建数据库，详情请参见[（一端不通）数据源网络不通的情况下的数据同步](intl.zh-CN/使用指南/数据集成/最佳实践/（一端不通）数据源网络不通的情况下的数据同步.md#)和[（两端不通）数据源网络不通的情况下的数据同步](intl.zh-CN/使用指南/数据集成/最佳实践/（两端不通）数据源网络不通的情况下的数据同步.md#)。
 -   通过实例ID创建的AnalyticDB for PostgreSQL数据源
 
     您无需选择网络环境，系统自动根据您填写的RDS实例信息进行判断。
@@ -18,10 +18,10 @@ AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for Post
 
 ## 操作步骤 {#section_uvj_mzr_5fb .section}
 
-1.  以项目管理员身份登录[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间操作栏中的**进入数据集成**。
+1.  以项目管理员身份登录[DataWorks控制台](https://workbench.data.aliyun.com/console)，单击对应工作空间后的**进入数据集成**。
 2.  选择**同步资源管理** \> **数据源**，单击**新增数据源**。
 
-    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15668671297595_zh-CN.png)
+    ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/16213/15677406307595_zh-CN.png)
 
 3.  在新增数据源弹出框中，选择数据源类型为**AnalyticDB for PostgreSQL**。
 4.  填写AnalyticDB for PostgreSQL数据源的各配置项。
@@ -41,13 +41,13 @@ AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for Post
 
  |
         |**RDS实例ID**|您可以进入AnalyticDB for PostgreSQL的控制台，查看相应的实例ID。|
-        |**主账号ID**|您可以进入AnalyticDB for PostgreSQL控制台的安全设置页面，查看相应的信息。![安全设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156686712932076_zh-CN.png)
+        |**主账号ID**|您可以进入AnalyticDB for PostgreSQL控制台的安全设置页面，查看相应的信息。![安全设置](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156774063032076_zh-CN.png)
 
 |
 
     -   以新增**AnalyticDB for PostgreSQL** \> **连接串模式（数据集成网络可直接连通）**类型的数据源为例。
 
-        ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156686712957838_zh-CN.png)
+        ![新增数据源](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62183/156774063057838_zh-CN.png)
 
         |配置|说明|
         |:-|:-|
@@ -67,7 +67,7 @@ AnalyticDB for PostgreSQL数据源为您提供读取和写入AnalyticDB for Post
 
 ## 测试连通性说明 {#section_w31_g1s_5fb .section}
 
--   经典网络下，能够提供测试连通性能力，可以判断输入的信息是否正确。
+-   经典网络下，能够提供测试连通性功能，可以判断输入的信息是否正确。
 -   专有网络下，如果您使用实例模式配置数据源，可以判断输入的信息是否正确。
 -   专有网络下，如果您将VPC内部地址作为JDBC URL添加数据源，测试连通性会报告失败。
 -   经典网络/专有网络下，如果您将数据源的公网地址作为JDBC URL添加数据源，可以判断输入的信息是否正确。
