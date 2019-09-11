@@ -1,11 +1,14 @@
 # DataWorks增值版本功能对比 {#concept_265336 .concept}
 
+本文将为您介绍DataWorks各版本的功能差异。
+
 |模块|功能点|基础版|标准版|专业版|企业版|旗舰版|部署地域（Region）|
 |--|---|---|---|---|---|---|------------|
 |基础|工作空间数量|不限|不限|不限|不限|不限|全部DataWorks部署区域|
 |换肤|支持|支持|支持|支持|支持|
 |OpenAPI|支持|支持|支持|支持|支持|
-|数据集成|离线同步|支持|支持|支持|支持|支持|
+|自定义调度资源组|不支持|不支持|不支持|支持|支持|华东2（上海）|
+|数据集成|离线同步|支持|支持|支持|支持|支持|全部DataWorks部署区域|
 |整库迁移/批量上云|支持|支持|支持|支持|支持|
 |独享数据集成资源|支持|支持|支持|支持|支持|
 |同步资源监控|不支持|规划中|规划中|规划中|规划中|
@@ -49,7 +52,7 @@
 |脚本模式生成API|支持|支持|支持|支持|支持|
 |注册API|支持|支持|支持|支持|支持|
 |查看数据表|支持|支持|支持|支持|支持|
-|数据类型|基础关系型数据（DRDS/ADS/MySQL/SQL Server/PostgreSQL/Oracle\)|关系型+NoSQL（OTS/MonogoDB）+Hologres|关系型+NoSQL（OTS/MonogoDB）+Hologres|关系型+NoSQL（OTS/MonogoDB）+Hologres|关系型+NoSQL（OTS/MonogoDB）+Hologres|
+|数据类型|基础关系型数据（DRDS、ADS、MySQL、SQL Server、PostgreSQL和Oracle）|关系型+NoSQL（OTS和MonogoDB）+Hologres|关系型+NoSQL（OTS和MonogoDB）+Hologres|关系型+NoSQL（OTS和MonogoDB）+Hologres|关系型+NoSQL（OTS和MonogoDB）+Hologres|
 |API授权|支持|支持|支持|支持|支持|
 |过滤器|不支持|不支持|支持|支持|支持|
 |函数|不支持|不支持|支持|支持|支持|
